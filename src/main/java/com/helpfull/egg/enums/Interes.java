@@ -22,7 +22,8 @@ public enum Interes {
 	COMPARTIR,
 	MATE,
 	REGALOS,
-	COMER;
+	COMER,
+	CAFE;
 	
 
 }
