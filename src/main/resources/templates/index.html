@@ -3,16 +3,7 @@
 
 <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-
-<html lang="en">
-
-<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +19,7 @@
 <body>
     <header>
         <div class="logo">
-            <a href="index.html"><img src="img/nuevo logo-03.png" alt="logo pagina">
+            <a th:href="@{/}"><img src="img/nuevo logo-03.png" alt="logo pagina">
             </a>
         </div>
         <div>
@@ -44,11 +35,11 @@
 
     <main>
         <section id ="inicio">
-            <img src="img/index.jpg" alt="imagen fundación">
+            <img src="img/index.jpg" alt="imagen fundaciÃ³n">
         </section>
 
         <article class=texto-central>
-            <p>Somos una organización benéfica que llega a personas mayores y aisladas en el norte de Westminster,
+            <p>Somos una organizaciÃ³n benÃ©fica que llega a personas mayores y aisladas en el norte de Westminster,
                 Londres. Ya sea que desee utilizar nuestros servicios o recomendarnos a alguien o unirse a nosotros como
                 voluntario.</p>
         </article>
@@ -59,7 +50,7 @@
             <div>
                 <p>Telefono: 0207 586 5153</p>
                 <p>Email:info@neighbourcaresjwmv.org.uk</p>
-                <p>Numero de organización benefica registrada: 1087571</p>
+                <p>Numero de organizaciÃ³n benefica registrada: 1087571</p>
             </div>
         </div>
 
