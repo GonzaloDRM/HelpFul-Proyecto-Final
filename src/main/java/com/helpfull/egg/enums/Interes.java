@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.helpfull.egg.enums;
 
 <<<<<<< HEAD
@@ -37,3 +38,5 @@ public enum Interes {
 	FUTBOL, MATE, CINE, CAFE, MUSICA
 >>>>>>> amigo/familiar_acargo
 }
+=======
+>>>>>>> b518286b906cca55bd696d867f56650d70572ca9
