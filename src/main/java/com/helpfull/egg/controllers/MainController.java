@@ -18,9 +18,9 @@ public class MainController {
 		return "registrarse";
 	}
 	
-	@GetMapping("/quienes_somos")
+	@GetMapping("/nuestrahistoria")
 	public String quienesSomos() {
-		return "quienes_somos";
+		return "nuestrahistoria";
 	}
 	
 	@GetMapping("/amigos")
