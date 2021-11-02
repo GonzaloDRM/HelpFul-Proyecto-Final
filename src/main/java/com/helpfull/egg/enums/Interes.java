@@ -1,5 +1,6 @@
 package com.helpfull.egg.enums;
 
+<<<<<<< HEAD
 public enum Interes {
  
 	SALIDAS(1,"salidas a pasear"), MUSICA(2, "tipo de musica"), COCINAR(3,"cocinar dulce o salado"), 
@@ -30,4 +31,9 @@ public enum Interes {
 		this.valor = valor;
 	}
 	
+=======
+@E
+public enum Interes {
+	FUTBOL, MATE, CINE, CAFE, MUSICA
+>>>>>>> amigo/familiar_acargo
 }
