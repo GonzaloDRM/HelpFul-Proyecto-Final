@@ -1,16 +1,17 @@
 package com.helpfull.egg.services;
 
-import com.helpfull.egg.entities.Discapacidad;
+import org.springframework.stereotype.Service;
+
 import com.helpfull.egg.entities.FamiliarAcargo;
-import com.helpfull.egg.entities.Interes;
-import com.helpfull.egg.entities.List;
-import com.helpfull.egg.entities.Necesidad;
 import com.helpfull.egg.entities.Zona;
+import com.helpfull.egg.enums.Discapacidad;
+import com.helpfull.egg.enums.Necesidad;
+import com.helpfull.egg.repositories.AmigoRepository;
 
 @Service
 public class AmigoService {
 	
-	@Overwride
+	@Autowired
 	AmigoRepository amigoRepository;
 	
 	public void crearAmigo(String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
@@ -19,3 +20,4 @@ public class AmigoService {
 		
 	}
 }
+ 
