@@ -1,5 +1,16 @@
 package com.helpfull.egg.errors;
 
-public class Error {
+<<<<<<< HEAD
+public class Error extends Exception {
 
+	public Error(String msg) {
+		super(msg);
+	}
+=======
+public class Error extends Exception{
+    
+    public Error(String msn){
+        super(msn);
+    }
+>>>>>>> Zona
 }
