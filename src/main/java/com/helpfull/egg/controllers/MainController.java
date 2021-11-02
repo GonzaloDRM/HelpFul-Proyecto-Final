@@ -23,4 +23,24 @@ public class MainController {
 		return "quienes_somos";
 	}
 	
+	@GetMapping("/amigos")
+	public String amigos(){
+		return "amigos";
+	}
+	
+	@GetMapping("/match")
+	public String match(){
+		return "match";
+	}
+	
+	@GetMapping("/voluntarios")
+	public String voluntarios(){
+		return "voluntarios";
+	}
+	
+	@GetMapping("/seleccion")
+	public String seleccion() {
+		return "seleccion";
+	}
+	
 }
