@@ -1,6 +1,8 @@
 package com.helpfull.egg.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -23,8 +25,8 @@ public class Voluntario {
 	private String id;
 	private String nombre;
 	private String apellido;
+	@Enumerated(EnumType.STRING)
 	private Interes interes;
-	
 	
 	
 	@OneToOne
@@ -75,6 +77,16 @@ public class Voluntario {
 	public String toString() {
 		return "Voluntario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", amigo=" + amigo
 				+ ", toString()=" + super.toString() + "]";
+	}
+
+
+	public Interes getInteres() {
+		return interes;
+	}
+
+
+	public void setInteres(Interes interes) {
+		this.interes = interes;
 	}
 	
 
