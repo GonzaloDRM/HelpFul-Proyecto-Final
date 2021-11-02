@@ -13,19 +13,14 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/seleccion")
-	public String seleccion() {
-		return "seleccion";
+	@GetMapping("/registrarse")
+	public String registrarse() {
+		return "registrarse";
 	}
 	
-	@GetMapping("/registroAmigo")
-	public String registroAmigo() {
-		return "registroAmigo";
-	}
-	
-	@GetMapping("/registroVoluntario")
-	public String registroVoluntario() {
-		return "registroVoluntario";
+	@GetMapping("/quienes_somos")
+	public String quienesSomos() {
+		return "quienes_somos";
 	}
 	
 }

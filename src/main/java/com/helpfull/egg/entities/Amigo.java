@@ -5,13 +5,13 @@ import java.util.EnumSet;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.prueba.app.demo.enumerations.Interes;
+import com.helpfull.egg.enums.Discapacidad;
+import com.helpfull.egg.enums.Interes;
+import com.helpfull.egg.enums.Necesidad;
 
 @Entity
 public class Amigo {
@@ -40,7 +40,7 @@ public class Amigo {
 	private EnumSet<Necesidad> necesidades;
 	
 	public Amigo(String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
-			FamiliarAcargo familiarAcargo, Zona zona, EnumSet<com.helpfull.egg.entities.Interes> intereses,
+			FamiliarAcargo familiarAcargo, Zona zona, EnumSet<Interes> intereses,
 			EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades) {
 		this.id = id;
 		this.nombre = nombre;
@@ -147,5 +147,5 @@ public class Amigo {
 		this.necesidades = necesidades;
 	}
 
-
+}
 	

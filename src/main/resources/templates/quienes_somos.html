@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -17,16 +17,16 @@
 <body>
     <header>
         <div class="logo">
-            <a href="../index.html"><img src="../img/nuevo logo-03.png" alt="logo pagina">
+            <a th:href="@{/}"><img src="../img/nuevo logo-03.png" alt="logo pagina">
             </a>
         </div>
 
         <nav class="links">
-            <a href="quienes_somos.html">Quienes Somos</a>
-            <a href="amigos.html">Amigos</a>
-            <a href="voluntarios.html">Voluntarios</a>
-            <a href="match.html">Match</a>
-            <a href="registrarse.html">Registrarse</a>
+            <a th:href="@{/quienes_somos}">Quienes Somos</a>
+            <a th:href="@{/amigos}">Amigos</a>
+            <a th:href="@{/voluntarios}">Voluntarios</a>
+            <a th:href="@{/match}">Match</a>
+            <a th:href="@{/registrarse}">Registrarse</a>
         </nav>
     </header>
     <main>

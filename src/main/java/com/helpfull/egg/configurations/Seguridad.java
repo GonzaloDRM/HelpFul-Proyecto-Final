@@ -31,7 +31,6 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 			.authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
 			.and()
 				.authorizeRequests().antMatchers("/list").hasRole("ADMIN")
-				
 			.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
 				.usernameParameter("nombre").passwordParameter("password")
