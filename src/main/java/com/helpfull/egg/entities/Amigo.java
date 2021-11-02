@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.helpfull.egg.enums.Discapacidad;
+import com.helpfull.egg.enums.Necesidad;
 import com.prueba.app.demo.enumerations.Interes;
 
 @Entity
@@ -40,7 +42,7 @@ public class Amigo {
 	private EnumSet<Necesidad> necesidades;
 	
 	public Amigo(String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
-			FamiliarAcargo familiarAcargo, Zona zona, EnumSet<com.helpfull.egg.entities.Interes> intereses,
+			FamiliarAcargo familiarAcargo, Zona zona, EnumSet<Interes> intereses,
 			EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades) {
 		this.id = id;
 		this.nombre = nombre;
@@ -50,7 +52,9 @@ public class Amigo {
 		this.direccion = direccion;
 		this.familiarAcargo = familiarAcargo;
 		this.zona = zona;
+		
 		this.intereses = intereses;
+		
 		this.discapacidades = discapacidades;
 		this.necesidades = necesidades;
 	}

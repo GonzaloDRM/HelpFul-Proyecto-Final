@@ -13,7 +13,7 @@ import com.helpfull.egg.entities.Voluntario;
 public interface VoluntarioRepository extends JpaRepository<Voluntario, String> {
 
 	@Query("SELECT c FROM Voluntario c WHERE c.id = :id")
-	public List<Voluntario> buscarMascotaPorUsuario(@Param ("id")String id);
+	public Voluntario buscarVoluntarioPorId(@Param ("id")String id);
 		
 	
 	

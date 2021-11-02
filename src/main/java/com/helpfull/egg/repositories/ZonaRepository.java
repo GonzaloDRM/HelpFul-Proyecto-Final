@@ -28,5 +28,5 @@ public interface ZonaRepository extends JpaRepository<Zona, String> {
 	public List<Zona> buscarPorDireccion(@Param("direccion") String direccion);
 
 	@Query("SELECT c FROM Zona c WHERE c.id = :id")
-	public Zona consultarZonaPorId(@Param("id") Integer id);
+	public Zona consultarZonaPorId(@Param("id") String idZona);
 }
