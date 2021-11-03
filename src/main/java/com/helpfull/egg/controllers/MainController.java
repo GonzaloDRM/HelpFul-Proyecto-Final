@@ -13,14 +13,9 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/registrarse")
-	public String registrarse() {
-		return "registrarse";
-	}
-	
-	@GetMapping("/quienes_somos")
+	@GetMapping("/nuestrahistoria")
 	public String quienesSomos() {
-		return "quienes_somos";
+		return "nuestrahistoria";
 	}
 	
 	@GetMapping("/amigos")

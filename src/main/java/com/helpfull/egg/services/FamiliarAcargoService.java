@@ -24,7 +24,6 @@ public class FamiliarAcargoService {
 	}
 
 	
-	
 	public void validarFamiliarAcargo(String nombre, String apellido, String edad, String telefono,
 			String direccion) throws Error {
 		
