@@ -18,7 +18,7 @@ import com.helpfull.egg.services.VoluntarioService;
 public class Seguridad extends WebSecurityConfigurerAdapter{
 
 	@Autowired
-	@Qualifier("usuarioService")
+	@Qualifier("voluntarioService")
 	public VoluntarioService voluntarioService;
 
 	@Autowired
