@@ -2,6 +2,7 @@ package com.helpfull.egg.entities;
 
 import java.util.EnumSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,10 +28,14 @@ public class Amigo {
 	private String telefono;
 	private String direccion;
 	
-	@OneToOne
+	//private Foto foto;
+	
+	//despues crear los getter y setter
+	
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private FamiliarAcargo familiarAcargo;
 	
-	@OneToOne
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Zona zona;
 	
 	private EnumSet<Interes> intereses;
