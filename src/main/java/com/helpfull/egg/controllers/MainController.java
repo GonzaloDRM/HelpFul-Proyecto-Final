@@ -13,11 +13,6 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/registrarse")
-	public String registrarse() {
-		return "registrarse";
-	}
-	
 	@GetMapping("/nuestrahistoria")
 	public String quienesSomos() {
 		return "nuestrahistoria";
