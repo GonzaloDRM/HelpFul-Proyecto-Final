@@ -1,6 +1,8 @@
 package com.helpfull.egg.services;
 
+import java.util.Date;
 import java.util.EnumSet;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,19 +25,23 @@ public class AmigoService {
 	@Autowired
 	private FamiliarAcargoService familiarAcargoService;
 	
-
+	//las calocciones de enum se vera como lo armamos de acuerdo a la html y como lo manda al controlador.
+	
 	@Transactional
 	public void crearAmigo(String nombre, String apellido, Integer edad, String telefono, String direccion, Zona zona,
 			EnumSet<Interes> intereses, EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades, String nombreFamiliarAcargo, String apellidoFamiliarAcargo, Integer edadFamiliarAcargo, String telefonoFamiliarAcargo,
 			String direccionFamiliarAcargo) throws Error{
 		
-		validar(nombre,apellido,edad,telefono,direccion,zona,intereses,discapacidades,necesidades);
+		validar(nombre,apellido,Integer.toString(edad),telefono,direccion,zona,intereses,discapacidades,necesidades);
 		
-		familiarAcargoService.validarFamiliarAcargo(nombreFamiliarAcargo,apellidoFamiliarAcargo,edadFamiliarAcargo,telefonoFamiliarAcargo,direccionFamiliarAcargo);
+		familiarAcargoService.validarFamiliarAcargo(nombreFamiliarAcargo,apellidoFamiliarAcargo,Integer.toString(edadFamiliarAcargo),telefonoFamiliarAcargo,direccionFamiliarAcargo);
 		
 		Amigo amigo = new Amigo();
 		
 		FamiliarAcargo familiarAcargo = familiarAcargoService.crearFamiliarAcargo(nombreFamiliarAcargo, apellidoFamiliarAcargo, edadFamiliarAcargo, telefonoFamiliarAcargo, direccionFamiliarAcargo);
+		
+		//cuando se crea un amigo se setea automaticamente la fecha y hora.
+		amigo.setAlta(new Date());
 		
 		amigo.setNombre(nombre);
 		amigo.setApellido(apellido);
@@ -50,8 +56,48 @@ public class AmigoService {
 		
 		amigoRepository.save(amigo);
 	}
+	
+	//las calocciones de enum se vera como lo armamos de acuerdo a la html y como lo manda al controlador.
+	
+	@Transactional
+	public void modificarAmigo(String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
+			Zona zona, EnumSet<Interes> intereses,
+			EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades, String nombreFamiliarAcargo, String apellidoFamiliarAcargo, Integer edadFamiliarAcargo, String telefonoFamiliarAcargo,
+			String direccionFamiliarAcargo) throws Error {
+		
+		Amigo amigo = buscarAmigoID(id);
+		
+		//seteamos los valores modificado de amigo
+		amigo.setNombre(nombre);
+		amigo.setApellido(apellido);
+		amigo.setEdad(edad);
+		amigo.setTelefono(telefono);
+		amigo.setZona(zona);
+		amigo.setIntereses(intereses);
+		amigo.setDiscapacidades(discapacidades);
+		amigo.setNecesidades(necesidades);
+		
+		//seteamos los valores modificado de familiar a cargo
+		amigo.getFamiliarAcargo().setNombre(nombreFamiliarAcargo);
+		amigo.getFamiliarAcargo().setApellido(apellidoFamiliarAcargo);
+		amigo.getFamiliarAcargo().setEdad(edadFamiliarAcargo);
+		amigo.getFamiliarAcargo().setTelefono(telefonoFamiliarAcargo);
+		amigo.getFamiliarAcargo().setDireccion(direccionFamiliarAcargo);
+		
+		amigoRepository.save(amigo);
+		
+	}
+	
+	public Amigo buscarAmigoID(String id) throws Error {
+		Optional<Amigo> optional = amigoRepository.findById(id);
+		if(optional.isPresent()) {
+			throw new Error("No se encontro el amigo");
+		}
+		Amigo amigo = optional.get();
+		return amigo;
+	}
 
-	public void validar(String nombre, String apellido, Integer edad, String telefono, String direccion, Zona zona,
+	public void validar(String nombre, String apellido, String edad, String telefono, String direccion, Zona zona,
 			EnumSet<Interes> intereses, EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades)
 			throws Error {
 
@@ -63,7 +109,7 @@ public class AmigoService {
 			throw new Error("apellido invalido");
 		}
 
-		if (edad <= 0 || edad == null) {
+		if (Integer.parseInt(edad) <= 0 || edad.isEmpty() || edad == null) {
 			throw new Error("edad invalida");
 		}
 

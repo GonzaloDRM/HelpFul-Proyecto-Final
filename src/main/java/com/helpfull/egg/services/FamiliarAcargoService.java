@@ -4,13 +4,13 @@ import org.springframework.stereotype.Service;
 
 import com.helpfull.egg.entities.FamiliarAcargo;
 
+
 @Service
 public class FamiliarAcargoService {
 	
-	public FamiliarAcargo crearFamiliarAcargo(String nombreFamiliarAcargo, String apellidoFamiliarAcargo, Integer edadFamiliarAcargo, String telefonoFamiliarAcargo,
-			String direccionFamiliarAcargo) throws Error{
+	public FamiliarAcargo crearFamiliarAcargo(String nombreFamiliarAcargo, String apellidoFamiliarAcargo, Integer edadFamiliarAcargo, String telefonoFamiliarAcargo, String direccionFamiliarAcargo) throws Error{
 		
-		validarFamiliarAcargo(nombreFamiliarAcargo, apellidoFamiliarAcargo, edadFamiliarAcargo, telefonoFamiliarAcargo, direccionFamiliarAcargo);
+		validarFamiliarAcargo(nombreFamiliarAcargo, apellidoFamiliarAcargo, Integer.toString(edadFamiliarAcargo), telefonoFamiliarAcargo, direccionFamiliarAcargo);
 		
 		FamiliarAcargo familiarAcargo = new FamiliarAcargo();
 		
@@ -21,21 +21,22 @@ public class FamiliarAcargoService {
 		familiarAcargo.setDireccion(direccionFamiliarAcargo);
 		
 		return familiarAcargo;
-		
 	}
-	
-	public void validarFamiliarAcargo(String nombre, String apellido, Integer edad, String telefono,
-			String direccion) throws Error {
 
+	
+	
+	public void validarFamiliarAcargo(String nombre, String apellido, String edad, String telefono,
+			String direccion) throws Error {
+		
 		if (nombre.isEmpty() || nombre == null) {
-			throw new Error("nombre invalido");
+			throw new Error("apellido invalido");
 		}
 
 		if (apellido.isEmpty() || apellido == null) {
 			throw new Error("apellido invalido");
 		}
 
-		if (edad <= 0 || edad == null) {
+		if (Integer.parseInt(edad) <= 0 || edad.isEmpty() || edad == null) {
 			throw new Error("edad invalida");
 		}
 

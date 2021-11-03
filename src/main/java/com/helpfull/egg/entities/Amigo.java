@@ -1,12 +1,16 @@
 package com.helpfull.egg.entities;
 
+import java.util.Date;
 import java.util.EnumSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -28,6 +32,28 @@ public class Amigo {
 	private String telefono;
 	private String direccion;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date alta;
+	
+	public Date getAlta() {
+		return alta;
+	}
+
+	public void setAlta(Date alta) {
+		this.alta = alta;
+	}
+
+	public Date getBaja() {
+		return baja;
+	}
+
+	public void setBaja(Date baja) {
+		this.baja = baja;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date baja;
+	
 	//private Foto foto;
 	
 	//despues crear los getter y setter
@@ -35,7 +61,7 @@ public class Amigo {
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private FamiliarAcargo familiarAcargo;
 	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Zona zona;
 	
 	private EnumSet<Interes> intereses;
