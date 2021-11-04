@@ -35,28 +35,11 @@ public class Amigo {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date alta;
 	
-	public Date getAlta() {
-		return alta;
-	}
-
-	public void setAlta(Date alta) {
-		this.alta = alta;
-	}
-
-	public Date getBaja() {
-		return baja;
-	}
-
-	public void setBaja(Date baja) {
-		this.baja = baja;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date baja;
 	
-	//private Foto foto;
-	
-	//despues crear los getter y setter
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	private Foto foto;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private FamiliarAcargo familiarAcargo;
@@ -69,22 +52,6 @@ public class Amigo {
 	private EnumSet<Discapacidad> discapacidades;
 	
 	private EnumSet<Necesidad> necesidades;
-	
-	public Amigo(String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
-			FamiliarAcargo familiarAcargo, Zona zona, EnumSet<Interes> intereses,
-			EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades) {
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.telefono = telefono;
-		this.direccion = direccion;
-		this.familiarAcargo = familiarAcargo;
-		this.zona = zona;
-		this.intereses = intereses;
-		this.discapacidades = discapacidades;
-		this.necesidades = necesidades;
-	}
 
 	public Amigo() {
 
@@ -177,6 +144,32 @@ public class Amigo {
 	public void setNecesidades(EnumSet<Necesidad> necesidades) {
 		this.necesidades = necesidades;
 	}
+	
+	public Date getAlta() {
+		return alta;
+	}
+
+	public void setAlta(Date alta) {
+		this.alta = alta;
+	}
+
+	public Date getBaja() {
+		return baja;
+	}
+
+	public void setBaja(Date baja) {
+		this.baja = baja;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+	
+	
 
 }
 	
