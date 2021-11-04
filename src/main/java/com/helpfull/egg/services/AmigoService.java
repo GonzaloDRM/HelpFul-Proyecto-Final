@@ -2,6 +2,7 @@ package com.helpfull.egg.services;
 
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,15 @@ public class AmigoService {
 		Amigo amigo = optional.get();
 		return amigo;
 	}
-
+	
+	public List<Amigo> buscarAmigosZona(Zona zona) throws Error {
+		List<Amigo> amigos = amigoRepository.buscarAmigosPorZona(zona.getId());
+		if(amigos == null) {
+			throw new Error("No se encontraron amigos por la zona.");
+		}
+		return amigos;
+	}
+	
 	public void validar(String nombre, String apellido, String edad, String telefono, String direccion, Zona zona,
 			EnumSet<Interes> intereses, EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades)
 			throws Error {
@@ -140,4 +149,8 @@ public class AmigoService {
 	}
 
 	
+
 }
+
+
+

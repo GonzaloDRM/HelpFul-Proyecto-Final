@@ -1,11 +1,16 @@
 package com.helpfull.egg.entities;
 
+import java.util.Date;
 import java.util.EnumSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,10 +32,19 @@ public class Amigo {
 	private String telefono;
 	private String direccion;
 	
-	@OneToOne
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date alta;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date baja;
+	
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	private Foto foto;
+	
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private FamiliarAcargo familiarAcargo;
 	
-	@OneToOne
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Zona zona;
 	
 	private EnumSet<Interes> intereses;
@@ -38,22 +52,6 @@ public class Amigo {
 	private EnumSet<Discapacidad> discapacidades;
 	
 	private EnumSet<Necesidad> necesidades;
-	
-	public Amigo(String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
-			FamiliarAcargo familiarAcargo, Zona zona, EnumSet<Interes> intereses,
-			EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades) {
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.telefono = telefono;
-		this.direccion = direccion;
-		this.familiarAcargo = familiarAcargo;
-		this.zona = zona;
-		this.intereses = intereses;
-		this.discapacidades = discapacidades;
-		this.necesidades = necesidades;
-	}
 
 	public Amigo() {
 
@@ -146,6 +144,32 @@ public class Amigo {
 	public void setNecesidades(EnumSet<Necesidad> necesidades) {
 		this.necesidades = necesidades;
 	}
+	
+	public Date getAlta() {
+		return alta;
+	}
+
+	public void setAlta(Date alta) {
+		this.alta = alta;
+	}
+
+	public Date getBaja() {
+		return baja;
+	}
+
+	public void setBaja(Date baja) {
+		this.baja = baja;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+	
+	
 
 }
 	
