@@ -9,8 +9,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.helpfull.egg.services.VoluntarioService;
 
@@ -45,13 +47,13 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 	}
 	
 	protected UserDetailsService userDetailsService() {
-		User.builder()
-			.username("ADMIN")
+		UserDetails Admin = User.builder()
+			.username("Admin")
 			.password("123")
 			.roles("ADMIN")
 			.build();
 		
-		return voluntarioService;	
+		return new InMemoryUserDetailsManager(Admin);	
 	}
 	
 }

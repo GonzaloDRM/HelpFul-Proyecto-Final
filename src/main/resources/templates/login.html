@@ -55,14 +55,14 @@
     </div>
   </header><!-- End Header -->
 
-    <form action="/logincheck" class="formulario">
+    <form th:action="@{/logincheck}" method="POST" class="formulario">
         <h1>Iniciar Sesión</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <input type="text" placeholder="Usuario">
+                <input type="text" placeholder="Usuario" name="nombre">
             </div>
             <div class="input-contenedor">
-                <input type="password" placeholder="Contraseña">
+                <input type="password" placeholder="Contraseña" name="password">
             </div>
             <div>
                 <input type="submit" value="Iniciar Sesión" class="button">
