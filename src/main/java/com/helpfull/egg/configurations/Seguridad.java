@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.helpfull.egg.services.VoluntarioService;
@@ -40,6 +42,16 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
 			.and()
 				.csrf().disable();
+	}
+	
+	protected UserDetailsService userDetailsService() {
+		User.builder()
+			.username("ADMIN")
+			.password("123")
+			.roles("ADMIN")
+			.build();
+		
+		return voluntarioService;	
 	}
 	
 }
