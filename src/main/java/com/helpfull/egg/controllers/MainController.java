@@ -18,24 +18,9 @@ public class MainController {
 		return "nuestrahistoria";
 	}
 	
-	@GetMapping("/amigos")
-	public String amigos(){
-		return "amigos";
-	}
-	
-	@GetMapping("/match")
-	public String match(){
-		return "match";
-	}
-	
-	@GetMapping("/voluntarios")
-	public String voluntarios(){
-		return "voluntarios";
-	}
-	
-	@GetMapping("/seleccion")
-	public String seleccion() {
-		return "seleccion";
+	@GetMapping("/registroAmigos")
+	public String registroAmigos() {
+		return "registroAmigos";
 	}
 	
 }

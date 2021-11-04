@@ -37,7 +37,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">HelpFul</a></h1>
+      <h1 class="logo"><a th:href="@{/}">HelpFul</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -55,11 +55,11 @@
     </div>
   </header><!-- End Header -->
 
-    <form class="formulario">
+    <form action="/logincheck" class="formulario">
         <h1>Iniciar Sesión</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <input type="text" placeholder="Email">
+                <input type="text" placeholder="Usuario">
             </div>
             <div class="input-contenedor">
                 <input type="password" placeholder="Contraseña">
@@ -68,7 +68,7 @@
                 <input type="submit" value="Iniciar Sesión" class="button">
                 <p class="text-registro">Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.
                 </p>
-                <p class="text-registro">¿No tienes una cuenta?<a class="link" href="registrarse.html"> Registrate
+                <p class="text-registro">¿No tienes una cuenta?<a class="link" th:href="@{/voluntario/registrarse}"> Registrate
                     </a></p>
             </div>
         </div>

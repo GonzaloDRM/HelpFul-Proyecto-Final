@@ -29,7 +29,6 @@
   <link href="/assets/css/style.css" rel="stylesheet">
   <link href="/assets/css/estiloss.css" rel="stylesheet">
 
-  
 </head>
 
 <body>
@@ -38,7 +37,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">HelpFul</a></h1>
+      <h1 class="logo"><a th:href="@{/}">HelpFul</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -135,7 +134,7 @@
                 <input type="submit" value="Registrate" class="button">
                 <p class="text-registro">Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.
                 </p>
-                <p class="text-registro">¿Ya tienes una cuenta?<a class="link" href="iniciar_sesion.html"> Iniciar
+                <p class="text-registro">¿Ya tienes una cuenta?<a class="link" th:href="@{/voluntario/login}"> Iniciar
                         Sesión
                     </a></p>
             </div>

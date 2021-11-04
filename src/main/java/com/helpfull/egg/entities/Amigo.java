@@ -168,8 +168,5 @@ public class Amigo {
 	public void setFoto(Foto foto) {
 		this.foto = foto;
 	}
-	
-	
-
 }
 	

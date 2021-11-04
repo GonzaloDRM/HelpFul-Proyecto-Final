@@ -38,5 +38,4 @@ public class AmigoController {
 		
 		return "amigo";
 	}
-
 }
