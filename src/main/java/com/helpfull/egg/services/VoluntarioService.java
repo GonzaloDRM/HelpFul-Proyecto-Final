@@ -34,8 +34,7 @@ public class VoluntarioService implements UserDetailsService{
 	}
 	
 	public void save(String nombre, String apellido, String password, Integer telefono, String email,
-			LocalDate nacimiento, EnumSet<Interes> intereses, LocalDate alta,
-			LocalDate baja, Zona zona) {
+			LocalDate nacimiento, EnumSet<Interes> intereses, Zona zona) {
 		Voluntario voluntario = new Voluntario();
 		
 		voluntario.setNombre(nombre);
@@ -45,8 +44,8 @@ public class VoluntarioService implements UserDetailsService{
 		voluntario.setEmail(email);
 		voluntario.setNacimiento(nacimiento);
 		voluntario.setIntereses(intereses);
-		voluntario.setAlta(alta);
-		voluntario.setBaja(baja);
+		voluntario.setAlta(LocalDate.now());
+		voluntario.setBaja(null);
 		voluntario.setZona(zona);
 		
 		voluntarioRepository.save(voluntario);
