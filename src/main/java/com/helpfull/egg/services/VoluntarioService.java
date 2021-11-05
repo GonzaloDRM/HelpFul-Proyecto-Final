@@ -33,13 +33,17 @@ public class VoluntarioService implements UserDetailsService{
 		voluntarioRepository.save(voluntario);
 	}
 	
-	public void save(String nombre, String apellido, String password, EnumSet<Interes> intereses, LocalDate alta,
+	public void save(String nombre, String apellido, String password, Integer telefono, String email,
+			LocalDate nacimiento, EnumSet<Interes> intereses, LocalDate alta,
 			LocalDate baja, Zona zona) {
 		Voluntario voluntario = new Voluntario();
 		
 		voluntario.setNombre(nombre);
 		voluntario.setApellido(apellido);
 		voluntario.setPassword(password);
+		voluntario.setTelefono(telefono);
+		voluntario.setEmail(email);
+		voluntario.setNacimiento(nacimiento);
 		voluntario.setIntereses(intereses);
 		voluntario.setAlta(alta);
 		voluntario.setBaja(baja);

@@ -2,6 +2,7 @@ package com.helpfull.egg.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -46,6 +47,8 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 				.csrf().disable();
 	}
 	
+	@Override
+	@Bean
 	protected UserDetailsService userDetailsService() {
 		UserDetails Admin = User.builder()
 			.username("Admin")

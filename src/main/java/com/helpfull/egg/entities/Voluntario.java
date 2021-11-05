@@ -26,6 +26,7 @@ public class Voluntario {
 	private String password;
 	private Integer telefono;
 	private String email;
+	private LocalDate nacimiento;
 	
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
@@ -41,7 +42,7 @@ public class Voluntario {
 	}
 
 	public Voluntario(String id, String nombre, String apellido, String password, Integer telefono, String email,
-			Rol rol, EnumSet<Interes> intereses, LocalDate alta, LocalDate baja, Zona zona) {
+			LocalDate nacimiento, Rol rol, EnumSet<Interes> intereses, LocalDate alta, LocalDate baja, Zona zona) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -49,6 +50,7 @@ public class Voluntario {
 		this.password = password;
 		this.telefono = telefono;
 		this.email = email;
+		this.nacimiento = nacimiento;
 		this.rol = rol;
 		this.intereses = intereses;
 		this.alta = alta;
@@ -144,11 +146,19 @@ public class Voluntario {
 		this.zona = zona;
 	}
 
+	public LocalDate getNacimiento() {
+		return nacimiento;
+	}
+
+	public void setNacimiento(LocalDate nacimiento) {
+		this.nacimiento = nacimiento;
+	}
+
 	@Override
 	public String toString() {
 		return "Voluntario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
-				+ ", telefono=" + telefono + ", email=" + email + ", rol=" + rol + ", intereses=" + intereses
-				+ ", alta=" + alta + ", baja=" + baja + ", zona=" + zona + "]";
+				+ ", telefono=" + telefono + ", email=" + email + ", nacimiento=" + nacimiento + ", rol=" + rol
+				+ ", intereses=" + intereses + ", alta=" + alta + ", baja=" + baja + ", zona=" + zona + "]";
 	}
 
 }

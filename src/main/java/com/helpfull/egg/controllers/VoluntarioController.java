@@ -33,9 +33,10 @@ public class VoluntarioController {
 	
 	@PostMapping("/registroVoluntario")
 	public String registroVoluntario(@RequestParam String nombre, @RequestParam String apellido,
-						@RequestParam String password, @RequestParam EnumSet<Interes> intereses, 
+						@RequestParam String password, @RequestParam Integer telefono,
+						@RequestParam String email, @RequestParam LocalDate nacimiento, @RequestParam EnumSet<Interes> intereses, 
 						@RequestParam LocalDate alta, @RequestParam LocalDate baja, @RequestParam Zona zona) {
-		voluntarioService.save(nombre, apellido, password, intereses,  alta, baja, zona);
+		voluntarioService.save(nombre, apellido, password, telefono, email, nacimiento, intereses,  alta, baja, zona);
 		return "/";
 	}
 
