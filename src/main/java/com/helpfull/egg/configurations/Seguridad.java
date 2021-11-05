@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.helpfull.egg.services.VoluntarioService;
@@ -25,6 +26,9 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 	@Autowired
 	@Qualifier("voluntarioService")
 	public VoluntarioService voluntarioService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,7 +56,7 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 	protected UserDetailsService userDetailsService() {
 		UserDetails Admin = User.builder()
 			.username("Admin")
-			.password("123")
+			.password(passwordEncoder.encode("123"))
 			.roles("ADMIN")
 			.build();
 		
