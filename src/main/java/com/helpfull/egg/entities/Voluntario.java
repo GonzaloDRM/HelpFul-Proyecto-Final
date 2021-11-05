@@ -31,18 +31,18 @@ public class Voluntario {
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 	
-	private EnumSet<Interes> intereses;
+//	private EnumSet<Interes> intereses;
 	
 	private LocalDate alta;
 	private LocalDate baja;
-	private Zona zona;
+//	private Zona zona;
 	
 	public Voluntario() {
 		super();
 	}
 
 	public Voluntario(String id, String nombre, String apellido, String password, Integer telefono, String email,
-			LocalDate nacimiento, Rol rol, EnumSet<Interes> intereses, LocalDate alta, LocalDate baja, Zona zona) {
+			LocalDate nacimiento, Rol rol, LocalDate alta, LocalDate baja) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -52,10 +52,10 @@ public class Voluntario {
 		this.email = email;
 		this.nacimiento = nacimiento;
 		this.rol = rol;
-		this.intereses = intereses;
+//		this.intereses = intereses;
 		this.alta = alta;
 		this.baja = baja;
-		this.zona = zona;
+//		this.zona = zona;
 	}
 
 	public String getId() {
@@ -114,13 +114,13 @@ public class Voluntario {
 		this.rol = rol;
 	}
 
-	public EnumSet<Interes> getIntereses() {
-		return intereses;
-	}
-
-	public void setIntereses(EnumSet<Interes> intereses) {
-		this.intereses = intereses;
-	}
+//	public EnumSet<Interes> getIntereses() {
+//		return intereses;
+//	}
+//
+//	public void setIntereses(EnumSet<Interes> intereses) {
+//		this.intereses = intereses;
+//	}
 
 	public LocalDate getAlta() {
 		return alta;
@@ -138,13 +138,13 @@ public class Voluntario {
 		this.baja = baja;
 	}
 
-	public Zona getZona() {
-		return zona;
-	}
-
-	public void setZona(Zona zona) {
-		this.zona = zona;
-	}
+//	public Zona getZona() {
+//		return zona;
+//	}
+//
+//	public void setZona(Zona zona) {
+//		this.zona = zona;
+//	}
 
 	public LocalDate getNacimiento() {
 		return nacimiento;
@@ -158,7 +158,7 @@ public class Voluntario {
 	public String toString() {
 		return "Voluntario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
 				+ ", telefono=" + telefono + ", email=" + email + ", nacimiento=" + nacimiento + ", rol=" + rol
-				+ ", intereses=" + intereses + ", alta=" + alta + ", baja=" + baja + ", zona=" + zona + "]";
+				+ ", intereses=" + ", alta=" + alta + ", baja=" + baja + "]";
 	}
 
 }

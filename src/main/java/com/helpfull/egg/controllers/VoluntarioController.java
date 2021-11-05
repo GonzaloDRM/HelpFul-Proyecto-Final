@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.EnumSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,9 +36,9 @@ public class VoluntarioController {
 	@PostMapping("/registroVoluntario")
 	public String registroVoluntario(@RequestParam String nombre, @RequestParam String apellido,
 						@RequestParam String password, @RequestParam Integer telefono,
-						@RequestParam String email, @RequestParam LocalDate nacimiento,
-						@RequestParam EnumSet<Interes> intereses, @RequestParam Zona zona) {
-		voluntarioService.save(nombre, apellido, password, telefono, email, nacimiento, intereses, zona);
+						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento) {
+		System.out.println("-------------------------------------");
+		voluntarioService.save(nombre, apellido, password, telefono, email, nacimiento);
 		return "redirect:/";
 	}
 

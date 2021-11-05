@@ -6,6 +6,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,8 +15,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.entities.Zona;
@@ -28,26 +33,30 @@ public class VoluntarioService implements UserDetailsService{
 	@Autowired
 	private VoluntarioRepository voluntarioRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Transactional
 	public void save(Voluntario voluntario) {
 		voluntarioRepository.save(voluntario);
 	}
 	
 	public void save(String nombre, String apellido, String password, Integer telefono, String email,
-			LocalDate nacimiento, EnumSet<Interes> intereses, Zona zona) {
+				LocalDate nacimiento) {
 		Voluntario voluntario = new Voluntario();
+		
 		
 		voluntario.setNombre(nombre);
 		voluntario.setApellido(apellido);
-		voluntario.setPassword(password);
+		voluntario.setPassword(passwordEncoder.encode(password));
 		voluntario.setTelefono(telefono);
 		voluntario.setEmail(email);
 		voluntario.setNacimiento(nacimiento);
-		voluntario.setIntereses(intereses);
+//		voluntario.setIntereses(intereses);
 		voluntario.setAlta(LocalDate.now());
+		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 		voluntario.setBaja(null);
-		voluntario.setZona(zona);
-		
+
 		voluntarioRepository.save(voluntario);
 	}
 	
@@ -58,17 +67,24 @@ public class VoluntarioService implements UserDetailsService{
 	
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Voluntario> voluntario = voluntarioRepository.findByNombre(username);
+	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+		Optional<Voluntario> voluntario = voluntarioRepository.findByNombre(nombre);
 		
 		List<GrantedAuthority> permisos = new ArrayList<>();
 		
 		if (voluntario.get().getRol() != null) {			
 			permisos.add(new SimpleGrantedAuthority(Rol.ROLE_REGISTRADO.toString()));
 			permisos.add(new SimpleGrantedAuthority(voluntario.get().getRol().toString()));
+		}else if(voluntario.get().getRol().equals("ROLE_ADMIN")){
+			permisos.add(new SimpleGrantedAuthority(Rol.ROLE_REGISTRADO.toString()));
+			permisos.add(new SimpleGrantedAuthority(voluntario.get().getRol().toString()));
 		}else {
 			permisos.add(new SimpleGrantedAuthority("ROLE_GUEST"));
 		}
+		
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(true);
+		session.setAttribute("voluntariosession", voluntario);
 		
 		User user = new User(voluntario.get().getNombre(), voluntario.get().getPassword(), permisos);
 		

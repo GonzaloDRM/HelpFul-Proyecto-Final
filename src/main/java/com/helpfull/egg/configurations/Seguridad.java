@@ -51,16 +51,4 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 				.csrf().disable();
 	}
 	
-	@Override
-	@Bean
-	protected UserDetailsService userDetailsService() {
-		UserDetails Admin = User.builder()
-			.username("Admin")
-			.password(passwordEncoder.encode("123"))
-			.roles("ADMIN")
-			.build();
-		
-		return new InMemoryUserDetailsManager(Admin);	
-	}
-	
 }
