@@ -18,9 +18,7 @@ import com.helpfull.egg.enums.Rol;
 public class Voluntario {
 
 	@Id
-	@GeneratedValue(generator="uuid")
-	@GenericGenerator(name="uuid", strategy="uuid2")
-	private String id;
+	private String username;
 	private String nombre;
 	private String apellido;
 	private String password;
@@ -41,10 +39,10 @@ public class Voluntario {
 		super();
 	}
 
-	public Voluntario(String id, String nombre, String apellido, String password, Integer telefono, String email,
+	public Voluntario(String username, String nombre, String apellido, String password, Integer telefono, String email,
 			LocalDate nacimiento, Rol rol, LocalDate alta, LocalDate baja) {
 		super();
-		this.id = id;
+		this.username = username;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.password = password;
@@ -58,12 +56,14 @@ public class Voluntario {
 //		this.zona = zona;
 	}
 
-	public String getId() {
-		return id;
+	
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getNombre() {
@@ -156,7 +156,7 @@ public class Voluntario {
 
 	@Override
 	public String toString() {
-		return "Voluntario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
+		return "Voluntario [username=" + username + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
 				+ ", telefono=" + telefono + ", email=" + email + ", nacimiento=" + nacimiento + ", rol=" + rol
 				+ ", intereses=" + ", alta=" + alta + ", baja=" + baja + "]";
 	}

@@ -36,13 +36,14 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 	}
 
 	protected void configure(HttpSecurity http) throws Exception {
-		http.headers().frameOptions().sameOrigin().and()
-			.authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
+		http.headers().frameOptions().sameOrigin()
+			.and()
+				.authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
 			.and()
 				.authorizeRequests().antMatchers("/list").hasRole("ADMIN")
 			.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
-				.usernameParameter("nombre").passwordParameter("password")
+				.usernameParameter("username").passwordParameter("password")
 				.defaultSuccessUrl("/").failureUrl("/login?error=error")
 				.permitAll()
 			.and()

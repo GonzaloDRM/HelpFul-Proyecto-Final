@@ -34,11 +34,10 @@ public class VoluntarioController {
 	}
 	
 	@PostMapping("/registroVoluntario")
-	public String registroVoluntario(@RequestParam String nombre, @RequestParam String apellido,
-						@RequestParam String password, @RequestParam Integer telefono,
+	public String registroVoluntario(@RequestParam String username, @RequestParam String nombre,
+						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
 						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento) {
-		System.out.println("-------------------------------------");
-		voluntarioService.save(nombre, apellido, password, telefono, email, nacimiento);
+		voluntarioService.save(username, nombre, apellido, password, telefono, email, nacimiento);
 		return "redirect:/";
 	}
 

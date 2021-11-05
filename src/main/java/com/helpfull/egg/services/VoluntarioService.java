@@ -41,11 +41,11 @@ public class VoluntarioService implements UserDetailsService{
 		voluntarioRepository.save(voluntario);
 	}
 	
-	public void save(String nombre, String apellido, String password, Integer telefono, String email,
+	public void save(String username, String nombre, String apellido, String password, Integer telefono, String email,
 				LocalDate nacimiento) {
 		Voluntario voluntario = new Voluntario();
 		
-		
+		voluntario.setUsername(username);;
 		voluntario.setNombre(nombre);
 		voluntario.setApellido(apellido);
 		voluntario.setPassword(passwordEncoder.encode(password));
@@ -86,7 +86,7 @@ public class VoluntarioService implements UserDetailsService{
 		HttpSession session = attr.getRequest().getSession(true);
 		session.setAttribute("voluntariosession", voluntario);
 		
-		User user = new User(voluntario.get().getNombre(), voluntario.get().getPassword(), permisos);
+		User user = new User(voluntario.get().getUsername(), voluntario.get().getPassword(), permisos);
 		
 		return user;
 	}
