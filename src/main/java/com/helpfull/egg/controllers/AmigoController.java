@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.enums.Discapacidad;
 import com.helpfull.egg.enums.Necesidad;
@@ -32,6 +34,13 @@ public class AmigoController {
 		return "registroAmigos";
 	}
 	
+	@PostMapping("/registroAmigos")
+	public String registroAmigos1(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String direccion
+			, @RequestParam String discapacidades, @RequestParam String necesidades) {
+		System.out.println(discapacidades+necesidades);
+		return "registroAmigos";
+	}
+	
 	@GetMapping("/mostar_amigos")
 	public String mostrarAmigos(Model model, @RequestParam String idVoluntario) {
 		/*el metodo recibe el id del voluntario que se logeo.
@@ -52,8 +61,4 @@ public class AmigoController {
 		return "amigo";
 	}
 	
-	@GetMapping("/registroAmigos")
-	public String registroAmigos() {
-		return "registroAmigos";
-	}
 }

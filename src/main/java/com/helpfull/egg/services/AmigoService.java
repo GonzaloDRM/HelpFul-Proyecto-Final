@@ -51,7 +51,9 @@ public class AmigoService {
 		
 		amigo.setNombre(nombre);
 		amigo.setApellido(apellido);
-		amigo.setEdad(edad);
+		
+		
+		//amigo.setEdad(edad);
 		amigo.setTelefono(telefono);
 		amigo.setZona(zona);
 		amigo.setIntereses(intereses);

@@ -60,20 +60,20 @@
         <h1>Registrar Amigo</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <input type="text" placeholder="Nombre" >
+                <input type="text" placeholder="Nombre" name="nombre" >
             </div>
             <div class="input-contenedor">
-                <input type="text" placeholder="Apellido">
+                <input type="text" placeholder="Apellido" name="apellido">
             </div>
             <div class="input-contenedor">
-                <input type="tel" placeholder="Telefono">
+                <input type="tel" placeholder="Telefono" name="telefono">
             </div>
             <div class="input-contenedor">
                 <p class="fecha">Fecha de nacimiento</p>
                 <input type="date">
             </div>
             <div class="input-contenedor">
-                <input type="text" placeholder="Dirección">
+                <input type="text" placeholder="Dirección" name="direccion">
             </div>
             <div class="input-contenedor">
                 <input type="text" placeholder="Barrio">
@@ -95,7 +95,7 @@
                     <p class="Discapaciadad">Tipo de Discapaciadad</p>
                     <ul>
                     	<li th:each= "d : ${discapacidades}">
-                    		<input id="discapacidades" type="checkbox">
+                    		<input id="discapacidades" type="checkbox" th:value ="${d}"  name = "discapacidades">
                     		<label for="discapacidades" th:text = "${d}"></label>
                     	</li>
                     </ul>
@@ -123,7 +123,7 @@
                     <p class="Necesidad">Tipo de Necesidad</p>
                     <ul>
                     	<li th:each= "n : ${necesidades}">
-                    		<input id="necesidades" type="checkbox">
+                    		<input id="necesidades" type="checkbox" th:value ="${n}" name = "necesidades">
                     		<label for="necesidades" th:text = "${n}"></label>
                     	</li>
                     </ul>
