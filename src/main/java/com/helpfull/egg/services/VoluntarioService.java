@@ -67,8 +67,8 @@ public class VoluntarioService implements UserDetailsService{
 	
 	
 	@Override
-	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-		Optional<Voluntario> voluntario = voluntarioRepository.findByNombre(nombre);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<Voluntario> voluntario = voluntarioRepository.findByUsername(username);
 		
 		List<GrantedAuthority> permisos = new ArrayList<>();
 		
