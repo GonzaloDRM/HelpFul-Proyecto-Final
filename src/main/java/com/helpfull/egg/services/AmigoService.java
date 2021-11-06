@@ -8,9 +8,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.FamiliarAcargo;
+import com.helpfull.egg.entities.Foto;
 import com.helpfull.egg.entities.Zona;
 import com.helpfull.egg.enums.Discapacidad;
 import com.helpfull.egg.enums.Interes;
@@ -24,12 +26,15 @@ public class AmigoService {
 	private AmigoRepository amigoRepository;
 	
 	@Autowired
+	private FotoService fotoService;
+	
+	@Autowired
 	private FamiliarAcargoService familiarAcargoService;
 	
 	//las calocciones de enum se vera como lo armamos de acuerdo a la html y como lo manda al controlador.
 	
 	@Transactional
-	public void crearAmigo(String nombre, String apellido, Integer edad, String telefono, String direccion, Zona zona,
+	public void crearAmigo(MultipartFile archivo, String nombre, String apellido, Integer edad, String telefono, String direccion, Zona zona,
 			EnumSet<Interes> intereses, EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades, String nombreFamiliarAcargo, String apellidoFamiliarAcargo, Integer edadFamiliarAcargo, String telefonoFamiliarAcargo,
 			String direccionFamiliarAcargo) throws Error{
 		
@@ -55,13 +60,16 @@ public class AmigoService {
 		
 		amigo.setFamiliarAcargo(familiarAcargo);
 		
+		Foto foto = fotoService.guardar(archivo);
+		amigo.setFoto(foto);
+		
 		amigoRepository.save(amigo);
 	}
 	
 	//las calocciones de enum se vera como lo armamos de acuerdo a la html y como lo manda al controlador.
 	
 	@Transactional
-	public void modificarAmigo(String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
+	public void modificarAmigo(MultipartFile archivo, String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
 			Zona zona, EnumSet<Interes> intereses,
 			EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades, String nombreFamiliarAcargo, String apellidoFamiliarAcargo, Integer edadFamiliarAcargo, String telefonoFamiliarAcargo,
 			String direccionFamiliarAcargo) throws Error {
@@ -84,6 +92,10 @@ public class AmigoService {
 		amigo.getFamiliarAcargo().setEdad(edadFamiliarAcargo);
 		amigo.getFamiliarAcargo().setTelefono(telefonoFamiliarAcargo);
 		amigo.getFamiliarAcargo().setDireccion(direccionFamiliarAcargo);
+		
+		//modificamos la foto
+		Foto foto = fotoService.guardar(archivo);
+		amigo.setFoto(foto);
 		
 		amigoRepository.save(amigo);
 		

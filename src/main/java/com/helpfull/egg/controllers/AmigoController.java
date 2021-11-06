@@ -1,7 +1,5 @@
 package com.helpfull.egg.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.helpfull.egg.entities.Amigo;
+import com.helpfull.egg.enums.Discapacidad;
+import com.helpfull.egg.enums.Necesidad;
 import com.helpfull.egg.services.AmigoService;
 
 @Controller
@@ -18,6 +17,20 @@ public class AmigoController {
 	
 	@Autowired
 	private AmigoService amigoService;
+	
+	@GetMapping("/registroAmigos")
+	public String registroAmigos(Model model) {
+		try {
+			Necesidad[] necesidades = Necesidad.values();
+			Discapacidad[] discapacidades = Discapacidad.values();
+			model.addAttribute("discapacidades", discapacidades);
+			model.addAttribute("necesidades", necesidades);
+		}catch(Error e) {
+			model.addAttribute("error", e.getMessage());
+			return "registroAmigos";
+		}
+		return "registroAmigos";
+	}
 	
 	@GetMapping("/mostar_amigos")
 	public String mostrarAmigos(Model model, @RequestParam String idVoluntario) {

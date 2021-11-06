@@ -56,11 +56,11 @@
   </header><!-- End Header -->
 
 
-    <form class="formulario">
+    <form class="formulario" th:action= "@{/amigo/registroAmigos}" method="POST" enctype="multipart/form-data">
         <h1>Registrar Amigo</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <input type="text" placeholder="Nombre">
+                <input type="text" placeholder="Nombre" >
             </div>
             <div class="input-contenedor">
                 <input type="text" placeholder="Apellido">
@@ -88,8 +88,18 @@
                 <input type="text" placeholder="Provincia">
             </div>
             <div class="input-contenedor">
+                <input type="file" name = "archivo" >
+            </div>
+            <div class="input-contenedor">
                 <div>
                     <p class="Discapaciadad">Tipo de Discapaciadad</p>
+                    <ul>
+                    	<li th:each= "d : ${discapacidades}">
+                    		<input id="discapacidades" type="checkbox">
+                    		<label for="discapacidades" th:text = "${d}"></label>
+                    	</li>
+                    </ul>
+                    <!--
                     <input id="none" type="checkbox">
                     <label for="none">Ninguna</label>
                     <br>
@@ -107,9 +117,17 @@
                     <br>
                     <input id="multiple" type="checkbox">
                     <label for="multiple">Discapaciadad Múltiple</label>
+                    -->
                 </div>
                 <div>
                     <p class="Necesidad">Tipo de Necesidad</p>
+                    <ul>
+                    	<li th:each= "n : ${necesidades}">
+                    		<input id="necesidades" type="checkbox">
+                    		<label for="necesidades" th:text = "${n}"></label>
+                    	</li>
+                    </ul>
+                   <!--
                     <input id="dinero" type="checkbox">
                     <label for="dinero"></label>
                     <br>
@@ -127,6 +145,7 @@
                     <br>
                     <input id="multiple" type="checkbox">
                     <label for="multiple">Discapaciadad Múltiple</label>
+                    -->
                 </div>
             </div>
             <div></div>
