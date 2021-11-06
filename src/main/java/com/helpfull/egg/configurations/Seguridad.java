@@ -44,7 +44,7 @@ public class Seguridad extends WebSecurityConfigurerAdapter{
 			.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
 				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/").failureUrl("/login?error=error")
+				.defaultSuccessUrl("/").failureUrl("/voluntario/login")
 				.permitAll()
 			.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
