@@ -10,6 +10,6 @@ import com.helpfull.egg.entities.Voluntario;
 @Repository
 public interface VoluntarioRepository extends JpaRepository<Voluntario,String>{
 
-	Optional<Voluntario> findByNombre(String nombre);
+	Optional<Voluntario> findByUsername(String username);
 	
 }

@@ -61,6 +61,12 @@
         <form th:action="@{/voluntario/registroVoluntario}" method="POST" class="formulario">
         <h1>Registrate</h1>
         <div class="contenedor">
+        	<div class="input-contenedor">
+                <input type="text" placeholder="Username" name="username">
+            </div>
+            <div class="input-contenedor">       
+                <input type="password" placeholder="Password" name="password">
+            </div>
             <div class="input-contenedor">
                 <input type="text" placeholder="Nombre" name="nombre">
             </div>
@@ -68,12 +74,7 @@
                 <input type="text" placeholder="Apellido" name="apellido">
             </div>
             <div class="input-contenedor">
-            <div class="input-contenedor">
-                <input type="text" placeholder="Username" name="username">
-            </div>
-            <div class="input-contenedor">       
-                <input type="password" placeholder="Password" name="password">
-            </div>
+            
             <div class="input-contenedor">
                 <input type="tel" placeholder="Telefono" name="telefono">
             </div>
