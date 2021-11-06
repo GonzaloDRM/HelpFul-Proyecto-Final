@@ -18,50 +18,52 @@ import com.helpfull.egg.enums.Rol;
 public class Voluntario {
 
 	@Id
-	@GeneratedValue(generator="uuid")
-	@GenericGenerator(name="uuid", strategy="uuid2")
-	private String id;
+	private String username;
 	private String nombre;
 	private String apellido;
 	private String password;
 	private Integer telefono;
 	private String email;
+	private LocalDate nacimiento;
 	
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 	
-	private EnumSet<Interes> intereses;
+//	private EnumSet<Interes> intereses;
 	
 	private LocalDate alta;
 	private LocalDate baja;
-	private Zona zona;
+//	private Zona zona;
 	
 	public Voluntario() {
 		super();
 	}
 
-	public Voluntario(String id, String nombre, String apellido, String password, Integer telefono, String email,
-			Rol rol, EnumSet<Interes> intereses, LocalDate alta, LocalDate baja, Zona zona) {
+	public Voluntario(String username, String nombre, String apellido, String password, Integer telefono, String email,
+			LocalDate nacimiento, Rol rol, LocalDate alta, LocalDate baja) {
 		super();
-		this.id = id;
+		this.username = username;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.password = password;
 		this.telefono = telefono;
 		this.email = email;
+		this.nacimiento = nacimiento;
 		this.rol = rol;
-		this.intereses = intereses;
+//		this.intereses = intereses;
 		this.alta = alta;
 		this.baja = baja;
-		this.zona = zona;
+//		this.zona = zona;
 	}
 
-	public String getId() {
-		return id;
+	
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getNombre() {
@@ -112,13 +114,13 @@ public class Voluntario {
 		this.rol = rol;
 	}
 
-	public EnumSet<Interes> getIntereses() {
-		return intereses;
-	}
-
-	public void setIntereses(EnumSet<Interes> intereses) {
-		this.intereses = intereses;
-	}
+//	public EnumSet<Interes> getIntereses() {
+//		return intereses;
+//	}
+//
+//	public void setIntereses(EnumSet<Interes> intereses) {
+//		this.intereses = intereses;
+//	}
 
 	public LocalDate getAlta() {
 		return alta;
@@ -136,19 +138,27 @@ public class Voluntario {
 		this.baja = baja;
 	}
 
-	public Zona getZona() {
-		return zona;
+//	public Zona getZona() {
+//		return zona;
+//	}
+//
+//	public void setZona(Zona zona) {
+//		this.zona = zona;
+//	}
+
+	public LocalDate getNacimiento() {
+		return nacimiento;
 	}
 
-	public void setZona(Zona zona) {
-		this.zona = zona;
+	public void setNacimiento(LocalDate nacimiento) {
+		this.nacimiento = nacimiento;
 	}
 
 	@Override
 	public String toString() {
-		return "Voluntario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
-				+ ", telefono=" + telefono + ", email=" + email + ", rol=" + rol + ", intereses=" + intereses
-				+ ", alta=" + alta + ", baja=" + baja + ", zona=" + zona + "]";
+		return "Voluntario [username=" + username + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
+				+ ", telefono=" + telefono + ", email=" + email + ", nacimiento=" + nacimiento + ", rol=" + rol
+				+ ", intereses=" + ", alta=" + alta + ", baja=" + baja + "]";
 	}
 
 }

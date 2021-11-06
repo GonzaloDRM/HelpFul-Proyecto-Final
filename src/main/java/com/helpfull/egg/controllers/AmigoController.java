@@ -51,4 +51,9 @@ public class AmigoController {
 		
 		return "amigo";
 	}
+	
+	@GetMapping("/registroAmigos")
+	public String registroAmigos() {
+		return "registroAmigos";
+	}
 }

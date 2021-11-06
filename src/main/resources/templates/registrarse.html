@@ -58,43 +58,47 @@
   <section>
     <main>
     <div >
-        <form class="formulario">
+        <form th:action="@{/voluntario/registroVoluntario}" method="POST" class="formulario">
         <h1>Registrate</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <input type="text" placeholder="Nombre">
+                <input type="text" placeholder="Nombre" name="nombre">
             </div>
             <div class="input-contenedor">
-                <input type="text" placeholder="Apellido">
+                <input type="text" placeholder="Apellido" name="apellido">
             </div>
             <div class="input-contenedor">
-                <input type="tel" placeholder="Telefono">
+            <div class="input-contenedor">
+                <input type="text" placeholder="Username" name="username">
+            </div>
+            <div class="input-contenedor">       
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <div class="input-contenedor">
+                <input type="tel" placeholder="Telefono" name="telefono">
             </div>
             <div class="input-contenedor">
                 <p class="fecha">Fecha de nacimiento</p>
-                <input type="date">
+                <input type="date" name="nacimiento">
             </div>
             <div class="input-contenedor">
-                <input type="text" placeholder="Email">
+                <input type="text" placeholder="Email" name="email">
             </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Dirección">
-            </div>
-            <div class="input-contenedor">
-                <input type="password" placeholder="Contraseña">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Barrio">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Municipio">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Departamento">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Provincia">
-            </div>
+<!--             <div class="input-contenedor"> -->
+<!--                 <input type="text" placeholder="Dirección"> -->
+<!--             </div> -->
+<!--             <div class="input-contenedor"> -->
+<!--                 <input type="text" placeholder="Barrio"> -->
+<!--             </div> -->
+<!--             <div class="input-contenedor"> -->
+<!--                 <input type="text" placeholder="Municipio"> -->
+<!--             </div> -->
+<!--             <div class="input-contenedor"> -->
+<!--                 <input type="text" placeholder="Departamento"> -->
+<!--             </div> -->
+<!--             <div class="input-contenedor"> -->
+<!--                 <input type="text" placeholder="Provincia"> -->
+<!--             </div> -->
             <div>
                 <input type="submit" value="Registrate" class="button">
                 <p class="text-registro">Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.
