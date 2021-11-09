@@ -14,5 +14,8 @@ public interface AmigoRepository extends JpaRepository<Amigo,String>{
 	
 	@Query("SELECT a FROM Amigo a WHERE a.zona = :idZona")
 	public List<Amigo> buscarAmigosPorZona(@Param("idZona") String idZona);
+	
+	@Query("SELECT a FROM Amigo a WHERE a.foto = :idFoto")
+	public Amigo buscarAmigosPorFoto(@Param("idFoto") String idFoto);
 
 }

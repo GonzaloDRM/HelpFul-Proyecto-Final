@@ -37,6 +37,7 @@ public class VoluntarioController {
 	public String registroVoluntario(@RequestParam String username, @RequestParam String nombre,
 						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
 						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento) {
+		System.out.println("asd");
 		voluntarioService.save(username, nombre, apellido, password, telefono, email, nacimiento);
 		return "redirect:/";
 	}

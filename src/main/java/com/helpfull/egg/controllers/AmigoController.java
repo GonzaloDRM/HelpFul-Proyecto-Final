@@ -1,5 +1,7 @@
 package com.helpfull.egg.controllers;
 
+import java.util.EnumSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,10 +37,20 @@ public class AmigoController {
 	}
 	
 	@PostMapping("/registroAmigos")
-	public String registroAmigos1(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String direccion
-			, @RequestParam String discapacidades, @RequestParam String necesidades) {
-		System.out.println(discapacidades+necesidades);
-		return "registroAmigos";
+	public String registroAmigos1(Model model, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono
+			,@RequestParam String fechaDeNacimiento, @RequestParam String direccion,
+			@RequestParam String discapacidades, @RequestParam String necesidades,@RequestParam MultipartFile archivo) {
+		
+		System.out.println("asd");
+		//transformamos lo que reibimos del html a listas y luego a enumset
+		EnumSet<Discapacidad> setDiscapacidades = amigoService.transformarArregloAEnumSetDisc(discapacidades);
+		EnumSet<Necesidad> setNecesidad = amigoService.transformarArregloAEnumSetNec(necesidades);
+		
+		//calculamos la edad en base a la fecha de nacimiento.
+		Integer  edad = amigoService.calcularEdad(fechaDeNacimiento);
+		
+		amigoService.crearAmigo(archivo, nombre, apellido, edad, telefono, direccion,null, null, setDiscapacidades, setNecesidad);
+		return "redirect:/amigo/registroAmigos";
 	}
 	
 	@GetMapping("/mostar_amigos")

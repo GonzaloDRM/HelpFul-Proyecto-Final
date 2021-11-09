@@ -54,7 +54,9 @@
 
     </div>
   </header><!-- End Header -->
-
+	<div th:if="${foto}">
+		 <img th:src="" alt="Mi titulo de la imagen">
+	</div>
 
     <form class="formulario" th:action= "@{/amigo/registroAmigos}" method="POST" enctype="multipart/form-data">
         <h1>Registrar Amigo</h1>
@@ -70,7 +72,7 @@
             </div>
             <div class="input-contenedor">
                 <p class="fecha">Fecha de nacimiento</p>
-                <input type="date">
+                <input type="date" name="fechaDeNacimiento">
             </div>
             <div class="input-contenedor">
                 <input type="text" placeholder="Dirección" name="direccion">

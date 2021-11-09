@@ -1,16 +1,20 @@
 package com.helpfull.egg.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.EnumSet;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,11 +36,8 @@ public class Amigo {
 	private String telefono;
 	private String direccion;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date alta;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date baja;
+	private LocalDate alta;
+	private LocalDate baja;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Foto foto;
@@ -47,14 +48,23 @@ public class Amigo {
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Zona zona;
 	
-	private EnumSet<Interes> intereses;
+	@ElementCollection(targetClass=Interes.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name="intereses")
+	private Collection<Interes> intereses;
 	
-	private EnumSet<Discapacidad> discapacidades;
+	@ElementCollection(targetClass=Discapacidad.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name="discapacidades")
+	private Collection<Discapacidad> discapacidades;
 	
-	private EnumSet<Necesidad> necesidades;
+	@ElementCollection(targetClass=Necesidad.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name="necesidades")
+	private Collection<Necesidad> necesidades;
 
 	public Amigo() {
-
+		
 	}
 
 	public String getId() {
@@ -105,6 +115,30 @@ public class Amigo {
 		this.direccion = direccion;
 	}
 
+	public LocalDate getAlta() {
+		return alta;
+	}
+
+	public void setAlta(LocalDate alta) {
+		this.alta = alta;
+	}
+
+	public LocalDate getBaja() {
+		return baja;
+	}
+
+	public void setBaja(LocalDate baja) {
+		this.baja = baja;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
 	public FamiliarAcargo getFamiliarAcargo() {
 		return familiarAcargo;
 	}
@@ -121,7 +155,7 @@ public class Amigo {
 		this.zona = zona;
 	}
 
-	public EnumSet<Interes> getIntereses() {
+	public Collection<Interes> getIntereses() {
 		return intereses;
 	}
 
@@ -129,15 +163,15 @@ public class Amigo {
 		this.intereses = intereses;
 	}
 
-	public EnumSet<Discapacidad> getDiscapacidades() {
+	public Collection<Discapacidad> getDiscapacidades() {
 		return discapacidades;
 	}
 
 	public void setDiscapacidades(EnumSet<Discapacidad> discapacidades) {
 		this.discapacidades = discapacidades;
 	}
-
-	public EnumSet<Necesidad> getNecesidades() {
+	
+	public Collection<Necesidad> getNecesidades() {
 		return necesidades;
 	}
 
@@ -145,28 +179,5 @@ public class Amigo {
 		this.necesidades = necesidades;
 	}
 	
-	public Date getAlta() {
-		return alta;
-	}
-
-	public void setAlta(Date alta) {
-		this.alta = alta;
-	}
-
-	public Date getBaja() {
-		return baja;
-	}
-
-	public void setBaja(Date baja) {
-		this.baja = baja;
-	}
-
-	public Foto getFoto() {
-		return foto;
-	}
-
-	public void setFoto(Foto foto) {
-		this.foto = foto;
-	}
 }
 	
