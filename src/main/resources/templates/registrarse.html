@@ -85,6 +85,37 @@
             <div class="input-contenedor">
                 <input type="text" placeholder="Email" name="email">
             </div>
+            
+            <div>
+            
+            <div class="input-contenedor">
+            <p class="fecha">Provincia</p>
+            	<select class="from-control" name="zona-ciudad">
+            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.provincia}"></option>
+            	</select>
+            </div>
+            
+            <div class="input-contenedor">
+            <p class="fecha">Departamento</p>
+            	<select class="from-control" name="zona-ciudad">
+            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.departamento}"></option>
+            	</select>
+            </div>
+            
+            <div class="input-contenedor">
+            <p class="fecha">Municipio</p>
+            	<select class="from-control" name="zona-ciudad">
+            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.municipio}"></option>
+            	</select>
+            </div>
+            
+            <div class="input-contenedor">
+            <p class="fecha">Barrio</p>
+            	<select class="from-control" name="zona-ciudad">
+            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.barrio}"></option>
+            	</select>
+            </div>             
+            
 <!--             <div class="input-contenedor"> -->
 <!--                 <input type="text" placeholder="Dirección"> -->
 <!--             </div> -->

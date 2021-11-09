@@ -19,12 +19,18 @@
     font-size: 20px;
     padding: 10px;
     border: none;
+    
  
  }
  .input-contenedor{
     margin-bottom: 15px;
     border: 1px solid #aaa;
+    text-align: left;
  }
+ .from-control{
+	width: 50%;
+	border: none;
+}
  .formulario{
 	text-align: center;
     margin-top: 150px;
