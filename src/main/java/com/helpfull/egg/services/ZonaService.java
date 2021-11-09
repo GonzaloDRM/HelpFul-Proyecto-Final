@@ -2,6 +2,8 @@ package com.helpfull.egg.services;
 
 import com.helpfull.egg.entities.Zona;
 import com.helpfull.egg.repositories.ZonaRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,11 @@ public class ZonaService {
 
     @Autowired
     private ZonaRepository zonaRepository;
+    
+    @Transactional
+    public List<Zona> listar(){
+    	return zonaRepository.findAll();
+    }
 
     @Transactional
     public void crearZona(String direccion, String barrio, String municipio, String departamento, String provincia) throws Exception {
