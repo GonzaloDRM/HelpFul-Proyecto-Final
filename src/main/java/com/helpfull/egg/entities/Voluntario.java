@@ -3,11 +3,14 @@ package com.helpfull.egg.entities;
 import java.time.LocalDate;
 import java.util.EnumSet;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,6 +29,9 @@ public class Voluntario {
 	private String email;
 	private LocalDate nacimiento;
 	
+	@Lob @Basic(fetch = FetchType.LAZY) 
+	private byte[] foto;
+	
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 	
@@ -40,7 +46,7 @@ public class Voluntario {
 	}
 
 	public Voluntario(String username, String nombre, String apellido, String password, Integer telefono, String email,
-			LocalDate nacimiento, Rol rol, LocalDate alta, LocalDate baja) {
+			LocalDate nacimiento, byte[] foto, Rol rol, LocalDate alta, LocalDate baja) {
 		super();
 		this.username = username;
 		this.nombre = nombre;
@@ -49,6 +55,7 @@ public class Voluntario {
 		this.telefono = telefono;
 		this.email = email;
 		this.nacimiento = nacimiento;
+		this.foto = foto;
 		this.rol = rol;
 //		this.intereses = intereses;
 		this.alta = alta;
@@ -152,6 +159,14 @@ public class Voluntario {
 
 	public void setNacimiento(LocalDate nacimiento) {
 		this.nacimiento = nacimiento;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 	@Override

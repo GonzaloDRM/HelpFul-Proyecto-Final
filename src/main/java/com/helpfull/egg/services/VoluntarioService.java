@@ -1,5 +1,6 @@
 package com.helpfull.egg.services;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -20,7 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.helpfull.egg.entities.Foto;
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.entities.Zona;
 import com.helpfull.egg.enums.Interes;
@@ -42,8 +45,9 @@ public class VoluntarioService implements UserDetailsService{
 	}
 	
 	public void save(String username, String nombre, String apellido, String password, Integer telefono, String email,
-				LocalDate nacimiento) {
+				LocalDate nacimiento, MultipartFile foto) throws IOException {
 		Voluntario voluntario = new Voluntario();
+		
 		
 		voluntario.setUsername(username);;
 		voluntario.setNombre(nombre);
@@ -52,12 +56,23 @@ public class VoluntarioService implements UserDetailsService{
 		voluntario.setTelefono(telefono);
 		voluntario.setEmail(email);
 		voluntario.setNacimiento(nacimiento);
+		voluntario.setFoto(foto.getBytes());
 //		voluntario.setIntereses(intereses);
 		voluntario.setAlta(LocalDate.now());
 		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 		voluntario.setBaja(null);
 
 		voluntarioRepository.save(voluntario);
+	}
+	
+	@Transactional
+	public List<Voluntario> listartodos(){
+		return voluntarioRepository.findAll();
+	}
+	
+	@Transactional
+	public Voluntario buscarPorId(String id) {
+		return voluntarioRepository.getById(id);
 	}
 	
 	@Transactional

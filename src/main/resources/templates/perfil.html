@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Our Story - MeFamily Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a th:href="@{/}">HelpFul</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+<!--       <a href="index.html" class="logo"><img src="/img/logo-azul.png" alt="" class="img-fluid"></a> -->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a th:href="@{/nuestrahistoria}">Quienes Somos</a></li>
+         
+          <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+         
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Perfil de Usuario</h2>
+
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+
+    <!-- ======= Members Section ======= -->
+
+    <section id="members" class="members">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+				<img src="/img/8.png" class="img-fluid" alt="">
+			
+		</tr>
+                
+              </div>
+              <div class="member-info">
+                <h4 th:text="${usuario.nombre} + ' ' + ${usuario.apellido}">Jorge Surita</h4>
+                <span>Describite</span>
+                <p>Sint qui cupiditate. Asperiores fugit impedit aspernatur et mollitia. Molestiae qui placeat labore assumenda id qui nesciunt quo reprehenderit. Rem dolores similique quis soluta culpa enim quia ratione ea.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+  
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="escrituraperfil">
+              <div class="member-img">
+              
+				<label th:text="${usuario.nombre}"></label><br>
+				<label th:text="${usuario.apellido}"></label><br>
+				<label th:text="${usuario.telefono}"></label><br>
+				<label th:text="${usuario.email}"></label><br>
+				<label th:text="${usuario.nacimiento}"></label><br>
+
+              </div>
+            </div>
+     </div>              
+
+        </div>
+
+      </div>
+    </section><!-- End Members Section -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <h3>Mi Familia</h3>
+      <p>Teléfono: 0207 586 5153</p>
+      <p>info@helpfull.com</p>
+      <p>Número de organización benéfica registrada: 1087571</p> 
+
+
+      <div class="social-links">
+        
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        
+      </div>
+      
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
