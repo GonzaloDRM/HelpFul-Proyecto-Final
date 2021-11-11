@@ -74,64 +74,49 @@
                 <p class="fecha">Fecha de nacimiento</p>
                 <input type="date" name="fechaDeNacimiento">
             </div>
-            <!--
-            <div class="input-contenedor">
-                <input type="text" placeholder="Dirección" name="direccion">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Barrio">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Municipio">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Departamento">
-            </div>
-            <div class="input-contenedor">
-                <input type="text" placeholder="Provincia">
-            </div>
-            -->
+    
+     
             
-            <div class="input-contenedor">
-            <p class="fecha">Provincia</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.provincia}"></option>
-            	</select>
-            </div>
+<!--             <div class="input-contenedor"> -->
+<!--             <p class="fecha">Provincia</p> -->
+<!--             	<select class="from-control" name="zona-ciudad"> -->
+<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.provincia}"></option> -->
+<!--             	</select> -->
+<!--             </div> -->
             
-            <div class="input-contenedor">
-            <p class="fecha">Departamento</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.departamento}"></option>
-            	</select>
-            </div>
+<!--             <div class="input-contenedor"> -->
+<!--             <p class="fecha">Departamento</p> -->
+<!--             	<select class="from-control" name="zona-ciudad"> -->
+<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.departamento}"></option> -->
+<!--             	</select> -->
+<!--             </div> -->
             
-            <div class="input-contenedor">
-            <p class="fecha">Municipio</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.municipio}"></option>
-            	</select>
-            </div>
+<!--             <div class="input-contenedor"> -->
+<!--             <p class="fecha">Municipio</p> -->
+<!--             	<select class="from-control" name="zona-ciudad"> -->
+<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.municipio}"></option> -->
+<!--             	</select> -->
+<!--             </div> -->
             
-            <div class="input-contenedor">
-            <p class="fecha">Barrio</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.barrio}"></option>
-            	</select>
-            </div> 
+<!--             <div class="input-contenedor"> -->
+<!--             <p class="fecha">Barrio</p> -->
+<!--             	<select class="from-control" name="zona-ciudad"> -->
+<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.barrio}"></option> -->
+<!--             	</select> -->
+<!--             </div>  -->
            	
             <div class="input-contenedor">
                 <input type="file" name = "archivo" >
             </div>
             <div class="input-contenedor">
                 <div>
-                    <p class="Discapaciadad">Tipo de Discapaciadad</p>
-                    <ul>
-                    	<li th:each= "d : ${discapacidades}">
-                    		<input id="discapacidades" type="checkbox" th:value ="${d}"  name = "discapacidades">
-                    		<label for="discapacidades" th:text = "${d}"></label>
-                    	</li>
-                    </ul>
+<!--                     <p class="Discapaciadad">Tipo de Discapaciadad</p> -->
+<!--                     <ul> -->
+<!--                     	<li th:each= "d : ${discapacidades}"> -->
+<!--                     		<input id="discapacidades" type="checkbox" th:value ="${d}"  name = "discapacidades"> -->
+<!--                     		<label for="discapacidades" th:text = "${d}"></label> -->
+<!--                     	</li> -->
+<!--                     </ul> -->
                     <!--
                     <input id="none" type="checkbox">
                     <label for="none">Ninguna</label>
@@ -151,15 +136,15 @@
                     <input id="multiple" type="checkbox">
                     <label for="multiple">Discapaciadad Múltiple</label>
                     -->
-                </div>
-                <div>
-                    <p class="Necesidad">Tipo de Necesidad</p>
-                    <ul>
-                    	<li th:each= "n : ${necesidades}">
-                    		<input id="necesidades" type="checkbox" th:value ="${n}" name = "necesidades">
-                    		<label for="necesidades" th:text = "${n}"></label>
-                    	</li>
-                    </ul>
+<!--                 </div> -->
+<!--                 <div> -->
+<!--                     <p class="Necesidad">Tipo de Necesidad</p> -->
+<!--                     <ul> -->
+<!--                     	<li th:each= "n : ${necesidades}"> -->
+<!--                     		<input id="necesidades" type="checkbox" th:value ="${n}" name = "necesidades"> -->
+<!--                     		<label for="necesidades" th:text = "${n}"></label> -->
+<!--                     	</li> -->
+<!--                     </ul> -->
                    <!--
                     <input id="dinero" type="checkbox">
                     <label for="dinero"></label>

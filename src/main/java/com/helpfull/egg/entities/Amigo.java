@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.EnumSet;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -11,8 +12,10 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -39,8 +42,8 @@ public class Amigo {
 	private LocalDate alta;
 	private LocalDate baja;
 	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-	private Foto foto;
+	@Lob @Basic(fetch = FetchType.LAZY) 
+	private byte[] foto;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private FamiliarAcargo familiarAcargo;
@@ -131,11 +134,11 @@ public class Amigo {
 		this.baja = baja;
 	}
 
-	public Foto getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Foto foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 

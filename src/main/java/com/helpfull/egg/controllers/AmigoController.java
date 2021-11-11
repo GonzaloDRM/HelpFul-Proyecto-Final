@@ -1,16 +1,23 @@
 package com.helpfull.egg.controllers;
 
+import java.io.IOException;
 import java.util.EnumSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.enums.Discapacidad;
 import com.helpfull.egg.enums.Necesidad;
 import com.helpfull.egg.services.AmigoService;
@@ -39,7 +46,7 @@ public class AmigoController {
 	@PostMapping("/registroAmigos")
 	public String registroAmigos1(Model model, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono
 			,@RequestParam String fechaDeNacimiento, @RequestParam String direccion,
-			@RequestParam String discapacidades, @RequestParam String necesidades,@RequestParam MultipartFile archivo) {
+			@RequestParam String discapacidades, @RequestParam String necesidades,@RequestParam MultipartFile archivo) throws IOException, Error {
 		
 		System.out.println("asd");
 		//transformamos lo que reibimos del html a listas y luego a enumset
@@ -49,7 +56,7 @@ public class AmigoController {
 		//calculamos la edad en base a la fecha de nacimiento.
 		Integer  edad = amigoService.calcularEdad(fechaDeNacimiento);
 		
-		amigoService.crearAmigo(archivo, nombre, apellido, edad, telefono, direccion,null, null, setDiscapacidades, setNecesidad);
+		amigoService.crearAmigo(archivo, nombre, apellido, edad, telefono);
 		return "redirect:/amigo/registroAmigos";
 	}
 	
@@ -71,6 +78,20 @@ public class AmigoController {
 		}	
 		
 		return "amigo";
+	}
+	
+	@GetMapping("/load/{id}")
+	public ResponseEntity<byte[]> cargarFoto(@PathVariable String id) {
+		Amigo amigo = amigoService.buscarAmigoID(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		return new ResponseEntity<>(amigo.getFoto(), headers, HttpStatus.OK);
+	}
+	
+	@GetMapping("/listaAmigos")
+	public String listaAmigos(Model model) {
+		model.addAttribute("amigos", amigoService.listar());
+		return "listaAmigos";
 	}
 	
 }

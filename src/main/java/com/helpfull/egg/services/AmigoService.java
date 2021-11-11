@@ -1,5 +1,6 @@
 package com.helpfull.egg.services;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.EnumSet;
 import java.util.List;
@@ -38,8 +39,8 @@ public class AmigoService {
 	//las calocciones de enum se vera como lo armamos de acuerdo a la html y como lo manda al controlador.
 	
 	@Transactional
-	public void crearAmigo(MultipartFile archivo, String nombre, String apellido, Integer edad, String telefono, String direccion,Zona zona,
-			EnumSet<Interes> intereses, EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades) throws Error{
+	public void crearAmigo(MultipartFile archivo, String nombre, String apellido, 
+			Integer edad, String telefono) throws Error, IOException{
 		
 		//validar(nombre,apellido,Integer.toString(edad),telefono,direccion,zona,intereses,discapacidades,necesidades);
 		
@@ -59,15 +60,15 @@ public class AmigoService {
 		
 		amigo.setEdad(edad);
 		amigo.setTelefono(telefono);
-		amigo.setZona(zona);
-		amigo.setIntereses(intereses);
-		amigo.setDiscapacidades(discapacidades);
-		amigo.setNecesidades(necesidades);
+//		amigo.setZona(zona);
+//		amigo.setIntereses(intereses);
+//		amigo.setDiscapacidades(discapacidades);
+//		amigo.setNecesidades(necesidades);
 		
 		amigo.setFamiliarAcargo(familiarAcargo);
 		
-		Foto foto = fotoService.guardar(archivo);
-		amigo.setFoto(foto);
+		
+		amigo.setFoto(archivo.getBytes());
 		System.out.println("--------------asd5----------------");
 		amigoRepository.save(amigo);
 	}
@@ -78,11 +79,12 @@ public class AmigoService {
 	public void modificarAmigo(MultipartFile archivo, String id, String nombre, String apellido, Integer edad, String telefono, String direccion,
 			Zona zona, EnumSet<Interes> intereses,
 			EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades, String nombreFamiliarAcargo, String apellidoFamiliarAcargo, Integer edadFamiliarAcargo, String telefonoFamiliarAcargo,
-			String direccionFamiliarAcargo) throws Error {
+			String direccionFamiliarAcargo) throws Error, IOException {
 		
 		Amigo amigo = buscarAmigoID(id);
 		
 		//seteamos los valores modificado de amigo
+		amigo.setFoto(archivo.getBytes());
 		amigo.setNombre(nombre);
 		amigo.setApellido(apellido);
 		amigo.setEdad(edad);
@@ -100,8 +102,7 @@ public class AmigoService {
 		amigo.getFamiliarAcargo().setDireccion(direccionFamiliarAcargo);
 		
 		//modificamos la foto
-		Foto foto = fotoService.guardar(archivo);
-		amigo.setFoto(foto);
+		
 		
 		amigoRepository.save(amigo);
 		
@@ -124,13 +125,13 @@ public class AmigoService {
 		return amigos;
 	}
 	
-	public Foto buscarAmigosFoto(String id) throws Error {
-		Amigo amigo = amigoRepository.buscarAmigosPorFoto(id);
-		if(amigo == null) {
-			throw new Error("No se encontraron amigos por la zona.");
-		}
-		return amigo.getFoto();
-	}
+//	public Foto buscarAmigosFoto(String id) throws Error {
+//		Amigo amigo = amigoRepository.buscarAmigosPorFoto(id);
+//		if(amigo == null) {
+//			throw new Error("No se encontraron amigos por la zona.");
+//		}
+//		return amigo.getFoto();
+//	}
 	
 	public void validar(String nombre, String apellido, String edad, String telefono, String direccion, Zona zona,
 			EnumSet<Interes> intereses, EnumSet<Discapacidad> discapacidades, EnumSet<Necesidad> necesidades)
@@ -256,5 +257,9 @@ public class AmigoService {
 		}
 		
 		return setNecesidades;
+	}
+	
+	public List<Amigo> listar(){
+		return amigoRepository.findAll();
 	}
 }
