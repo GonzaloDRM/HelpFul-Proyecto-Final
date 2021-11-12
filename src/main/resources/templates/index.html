@@ -50,7 +50,7 @@
           
           <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
           
-          <li sec:authorize="isAuthenticated()"><a th:href="@{/voluntario/perfil}">Perfil</a></li>
+          <li sec:authorize="hasRole('ROLE_VOLUNTARIO')"><a th:href="@{/voluntario/perfil}">Perfil</a></li>
           
           <li sec:authorize="isAuthenticated()"><a th:href="@{/amigo/listaAmigos}">listar Amigos</a></li>
         </ul>
