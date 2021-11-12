@@ -23,7 +23,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.helpfull.egg.entities.Foto;
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.entities.Zona;
 import com.helpfull.egg.enums.Interes;

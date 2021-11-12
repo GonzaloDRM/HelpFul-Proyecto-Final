@@ -6,13 +6,12 @@
 </head>
 <body>
 
-	
 		<tr th:each="amigo : ${amigos}">
-			<th scope="row" th:text="${amigo.id}"></th>
-			<td><img th:src="@{/amigo/load/__${amigo.id}__}" style="width: auto; height: 60px;"></td><br>
-					
+			<td scope="row" th:text="${amigo.nombre}"></td>
+			<td scope="row" th:text="${amigo.apellido}"></td>
+			<td scope="row" th:text="${amigo.telefono}"></td>
+			<td><img th:src="@{/amigo/load/__${amigo.id}__}" style="width: auto; height: 60px;"></td>				
 		</tr>
-
 
 
 

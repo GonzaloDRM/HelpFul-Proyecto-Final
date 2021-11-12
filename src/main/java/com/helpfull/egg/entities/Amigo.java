@@ -1,29 +1,16 @@
 package com.helpfull.egg.entities;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.EnumSet;
+import java.util.Arrays;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
-
-import com.helpfull.egg.enums.Discapacidad;
-import com.helpfull.egg.enums.Interes;
-import com.helpfull.egg.enums.Necesidad;
 
 @Entity
 public class Amigo {
@@ -35,39 +22,31 @@ public class Amigo {
 	
 	private String nombre;
 	private String apellido;
-	private Integer edad;
+	private LocalDate edad;
 	private String telefono;
 	private String direccion;
-	
 	private LocalDate alta;
 	private LocalDate baja;
 	
 	@Lob @Basic(fetch = FetchType.LAZY) 
 	private byte[] foto;
-	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-	private FamiliarAcargo familiarAcargo;
-	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-	private Zona zona;
-	
-	@ElementCollection(targetClass=Interes.class)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name="intereses")
-	private Collection<Interes> intereses;
-	
-	@ElementCollection(targetClass=Discapacidad.class)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name="discapacidades")
-	private Collection<Discapacidad> discapacidades;
-	
-	@ElementCollection(targetClass=Necesidad.class)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name="necesidades")
-	private Collection<Necesidad> necesidades;
 
 	public Amigo() {
-		
+		super();
+	}
+
+	public Amigo(String id, String nombre, String apellido, LocalDate edad, String telefono, String direccion,
+			LocalDate alta, LocalDate baja, byte[] foto) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.alta = alta;
+		this.baja = baja;
+		this.foto = foto;
 	}
 
 	public String getId() {
@@ -94,11 +73,11 @@ public class Amigo {
 		this.apellido = apellido;
 	}
 
-	public Integer getEdad() {
+	public LocalDate getEdad() {
 		return edad;
 	}
 
-	public void setEdad(Integer edad) {
+	public void setEdad(LocalDate edad) {
 		this.edad = edad;
 	}
 
@@ -142,44 +121,11 @@ public class Amigo {
 		this.foto = foto;
 	}
 
-	public FamiliarAcargo getFamiliarAcargo() {
-		return familiarAcargo;
-	}
-
-	public void setFamiliarAcargo(FamiliarAcargo familiarAcargo) {
-		this.familiarAcargo = familiarAcargo;
-	}
-
-	public Zona getZona() {
-		return zona;
-	}
-
-	public void setZona(Zona zona) {
-		this.zona = zona;
-	}
-
-	public Collection<Interes> getIntereses() {
-		return intereses;
-	}
-
-	public void setIntereses(EnumSet<Interes> intereses) {
-		this.intereses = intereses;
-	}
-
-	public Collection<Discapacidad> getDiscapacidades() {
-		return discapacidades;
-	}
-
-	public void setDiscapacidades(EnumSet<Discapacidad> discapacidades) {
-		this.discapacidades = discapacidades;
-	}
-	
-	public Collection<Necesidad> getNecesidades() {
-		return necesidades;
-	}
-
-	public void setNecesidades(EnumSet<Necesidad> necesidades) {
-		this.necesidades = necesidades;
+	@Override
+	public String toString() {
+		return "Amigo [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", telefono="
+				+ telefono + ", direccion=" + direccion + ", alta=" + alta + ", baja=" + baja + ", foto="
+				+ Arrays.toString(foto) + "]";
 	}
 	
 }

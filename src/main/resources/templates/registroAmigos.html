@@ -54,11 +54,8 @@
 
     </div>
   </header><!-- End Header -->
-	<div th:if="${foto}">
-		 <img th:src="" alt="Mi titulo de la imagen">
-	</div>
 
-    <form class="formulario" th:action= "@{/amigo/registroAmigos}" method="POST" enctype="multipart/form-data">
+    <form class="formulario" th:action= "@{/amigo/guardar}" method="POST" enctype="multipart/form-data">
         <h1>Registrar Amigo</h1>
         <div class="contenedor">
             <div class="input-contenedor">
@@ -72,101 +69,14 @@
             </div>
             <div class="input-contenedor">
                 <p class="fecha">Fecha de nacimiento</p>
-                <input type="date" name="fechaDeNacimiento">
+                <input type="date" name="edad">
             </div>
-    
-     
-            
-<!--             <div class="input-contenedor"> -->
-<!--             <p class="fecha">Provincia</p> -->
-<!--             	<select class="from-control" name="zona-ciudad"> -->
-<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.provincia}"></option> -->
-<!--             	</select> -->
-<!--             </div> -->
-            
-<!--             <div class="input-contenedor"> -->
-<!--             <p class="fecha">Departamento</p> -->
-<!--             	<select class="from-control" name="zona-ciudad"> -->
-<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.departamento}"></option> -->
-<!--             	</select> -->
-<!--             </div> -->
-            
-<!--             <div class="input-contenedor"> -->
-<!--             <p class="fecha">Municipio</p> -->
-<!--             	<select class="from-control" name="zona-ciudad"> -->
-<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.municipio}"></option> -->
-<!--             	</select> -->
-<!--             </div> -->
-            
-<!--             <div class="input-contenedor"> -->
-<!--             <p class="fecha">Barrio</p> -->
-<!--             	<select class="from-control" name="zona-ciudad"> -->
-<!--             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.barrio}"></option> -->
-<!--             	</select> -->
-<!--             </div>  -->
+  
            	
             <div class="input-contenedor">
-                <input type="file" name = "archivo" >
+                <input type="file" name="foto" >
             </div>
-            <div class="input-contenedor">
-                <div>
-<!--                     <p class="Discapaciadad">Tipo de Discapaciadad</p> -->
-<!--                     <ul> -->
-<!--                     	<li th:each= "d : ${discapacidades}"> -->
-<!--                     		<input id="discapacidades" type="checkbox" th:value ="${d}"  name = "discapacidades"> -->
-<!--                     		<label for="discapacidades" th:text = "${d}"></label> -->
-<!--                     	</li> -->
-<!--                     </ul> -->
-                    <!--
-                    <input id="none" type="checkbox">
-                    <label for="none">Ninguna</label>
-                    <br>
-                    <input id="auditiva" type="checkbox">
-                    <label for="auditiva">Discapaciadad Auditiva</label>
-                    <br>
-                    <input id="sordoceguera" type="checkbox">
-                    <label for="sordoceguera">Sordoceguera</label>
-                    <br>
-                    <input id="dis-intelectual" type="checkbox">
-                    <label for="dis-intelectual">Discapaciadad Intelectual</label>
-                    <br>
-                    <input id="psicosocial-mental" type="checkbox">
-                    <label for="psicosocial-mental">Discapaciadad Psicosocial (mental)</label>
-                    <br>
-                    <input id="multiple" type="checkbox">
-                    <label for="multiple">Discapaciadad Múltiple</label>
-                    -->
-<!--                 </div> -->
-<!--                 <div> -->
-<!--                     <p class="Necesidad">Tipo de Necesidad</p> -->
-<!--                     <ul> -->
-<!--                     	<li th:each= "n : ${necesidades}"> -->
-<!--                     		<input id="necesidades" type="checkbox" th:value ="${n}" name = "necesidades"> -->
-<!--                     		<label for="necesidades" th:text = "${n}"></label> -->
-<!--                     	</li> -->
-<!--                     </ul> -->
-                   <!--
-                    <input id="dinero" type="checkbox">
-                    <label for="dinero"></label>
-                    <br>
-                    <input id="donaciones" type="checkbox">
-                    <label for="donaciones">Donaciones</label>
-                    <br>
-                    <input id="sordoceguera" type="checkbox">
-                    <label for="sordoceguera">Sordoceguera</label>
-                    <br>
-                    <input id="dis-intelectual" type="checkbox">
-                    <label for="dis-intelectual">Discapaciadad Intelectual</label>
-                    <br>
-                    <input id="psicosocial-mental" type="checkbox">
-                    <label for="psicosocial-mental">Discapaciadad Psicosocial (mental)</label>
-                    <br>
-                    <input id="multiple" type="checkbox">
-                    <label for="multiple">Discapaciadad Múltiple</label>
-                    -->
-                </div>
-            </div>
-            <div></div>
+
             <div>
                 <input type="submit" value="Registrate" class="button">
                 <p class="text-registro">Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.

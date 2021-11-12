@@ -18,9 +18,4 @@ public class MainController {
 		return "nuestrahistoria";
 	}
 	
-	@GetMapping("/registroAmigos")
-	public String registroAmigos() {
-		return "registroAmigos";
-	}
-	
 }
