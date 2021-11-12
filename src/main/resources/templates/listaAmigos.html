@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>HelpFul</title>
+  <title>Events - MeFamily Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,9 +26,13 @@
 
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
-  <link href="/assets/css/estiloss.css" rel="stylesheet">
 
-  
+  <!-- =======================================================
+  * Template Name: MeFamily - v4.6.0
+  * Template URL: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
@@ -44,13 +48,9 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a th:href="@{/nuestrahistoria}">Quienes Somos</a></li>
-          
           <li sec:authorize="isAnonymous()"><a th:href="@{/voluntario/login}">Login</a></li>
-          
           <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/amigo/registroAmigos}">Crear Amigo</a></li>
-          
           <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-          
           <li sec:authorize="hasRole('ROLE_VOLUNTARIO')"><a th:href="@{/voluntario/perfil}">Perfil</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -58,36 +58,53 @@
 
     </div>
   </header><!-- End Header -->
-  
-  <section>
-    <main>
-    <div >
-        
-        <div th:each="amigo : ${amigos}">
-			<label><img th:src="@{/amigo/load/__${amigo.id}__}" style="width: auto; height: 80px;"></label><br>	
-			<label scope="row" th:text="${amigo.nombre}"></label>
-			<label scope="row" th:text="${amigo.apellido}"></label>
-			<label scope="row" th:text="${amigo.telefono}"></label>			
-		</div>
-        
-  </div>
-  </main>
-</section>
+
+  <main id="main">
+
+    <!-- ======= Event List Section ======= -->
+    <section id="event-list" class="event-list">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-stretch" th:each="amigo : ${amigos}">
+            <div class="card">
+              <div class="card-img">
+                <img img th:src="@{/amigo/load/__${amigo.id}__}" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title" th:text="${amigo.nombre}+' '+${amigo.apellido}">Lara's 1th Birthday</h5>
+                <p class="fst-italic text-center" th:text="'Fecha de alta: '+${amigo.alta}"></p>
+                <p class="card-text" th:text="${amigo.telefono}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Event List Section -->
+
+  </main><!-- End #main -->
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
-      <h3>Mi Familia</h3>
-      <p>Teléfono: 0207 586 5153</p>
-      <p>info@helpfull.com</p>
-      <p>Número de organización benéfica registrada: 1087571</p>
+      <h3>MeFamily</h3>
+      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
       <div class="social-links">
-        
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        
-        
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
-      
+      <div class="copyright">
+        &copy; Copyright <strong><span>MeFamily</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
     </div>
   </footer><!-- End Footer -->
 

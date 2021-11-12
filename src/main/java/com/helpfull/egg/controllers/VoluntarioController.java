@@ -71,5 +71,22 @@ public class VoluntarioController {
 		headers.setContentType(MediaType.IMAGE_PNG);
 		return new ResponseEntity<>(voluntario.getFoto(), headers, HttpStatus.OK);
 	}
+	
+	@GetMapping("/modificarVoluntario")
+	public String modificarVoluntario(Model model) {
+		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		model.addAttribute("usuario", voluntarioService.buscarPorId(userDetails.getUsername()));
+		return "modificarVoluntario";
+	}
+	
+	@PostMapping("/modificoVoluntario")
+	public String modificoVoluntario(@RequestParam String username, @RequestParam String nombre,
+						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
+						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento) {
+		
+		voluntarioService.modificar(username, nombre, apellido, password, telefono, email, nacimiento);
+		return "redirect:/";
+	}
 
 }

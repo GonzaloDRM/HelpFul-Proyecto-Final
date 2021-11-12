@@ -79,6 +79,26 @@ public class VoluntarioService implements UserDetailsService{
 		voluntarioRepository.deleteById(id);
 	}
 	
+	public void modificar(String username, String nombre, String apellido, String password, Integer telefono, String email,
+			LocalDate nacimiento) {
+	Voluntario voluntario = new Voluntario();
+	
+	voluntario.setUsername(username);;
+	voluntario.setNombre(nombre);
+	voluntario.setApellido(apellido);
+	voluntario.setPassword(passwordEncoder.encode(password));
+	voluntario.setTelefono(telefono);
+	voluntario.setEmail(email);
+	voluntario.setNacimiento(nacimiento);
+	voluntario.setFoto(voluntario.getFoto());
+//	voluntario.setIntereses(intereses);
+	voluntario.setAlta(LocalDate.now());
+	voluntario.setRol(Rol.ROLE_VOLUNTARIO);
+	voluntario.setBaja(null);
+
+	voluntarioRepository.save(voluntario);
+}
+	
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

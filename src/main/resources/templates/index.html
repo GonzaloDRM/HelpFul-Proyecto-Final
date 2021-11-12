@@ -43,15 +43,10 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a th:href="@{/nuestrahistoria}">Quienes Somos</a></li>
-          
           <li sec:authorize="isAnonymous()"><a th:href="@{/voluntario/login}">Login</a></li>
-          
           <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/amigo/registroAmigos}">Crear Amigo</a></li>
-          
           <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-          
           <li sec:authorize="hasRole('ROLE_VOLUNTARIO')"><a th:href="@{/voluntario/perfil}">Perfil</a></li>
-          
           <li sec:authorize="isAuthenticated()"><a th:href="@{/amigo/listaAmigos}">listar Amigos</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

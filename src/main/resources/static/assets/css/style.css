@@ -1171,4 +1171,12 @@ section {
 .escrituraperfil {
 	height: 500px;
 	width: 500px;
+	padding: 0;
+	text-align: right;
+}
+
+.escrituraperfil2{
+  height: 500px;
+  width: 70%;
+  padding-left: 30px;
 }

@@ -27,7 +27,6 @@
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
 
-  
 </head>
 
 <body>
@@ -38,14 +37,15 @@
 
       <h1 class="logo"><a th:href="@{/}">HelpFul</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-<!--       <a href="index.html" class="logo"><img src="/img/logo-azul.png" alt="" class="img-fluid"></a> -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a th:href="@{/nuestrahistoria}">Quienes Somos</a></li>
-         
+          <li sec:authorize="isAnonymous()"><a th:href="@{/voluntario/login}">Login</a></li>
+          <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/amigo/registroAmigos}">Crear Amigo</a></li>
           <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-         
+          <li sec:authorize="isAuthenticated()"><a th:href="@{/amigo/listaAmigos}">listar Amigos</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -61,15 +61,16 @@
 
         <div class="d-flex justify-content-between align-items-center">
           <h2>Perfil de Usuario</h2>
-
+          <!--<ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Our Story</li>
+          </ol>-->
         </div>
 
       </div>
     </section><!-- End Breadcrumbs -->
 
-
     <!-- ======= Members Section ======= -->
-
     <section id="members" class="members">
       <div class="container">
 
@@ -78,44 +79,59 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-				<img src="/img/8.png" class="img-fluid" alt="">
-			
-		</tr>
+                <img src="/img/6.png" class="img-fluid" alt="">
                 
               </div>
               <div class="member-info">
-                <h4 th:text="${usuario.nombre} + ' ' + ${usuario.apellido}">Jorge Surita</h4>
+                <h4 th:text="${usuario.nombre}+' '+${usuario.apellido}"></h4><p><a th:href="@{/voluntario/modificarVoluntario}">Editar</a></p>
                 <span>Describite</span>
                 <p>Sint qui cupiditate. Asperiores fugit impedit aspernatur et mollitia. Molestiae qui placeat labore assumenda id qui nesciunt quo reprehenderit. Rem dolores similique quis soluta culpa enim quia ratione ea.</p>
               </div>
             </div>
           </div>
 
+<!--
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-  
+              <span class="label">NOMBRE</span> <input type="text" placeholder="" name="nombre">  
               </div>
             </div>
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="escrituraperfil">
-              <div class="member-img">
-              
-				<label th:text="${usuario.nombre}"></label><br>
-				<label th:text="${usuario.apellido}"></label><br>
-				<label th:text="${usuario.telefono}"></label><br>
-				<label th:text="${usuario.email}"></label><br>
-				<label th:text="${usuario.nacimiento}"></label><br>
+     </div>                 -->
 
-              </div>
-            </div>
-     </div>              
-
+    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+        <div class="escrituraperfil">
+            <label class="label">Nombre:</label><br><br>
+            <label class="label">Apellido:</label><br><br>
+            <label class="label">Dirección:</label><br><br>
+            <label class="label">DNI:</label><br><br>
+            <label class="label">Mail:</label><br><br>
+            <label class="label">Teléfono:</label><br><br>
+            <label class="label">Fecha de Nacimiento:</label><br><br>
+            <label class="label">Fecha de alta:</label><br><br>
+            <label class="label">Ciudad:</label><br><br>
         </div>
+      </div>
 
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="escrituraperfil2">
+            <div class="member-img">
+              <label class="label" th:text="${usuario.nombre}"></label><br><br>
+              <label class="label" th:text="${usuario.apellido}"></label><br><br>
+              <label class="label" th:text="${usuario.nombre}"></label><br><br>
+              <label class="label" th:text="${usuario.nombre}"></label><br><br>
+              <label class="label" th:text="${usuario.email}"></label><br><br>
+              <label class="label" th:text="${usuario.telefono}"></label><br><br>
+              <label class="label" th:text="${usuario.nacimiento}"></label><br><br>
+              <label class="label" th:text="${usuario.alta}"></label><br><br>
+              <label class="label" th:text="${usuario.nombre}"></label><br><br>
+            </div>
+          </div>
+        </div>
       </div>
     </section><!-- End Members Section -->
-
 
   </main><!-- End #main -->
 
