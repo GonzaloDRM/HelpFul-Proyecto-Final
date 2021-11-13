@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Amigo;
+import com.helpfull.egg.enums.Discapacidad;
+import com.helpfull.egg.enums.Interes;
+import com.helpfull.egg.enums.Necesidad;
 import com.helpfull.egg.services.AmigoService;
 
 @Controller
@@ -30,14 +33,18 @@ public class AmigoController {
 	private AmigoService amigoService;
 	
 	@GetMapping("/registroAmigos")
-	public String registroAmigos() {
+	public String registroAmigos(Model model) {
+		model.addAttribute("discapacidades", Discapacidad.values());
+		model.addAttribute("necesidades", Necesidad.values());
+		model.addAttribute("intereses", Interes.values());
 		return "registroAmigos";
 	}
 	
 	@PostMapping("/guardar")
 	public String guardar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
-						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate edad, @RequestParam MultipartFile foto) throws IOException {
-		amigoService.save(nombre, apellido, telefono, edad, foto);
+						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento, 
+						  @RequestParam MultipartFile foto, @RequestParam String direccion) throws IOException {
+		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion);
 		return "redirect:/";
 	}
 	

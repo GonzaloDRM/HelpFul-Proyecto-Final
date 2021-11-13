@@ -20,14 +20,15 @@ public class AmigoService {
 	
 	@Transactional
 	public void save(String nombre, String apellido, String telefono,
-			  		 LocalDate edad, MultipartFile foto) throws IOException {
+			  		 LocalDate nacimiento, MultipartFile foto, String direccion) throws IOException {
 		Amigo amigo = new Amigo();
 		amigo.setNombre(nombre);
 		amigo.setApellido(apellido);
 		amigo.setTelefono(telefono);
-		amigo.setEdad(edad);
+		amigo.setNacimiento(nacimiento);;
 		amigo.setFoto(foto.getBytes());
 		amigo.setAlta(LocalDate.now());
+		amigo.setDireccion(direccion);
 		
 		amigoRepository.save(amigo);
 	}

@@ -58,9 +58,9 @@ public class VoluntarioController {
 	public String registroVoluntario(@RequestParam String username, @RequestParam String nombre,
 						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
 						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
-						@RequestParam MultipartFile foto) throws IOException {
+						@RequestParam MultipartFile foto, @RequestParam String descripcion) throws IOException {
 		
-		voluntarioService.save(username, nombre, apellido, password, telefono, email, nacimiento, foto);
+		voluntarioService.save(username, nombre, apellido, password, telefono, email, nacimiento, foto, descripcion);
 		return "redirect:/";
 	}
 	
@@ -83,9 +83,10 @@ public class VoluntarioController {
 	@PostMapping("/modificoVoluntario")
 	public String modificoVoluntario(@RequestParam String username, @RequestParam String nombre,
 						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
-						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento) {
+						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
+						@RequestParam String descripcion) {
 		
-		voluntarioService.modificar(username, nombre, apellido, password, telefono, email, nacimiento);
+		voluntarioService.modificar(username, nombre, apellido, password, telefono, email, nacimiento, descripcion);
 		return "redirect:/";
 	}
 

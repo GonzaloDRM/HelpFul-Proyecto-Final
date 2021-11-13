@@ -28,6 +28,7 @@ public class Voluntario {
 	private Integer telefono;
 	private String email;
 	private LocalDate nacimiento;
+	private String descripcion;
 	
 	@Lob @Basic(fetch = FetchType.LAZY) 
 	private byte[] foto;
@@ -46,7 +47,7 @@ public class Voluntario {
 	}
 
 	public Voluntario(String username, String nombre, String apellido, String password, Integer telefono, String email,
-			LocalDate nacimiento, byte[] foto, Rol rol, LocalDate alta, LocalDate baja) {
+			LocalDate nacimiento, String descripcion, byte[] foto, Rol rol, LocalDate alta, LocalDate baja) {
 		super();
 		this.username = username;
 		this.nombre = nombre;
@@ -55,6 +56,7 @@ public class Voluntario {
 		this.telefono = telefono;
 		this.email = email;
 		this.nacimiento = nacimiento;
+		this.descripcion = descripcion;
 		this.foto = foto;
 		this.rol = rol;
 //		this.intereses = intereses;
@@ -62,8 +64,6 @@ public class Voluntario {
 		this.baja = baja;
 //		this.zona = zona;
 	}
-
-	
 
 	public String getUsername() {
 		return username;
@@ -169,11 +169,14 @@ public class Voluntario {
 		this.foto = foto;
 	}
 
-	@Override
-	public String toString() {
-		return "Voluntario [username=" + username + ", nombre=" + nombre + ", apellido=" + apellido + ", password=" + password
-				+ ", telefono=" + telefono + ", email=" + email + ", nacimiento=" + nacimiento + ", rol=" + rol
-				+ ", intereses=" + ", alta=" + alta + ", baja=" + baja + "]";
+	public String getDescripcion() {
+		return descripcion;
 	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	
 
 }

@@ -11,7 +11,7 @@
 	
   
   <!-- Favicons -->
-  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/img/logo-blanco.png" rel="icon">
   <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -60,50 +60,69 @@
         <h1>Registrar Amigo</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <input type="text" placeholder="Nombre" name="nombre" >
+                <input class="from-control" type="text" placeholder="Nombre" name="nombre" >
             </div>
             <div class="input-contenedor">
-                <input type="text" placeholder="Apellido" name="apellido">
+                <input class="from-control" type="text" placeholder="Apellido" name="apellido">
             </div>
             <div class="input-contenedor">
-                <input type="tel" placeholder="Telefono" name="telefono">
+                <input class="from-control" type="text" placeholder="Telefono" name="telefono">
             </div>
             <div class="input-contenedor">
-                <p class="fecha">Fecha de nacimiento</p>
-                <input type="date" name="edad">
+                <p class="from-control">Fecha de nacimiento</p>
+                <input class="from-control" type="date" name="nacimiento">
             </div>
-  
-           	
             <div class="input-contenedor">
-                <input type="file" name="foto" >
+                <input class="from-control" type="file" name="foto" >
             </div>
-
-            <div>
-                <input type="submit" value="Registrate" class="button">
-                <p class="text-registro">Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.
-                </p>
-                <p class="text-registro">¿Ya tienes una cuenta?<a class="link" th:href="@{/voluntario/login}"> Iniciar
-                        Sesión
-                    </a></p>
+            <div class="input-contenedor">
+                <input class="from-control" type="text" placeholder="Direccion" name="direccion">
             </div>
+            <div class="input-contenedor">
+            	<p class="from-control">Discapacidades</p>
+                <ul>
+                   	<li class="enums-inline" th:each= "n : ${discapacidades}">
+                   		<input class="enums-inline" type="checkbox" th:value ="${n}" name = "discapacidades">
+                   		<label class="enums-inline" for="discapacidades" th:text = "${n}"></label>
+                   	</li>
+                </ul>
+			</div>
+			<div class="input-contenedor">
+            	<p class="from-control">Necesidades</p>
+                <ul>
+                   	<li class="enums-inline" th:each= "n : ${necesidades}">
+                   		<input class="enums-inline" type="checkbox" th:value ="${n}" name = "necesidades">
+                   		<label class="enums-inline" for="necesidades" th:text = "${n}"></label>
+                   	</li>
+                </ul>
+			</div>
+			<div class="input-contenedor">
+            	<p class="from-control">Intereses</p>
+                <ul>
+                   	<li class="enums-inline" th:each= "n : ${intereses}">
+                   		<input class="enums-inline" type="checkbox" th:value ="${n}" name = "intereses">
+                   		<label class="enums-inline" for="intereses" th:text = "${n}"></label>
+                   	</li>
+                </ul>
+			</div>
+                <input type="submit" value="Registro" class="button">
         </div>
     </form>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
-      <h3>Mi Familia</h3>
-      <p>Teléfono: 0207 586 5153</p>
-      <p>info@helpfull.com</p>
-      <p>Número de organización benéfica registrada: 1087571</p>
+      <h3>HelpFul</h3>
       <div class="social-links">
-        
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        
-        
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
-      
+      <div class="copyright">
+        &copy; Copyright <strong><span>HelpFul</span></strong>. All Rights Reserved
+      </div>
     </div>
   </footer><!-- End Footer -->
 

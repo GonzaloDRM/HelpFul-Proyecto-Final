@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/img/logo-blanco.png" rel="icon">
   <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -75,13 +75,13 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="/img/6.png" class="img-fluid" alt="">
+                <img src="/img/6.png" class="img-fluid" width="100%" alt="}">
                 
               </div>
               <div class="member-info">
                 <h4 th:text="${usuario.nombre}+' '+${usuario.apellido}"></h4><p><a th:href="@{/voluntario/modificarVoluntario}">Editar</a></p>
-                <span>Describite</span>
-                <p>Sint qui cupiditate. Asperiores fugit impedit aspernatur et mollitia. Molestiae qui placeat labore assumenda id qui nesciunt quo reprehenderit. Rem dolores similique quis soluta culpa enim quia ratione ea.</p>
+                <span>Descripcion sobre ti</span>
+                <p th:text="${usuario.descripcion}"></p>
               </div>
             </div>
           </div>
@@ -134,19 +134,17 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
-      <h3>Mi Familia</h3>
-      <p>Teléfono: 0207 586 5153</p>
-      <p>info@helpfull.com</p>
-      <p>Número de organización benéfica registrada: 1087571</p> 
-
-
+      <h3>HelpFul</h3>
       <div class="social-links">
-        
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
-      
+      <div class="copyright">
+        &copy; Copyright <strong><span>HelpFul</span></strong>. All Rights Reserved
+      </div>
     </div>
   </footer><!-- End Footer -->
 

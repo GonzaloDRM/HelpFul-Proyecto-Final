@@ -44,7 +44,7 @@ public class VoluntarioService implements UserDetailsService{
 	}
 	
 	public void save(String username, String nombre, String apellido, String password, Integer telefono, String email,
-				LocalDate nacimiento, MultipartFile foto) throws IOException {
+				LocalDate nacimiento, MultipartFile foto, String descripcion) throws IOException {
 		Voluntario voluntario = new Voluntario();
 		
 		
@@ -60,6 +60,7 @@ public class VoluntarioService implements UserDetailsService{
 		voluntario.setAlta(LocalDate.now());
 		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 		voluntario.setBaja(null);
+		voluntario.setDescripcion(descripcion);
 
 		voluntarioRepository.save(voluntario);
 	}
@@ -80,7 +81,7 @@ public class VoluntarioService implements UserDetailsService{
 	}
 	
 	public void modificar(String username, String nombre, String apellido, String password, Integer telefono, String email,
-			LocalDate nacimiento) {
+			LocalDate nacimiento, String descripcion) {
 	Voluntario voluntario = new Voluntario();
 	
 	voluntario.setUsername(username);;
@@ -95,7 +96,8 @@ public class VoluntarioService implements UserDetailsService{
 	voluntario.setAlta(LocalDate.now());
 	voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 	voluntario.setBaja(null);
-
+	voluntario.setDescripcion(descripcion);
+	
 	voluntarioRepository.save(voluntario);
 }
 	

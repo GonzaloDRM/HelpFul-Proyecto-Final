@@ -25,11 +25,16 @@
  .input-contenedor{
     margin-bottom: 15px;
     border: 1px solid #aaa;
-    text-align: left;
+    text-align: center;
+    width: 100%;
  }
  .from-control{
 	width: 50%;
 	border: none;
+	width: 100%;
+	text-align: center;
+	font-size: 21px;
+	color: rgb(107, 107, 107);
 }
  .formulario{
 	text-align: center;
@@ -81,15 +86,6 @@
     }   
  }
 
- .Discapaciadad{
-    color: rgb(107, 107, 107);
-    display:flex;
-    font-size: 21px;
-    padding-left: 10px;
- }
- .Necesidad{
-    color: rgb(107, 107, 107);
-    display:flex;
-    font-size: 21px;
-    padding-left: 10px;
- }
+.enums-inline {
+	display: inline;
+}
