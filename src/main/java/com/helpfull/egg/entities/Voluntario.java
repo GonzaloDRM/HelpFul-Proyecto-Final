@@ -22,47 +22,51 @@ public class Voluntario {
 
 	@Id
 	private String username;
+	private String password;
 	private String nombre;
 	private String apellido;
-	private String password;
-	private Integer telefono;
+	private String direccion;
+	private Integer dni;
 	private String email;
+	private Integer telefono;
 	private LocalDate nacimiento;
 	private String descripcion;
-	
-	@Lob @Basic(fetch = FetchType.LAZY) 
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	private byte[] foto;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
-	
+
 //	private EnumSet<Interes> intereses;
-	
+
 	private LocalDate alta;
 	private LocalDate baja;
 //	private Zona zona;
-	
+
 	public Voluntario() {
 		super();
 	}
 
-	public Voluntario(String username, String nombre, String apellido, String password, Integer telefono, String email,
-			LocalDate nacimiento, String descripcion, byte[] foto, Rol rol, LocalDate alta, LocalDate baja) {
+	public Voluntario(String username, String password, String nombre, String apellido, String direccion, Integer dni,
+			String email, Integer telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
+			LocalDate alta, LocalDate baja) {
 		super();
 		this.username = username;
+		this.password = password;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.password = password;
-		this.telefono = telefono;
+		this.direccion = direccion;
+		this.dni = dni;
 		this.email = email;
+		this.telefono = telefono;
 		this.nacimiento = nacimiento;
 		this.descripcion = descripcion;
 		this.foto = foto;
 		this.rol = rol;
-//		this.intereses = intereses;
 		this.alta = alta;
 		this.baja = baja;
-//		this.zona = zona;
 	}
 
 	public String getUsername() {
@@ -71,6 +75,14 @@ public class Voluntario {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getNombre() {
@@ -89,20 +101,20 @@ public class Voluntario {
 		this.apellido = apellido;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
-	public Integer getTelefono() {
-		return telefono;
+	public Integer getDni() {
+		return dni;
 	}
 
-	public void setTelefono(Integer telefono) {
-		this.telefono = telefono;
+	public void setDni(Integer dni) {
+		this.dni = dni;
 	}
 
 	public String getEmail() {
@@ -113,6 +125,38 @@ public class Voluntario {
 		this.email = email;
 	}
 
+	public Integer getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+
+	public LocalDate getNacimiento() {
+		return nacimiento;
+	}
+
+	public void setNacimiento(LocalDate nacimiento) {
+		this.nacimiento = nacimiento;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
 	public Rol getRol() {
 		return rol;
 	}
@@ -120,14 +164,6 @@ public class Voluntario {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-
-//	public EnumSet<Interes> getIntereses() {
-//		return intereses;
-//	}
-//
-//	public void setIntereses(EnumSet<Interes> intereses) {
-//		this.intereses = intereses;
-//	}
 
 	public LocalDate getAlta() {
 		return alta;
@@ -144,39 +180,5 @@ public class Voluntario {
 	public void setBaja(LocalDate baja) {
 		this.baja = baja;
 	}
-
-//	public Zona getZona() {
-//		return zona;
-//	}
-//
-//	public void setZona(Zona zona) {
-//		this.zona = zona;
-//	}
-
-	public LocalDate getNacimiento() {
-		return nacimiento;
-	}
-
-	public void setNacimiento(LocalDate nacimiento) {
-		this.nacimiento = nacimiento;
-	}
-
-	public byte[] getFoto() {
-		return foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	
-	
 
 }

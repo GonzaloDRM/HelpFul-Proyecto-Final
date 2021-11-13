@@ -98,7 +98,7 @@
 							<div class="member-info">
 								<h4 th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></h4>
 								<span>Describite</span>
-								<textarea th:text="${usuario.descripcion}" class="input-contenedor" rows="5" cols="33"></textarea>
+								<p th:text="${usuario.descripcion}"></p>
 							</div>
 						</div>
 					</div>
@@ -137,12 +137,12 @@
 											<input type="hidden" th:field="${usuario.password}" name="password">
 											<input class="inputeditar" type="text" th:field="${usuario.nombre}" name="nombre"><br>
 											<input class="inputeditar" type="text" th:field="${usuario.apellido}" name="apellido"><br>
-											<input class="inputeditar" type="text" th:field="${usuario.nombre}"><br>
-											<input class="inputeditar" type="text" th:field="${usuario.nombre}"><br>
+											<input class="inputeditar" type="text" th:field="${usuario.direccion}" name="direccion"><br>
+											<input class="inputeditar" type="text" th:field="${usuario.dni}" name="dni"><br>
 											<input class="inputeditar" type="text" th:field="${usuario.email}" name="email"><br>
 											<input class="inputeditar" type="text" th:field="${usuario.telefono}" name="telefono"><br>
 											<input class="inputeditar" type="date" th:field="${usuario.nacimiento}" name="nacimiento"><br>
-											<input class="inputeditar" type="text" th:field="${usuario.nombre}"><br>
+											
 											<input class="inputeditar" type="submit"><br>
 										</form>
 									</div>

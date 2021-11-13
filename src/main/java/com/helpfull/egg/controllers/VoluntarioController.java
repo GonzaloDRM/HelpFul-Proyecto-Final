@@ -55,12 +55,13 @@ public class VoluntarioController {
 	}
 	
 	@PostMapping("/registroVoluntario")
-	public String registroVoluntario(@RequestParam String username, @RequestParam String nombre,
-						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
-						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
-						@RequestParam MultipartFile foto, @RequestParam String descripcion) throws IOException {
-		
-		voluntarioService.save(username, nombre, apellido, password, telefono, email, nacimiento, foto, descripcion);
+	public String registroVoluntario(@RequestParam String username, @RequestParam String password,
+									 @RequestParam String nombre, @RequestParam String apellido, @RequestParam String dni,
+									 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
+									 @RequestParam String email, @RequestParam MultipartFile foto,
+									 @RequestParam String descripcion, @RequestParam String direccion) throws IOException {
+		System.out.println("000000000000000000000000000000000000000000000000000000000000000000000000000");
+		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion);
 		return "redirect:/";
 	}
 	
@@ -84,9 +85,9 @@ public class VoluntarioController {
 	public String modificoVoluntario(@RequestParam String username, @RequestParam String nombre,
 						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
 						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
-						@RequestParam String descripcion) {
+						@RequestParam String direccion, @RequestParam Integer dni) {
 		
-		voluntarioService.modificar(username, nombre, apellido, password, telefono, email, nacimiento, descripcion);
+		voluntarioService.modificar(username, password, nombre, apellido, direccion, dni, email, telefono, nacimiento);
 		return "redirect:/";
 	}
 
