@@ -84,10 +84,10 @@ public class VoluntarioService implements UserDetailsService{
 	
 	public void modificar(String username, String password, String nombre, String apellido, 
 						  String direccion, Integer dni, String email, Integer telefono, LocalDate nacimiento) {
-	Voluntario voluntario = new Voluntario();
+	Voluntario voluntario = buscarPorId(username);
 	
 	voluntario.setUsername(username);
-	voluntario.setPassword(passwordEncoder.encode(password));
+	voluntario.setPassword(voluntario.getPassword());
 	voluntario.setNombre(nombre);
 	voluntario.setApellido(apellido);
 	voluntario.setDireccion(direccion);
