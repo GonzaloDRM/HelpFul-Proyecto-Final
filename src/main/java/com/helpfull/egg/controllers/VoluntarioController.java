@@ -60,7 +60,6 @@ public class VoluntarioController {
 									 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 									 @RequestParam String email, @RequestParam MultipartFile foto,
 									 @RequestParam String descripcion, @RequestParam String direccion) throws IOException {
-		System.out.println("000000000000000000000000000000000000000000000000000000000000000000000000000");
 		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion);
 		return "redirect:/";
 	}

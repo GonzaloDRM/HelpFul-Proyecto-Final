@@ -2,6 +2,7 @@ package com.helpfull.egg.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,8 +44,11 @@ public class AmigoController {
 	@PostMapping("/guardar")
 	public String guardar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
 						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento, 
-						  @RequestParam MultipartFile foto, @RequestParam String direccion) throws IOException {
-		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion);
+						  @RequestParam MultipartFile foto, @RequestParam String direccion,
+						  @RequestParam Collection<Interes> intereses,
+						  @RequestParam Collection<Discapacidad> discapacidades,
+						  @RequestParam Collection<Necesidad> necesidades) throws IOException {
+		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, intereses, discapacidades, necesidades);
 		return "redirect:/";
 	}
 	
