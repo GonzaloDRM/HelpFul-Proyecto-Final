@@ -3,7 +3,6 @@ package com.helpfull.egg.services;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +23,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Voluntario;
-import com.helpfull.egg.entities.Zona;
-import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.Rol;
 import com.helpfull.egg.repositories.VoluntarioRepository;
 
@@ -58,12 +55,12 @@ public class VoluntarioService implements UserDetailsService{
 		voluntario.setEmail(email);
 		voluntario.setNacimiento(nacimiento);
 		voluntario.setFoto(foto.getBytes());
-//		voluntario.setIntereses(intereses);
+
 		voluntario.setAlta(LocalDate.now());
 		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 		voluntario.setBaja(null);
 		voluntario.setDescripcion(descripcion);
-
+		
 		voluntarioRepository.save(voluntario);
 	}
 	
@@ -75,11 +72,6 @@ public class VoluntarioService implements UserDetailsService{
 	@Transactional
 	public Voluntario buscarPorId(String id) {
 		return voluntarioRepository.getById(id);
-	}
-	
-	@Transactional
-	public void eliminar(String id) {
-		voluntarioRepository.deleteById(id);
 	}
 	
 	public void modificar(String username, String password, String nombre, String apellido, 
@@ -96,7 +88,7 @@ public class VoluntarioService implements UserDetailsService{
 	voluntario.setEmail(email);
 	voluntario.setNacimiento(nacimiento);
 	voluntario.setFoto(voluntario.getFoto());
-//	voluntario.setIntereses(intereses);
+
 	voluntario.setAlta(voluntario.getAlta());
 	voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 	voluntario.setBaja(null);

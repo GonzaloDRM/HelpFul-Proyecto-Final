@@ -35,7 +35,6 @@ public class Amigo {
 	private String telefono;
 	private String direccion;
 	private LocalDate alta;
-	private LocalDate baja;
 	
 	@Lob @Basic(fetch = FetchType.LAZY) 
 	private byte[] foto;
@@ -60,7 +59,7 @@ public class Amigo {
 	}
 
 	public Amigo(String id, String nombre, String apellido, LocalDate nacimiento, String telefono, String direccion,
-			LocalDate alta, LocalDate baja, byte[] foto, Collection<Interes> intereses,
+			LocalDate alta, byte[] foto, Collection<Interes> intereses,
 			Collection<Discapacidad> discapacidades, Collection<Necesidad> necesidades) {
 		super();
 		this.id = id;
@@ -70,7 +69,6 @@ public class Amigo {
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.alta = alta;
-		this.baja = baja;
 		this.foto = foto;
 		this.intereses = intereses;
 		this.discapacidades = discapacidades;
@@ -133,14 +131,6 @@ public class Amigo {
 		this.alta = alta;
 	}
 
-	public LocalDate getBaja() {
-		return baja;
-	}
-
-	public void setBaja(LocalDate baja) {
-		this.baja = baja;
-	}
-
 	public byte[] getFoto() {
 		return foto;
 	}
@@ -176,7 +166,7 @@ public class Amigo {
 	@Override
 	public String toString() {
 		return "Amigo [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", nacimiento=" + nacimiento
-				+ ", telefono=" + telefono + ", direccion=" + direccion + ", alta=" + alta + ", baja=" + baja
+				+ ", telefono=" + telefono + ", direccion=" + direccion + ", alta=" + alta
 				+ ", foto=" + Arrays.toString(foto) + ", intereses=" + intereses + ", discapacidades=" + discapacidades
 				+ ", necesidades=" + necesidades + "]";
 	}

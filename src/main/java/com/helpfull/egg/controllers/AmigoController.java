@@ -66,6 +66,10 @@ public class AmigoController {
 		return new ResponseEntity<>(amigo.getFoto(), headers, HttpStatus.OK);
 	}
 	
-	
+	@GetMapping("/eliminar")
+	public String eliminar(@RequestParam String id) {
+		amigoService.eliminarAmigo(id);
+		return "redirect:/amigo/listaAmigos";
+	}
 	
 }

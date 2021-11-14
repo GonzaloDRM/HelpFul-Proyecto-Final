@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Amigo;
@@ -54,6 +53,9 @@ public class AmigoService {
 		return amigoRepository.getById(id);
 	}
 	
-	
+	@Transactional
+	public void eliminarAmigo(String id) {
+		amigoRepository.deleteById(id);
+	}
 	
 }

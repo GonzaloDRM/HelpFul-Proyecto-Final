@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Voluntario;
+import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.services.VoluntarioService;
 import com.helpfull.egg.services.ZonaService;
 
@@ -50,6 +51,7 @@ public class VoluntarioController {
 	
 	@GetMapping("/registrarse")
 	public String registrarse(Model model) {
+		model.addAttribute("intereses", Interes.values());
 		model.addAttribute("zonas", zonaService.listar());
 		return "registrarse";
 	}
@@ -74,6 +76,7 @@ public class VoluntarioController {
 	
 	@GetMapping("/modificarVoluntario")
 	public String modificarVoluntario(Model model) {
+		model.addAttribute("intereses", Interes.values());
 		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();
 		model.addAttribute("usuario", voluntarioService.buscarPorId(userDetails.getUsername()));

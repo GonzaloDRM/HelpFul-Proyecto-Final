@@ -1,20 +1,15 @@
 package com.helpfull.egg.entities;
 
 import java.time.LocalDate;
-import java.util.EnumSet;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.Rol;
 
 @Entity
@@ -39,11 +34,8 @@ public class Voluntario {
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 
-//	private EnumSet<Interes> intereses;
-
 	private LocalDate alta;
 	private LocalDate baja;
-//	private Zona zona;
 
 	public Voluntario() {
 		super();
