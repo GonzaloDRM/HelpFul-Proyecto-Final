@@ -94,7 +94,7 @@
                 <input class="from-control" type="text" placeholder="Direccion" name="direccion">
             </div>
             
-            
+            <div id="row g-3">
             <div class="input-contenedor">
             <p class="from-control">Provincia</p>
             	<select class="from-control" name="zona-ciudad">
@@ -122,6 +122,16 @@
             		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.barrio}"></option>
             	</select>
             </div>             
+            </div>
+            <div class="input-contenedor">
+            	<p class="from-control">Intereses</p>
+                <ul>
+                   	<li class="enums-inline" th:each= "n : ${intereses}">
+                   		<input class="enums-inline" type="checkbox" th:value ="${n}" name = "intereses">
+                   		<label class="enums-inline" for="intereses" th:text = "${n}"></label>
+                   	</li>
+                </ul>
+			</div>
             
             <div class="input-contenedor">
             	<p class="from-control">Descripcion sobre ti</p>

@@ -3,6 +3,7 @@ package com.helpfull.egg.services;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Voluntario;
+import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.enums.Rol;
 import com.helpfull.egg.repositories.VoluntarioRepository;
 
@@ -42,7 +44,7 @@ public class VoluntarioService implements UserDetailsService{
 	
 	public void save(String username, String password, String nombre, String apellido, String dni,
 					 String telefono, LocalDate nacimiento, String email, MultipartFile foto,
-					 String descripcion, String direccion) throws IOException {
+					 String descripcion, String direccion, Collection<InteresVoluntario> intereses) throws IOException {
 		Voluntario voluntario = new Voluntario();
 		
 		voluntario.setUsername(username);
@@ -60,6 +62,7 @@ public class VoluntarioService implements UserDetailsService{
 		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 		voluntario.setBaja(null);
 		voluntario.setDescripcion(descripcion);
+		voluntario.setIntereses(intereses);
 		
 		voluntarioRepository.save(voluntario);
 	}

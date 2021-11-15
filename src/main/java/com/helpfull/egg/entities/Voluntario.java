@@ -1,8 +1,11 @@
 package com.helpfull.egg.entities;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import javax.persistence.Basic;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.enums.Rol;
 
 @Entity
@@ -36,6 +40,11 @@ public class Voluntario {
 
 	private LocalDate alta;
 	private LocalDate baja;
+	
+	@ElementCollection(targetClass=InteresVoluntario.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name="interesesVoluntarios")
+	private Collection<InteresVoluntario> intereses;
 
 	public Voluntario() {
 		super();
@@ -43,7 +52,7 @@ public class Voluntario {
 
 	public Voluntario(String username, String password, String nombre, String apellido, String direccion, Integer dni,
 			String email, Integer telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
-			LocalDate alta, LocalDate baja) {
+			LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -59,6 +68,7 @@ public class Voluntario {
 		this.rol = rol;
 		this.alta = alta;
 		this.baja = baja;
+		this.intereses = intereses;
 	}
 
 	public String getUsername() {
@@ -173,4 +183,12 @@ public class Voluntario {
 		this.baja = baja;
 	}
 
+	public Collection<InteresVoluntario> getIntereses() {
+		return intereses;
+	}
+
+	public void setIntereses(Collection<InteresVoluntario> intereses) {
+		this.intereses = intereses;
+	}
+	
 }

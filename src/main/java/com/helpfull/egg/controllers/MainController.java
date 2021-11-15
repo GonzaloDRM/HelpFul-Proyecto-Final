@@ -18,4 +18,9 @@ public class MainController {
 		return "nuestrahistoria";
 	}
 	
+	@GetMapping("/login")
+	public String login() {
+		return "redirect:/voluntario/login";
+	}
+	
 }

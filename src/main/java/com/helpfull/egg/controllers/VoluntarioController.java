@@ -2,6 +2,7 @@ package com.helpfull.egg.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.enums.Interes;
+import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.services.VoluntarioService;
 import com.helpfull.egg.services.ZonaService;
 
@@ -41,6 +44,7 @@ public class VoluntarioController {
 		return "login";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_REGISTRADO')")
 	@GetMapping("/perfil")
 	public String perfil(Model model) {
 		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -51,7 +55,7 @@ public class VoluntarioController {
 	
 	@GetMapping("/registrarse")
 	public String registrarse(Model model) {
-		model.addAttribute("intereses", Interes.values());
+		model.addAttribute("intereses", InteresVoluntario.values());
 		model.addAttribute("zonas", zonaService.listar());
 		return "registrarse";
 	}
@@ -61,8 +65,9 @@ public class VoluntarioController {
 									 @RequestParam String nombre, @RequestParam String apellido, @RequestParam String dni,
 									 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 									 @RequestParam String email, @RequestParam MultipartFile foto,
-									 @RequestParam String descripcion, @RequestParam String direccion) throws IOException {
-		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion);
+									 @RequestParam String descripcion, @RequestParam String direccion,
+									 @RequestParam Collection<InteresVoluntario> intereses) throws IOException {
+		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses);
 		return "redirect:/";
 	}
 	
@@ -74,6 +79,7 @@ public class VoluntarioController {
 		return new ResponseEntity<>(voluntario.getFoto(), headers, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_REGISTRADO')")
 	@GetMapping("/modificarVoluntario")
 	public String modificarVoluntario(Model model) {
 		model.addAttribute("intereses", Interes.values());
