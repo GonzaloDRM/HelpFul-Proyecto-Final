@@ -91,7 +91,7 @@
                 <p class="card-text" th:text="'Intereses: '+${amigo.intereses}"></p>
                 <p class="card-text" th:text="'Discapacidades: '+${amigo.discapacidades}"></p>
                 <p class="card-text" th:text="'Necesidades: '+${amigo.necesidades}"></p>
-                <button class="btn-primary"><a th:href="@{/voluntario/seleccionar}+'?id='+${amigo.id}" class="btn-primary">Seleccionar</a></button>
+                <button sec:authorize="hasRole('ROLE_VOLUNTARIO')" class="btn-primary"><a th:href="@{/voluntario/seleccionar}+'?id='+${amigo.id}" class="btn-primary">Seleccionar</a></button>
                 <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn-primary"><a th:href="@{/amigo/eliminar}+'?id='+${amigo.id}" class="btn-primary">Eliminar</a></button>
               </div>
             </div>
