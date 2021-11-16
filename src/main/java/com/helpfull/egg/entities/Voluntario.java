@@ -2,6 +2,7 @@ package com.helpfull.egg.entities;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
@@ -12,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 
 import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.enums.Rol;
@@ -45,6 +47,9 @@ public class Voluntario {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="interesesVoluntarios")
 	private Collection<InteresVoluntario> intereses;
+	
+	@ManyToMany
+	private List<Amigo> amigos;
 
 	public Voluntario() {
 		super();
@@ -52,7 +57,7 @@ public class Voluntario {
 
 	public Voluntario(String username, String password, String nombre, String apellido, String direccion, Integer dni,
 			String email, Integer telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
-			LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses) {
+			LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses, List<Amigo> amigos) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -69,6 +74,7 @@ public class Voluntario {
 		this.alta = alta;
 		this.baja = baja;
 		this.intereses = intereses;
+		this.amigos = amigos;
 	}
 
 	public String getUsername() {
@@ -190,5 +196,15 @@ public class Voluntario {
 	public void setIntereses(Collection<InteresVoluntario> intereses) {
 		this.intereses = intereses;
 	}
+
+	public List<Amigo> getAmigos() {
+		return amigos;
+	}
+
+	public void setAmigos(List<Amigo> amigos) {
+		this.amigos = amigos;
+	}
+	
+	
 	
 }

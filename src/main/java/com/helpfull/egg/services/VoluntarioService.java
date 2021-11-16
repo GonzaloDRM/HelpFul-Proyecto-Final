@@ -23,9 +23,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.enums.Rol;
+import com.helpfull.egg.repositories.AmigoRepository;
 import com.helpfull.egg.repositories.VoluntarioRepository;
 
 @Service
@@ -33,6 +35,9 @@ public class VoluntarioService implements UserDetailsService{
 
 	@Autowired
 	private VoluntarioRepository voluntarioRepository;
+	
+	@Autowired
+	private AmigoRepository amigoRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -99,6 +104,34 @@ public class VoluntarioService implements UserDetailsService{
 	
 	voluntarioRepository.save(voluntario);
 }
+	
+	@Transactional
+	public void agregarAmigo(String username, String id) {
+		Voluntario voluntario = buscarPorId(username);
+		
+		List<Amigo> amigos = voluntario.getAmigos();
+		amigos.add(amigoRepository.getById(id));
+		
+		voluntario.setUsername(username);
+		voluntario.setPassword(voluntario.getPassword());
+		voluntario.setNombre(voluntario.getNombre());
+		voluntario.setApellido(voluntario.getApellido());
+		voluntario.setDireccion(voluntario.getDireccion());
+		voluntario.setDni(voluntario.getDni());
+		voluntario.setTelefono(voluntario.getTelefono());
+		voluntario.setEmail(voluntario.getEmail());
+		voluntario.setNacimiento(voluntario.getNacimiento());
+		voluntario.setFoto(voluntario.getFoto());
+
+		voluntario.setAlta(voluntario.getAlta());
+		voluntario.setRol(voluntario.getRol());
+		voluntario.setBaja(null);
+		voluntario.setDescripcion(voluntario.getDescripcion());
+		
+		voluntario.setAmigos(amigos);
+		
+		voluntarioRepository.save(voluntario);		
+	}
 	
 	
 	@Override

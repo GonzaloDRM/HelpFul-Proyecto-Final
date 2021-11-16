@@ -3,6 +3,7 @@ package com.helpfull.egg.controllers;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,6 +12,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Amigo;
+import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.enums.Discapacidad;
 import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.Necesidad;
 import com.helpfull.egg.services.AmigoService;
+import com.helpfull.egg.services.VoluntarioService;
 
 @Controller
 @RequestMapping("/amigo")
@@ -32,6 +38,9 @@ public class AmigoController {
 	
 	@Autowired
 	private AmigoService amigoService;
+	
+	@Autowired
+	private VoluntarioService voluntarioService;
 	
 	@GetMapping("/registroAmigos")
 	public String registroAmigos(Model model) {
@@ -54,7 +63,16 @@ public class AmigoController {
 	
 	@GetMapping("/listaAmigos")
 	public String listaAmigos(Model model) {
-		model.addAttribute("amigos", amigoService.listar());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		Voluntario voluntario = voluntarioService.buscarPorId(userDetails.getUsername());
+		List<Amigo> paraMostrar = amigoService.listar();
+		
+		for (Amigo amigo : voluntario.getAmigos()) {
+			paraMostrar.remove(amigo);
+		}
+		
+		model.addAttribute("amigos", paraMostrar);
 		return "listaAmigos";
 	}
 	
