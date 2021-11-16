@@ -2,10 +2,10 @@ package com.helpfull.egg.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Match {
@@ -15,10 +15,10 @@ public class Match {
     @GenericGenerator(name = "uuid",strategy ="uuid2")
 	private String id;
 	
-	@ManyToMany
+	@OneToOne
 	private Voluntario voluntario;
 	
-	@ManyToMany
+	@OneToOne
 	private Amigo amigo;
 
 	public Match() {
