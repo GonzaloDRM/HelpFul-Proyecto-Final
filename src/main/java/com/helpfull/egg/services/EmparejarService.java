@@ -24,10 +24,8 @@ public class EmparejarService {
 	@Transactional
 	public void save(String amigo, String voluntario) {
 		Emparejar emparejar = new Emparejar();
-		
 		emparejar.setAmigo(amigoService.buscarPorId(amigo));
 		emparejar.setVoluntario(voluntarioService.buscarPorId(voluntario));
-		
 		emparejarRepository.save(emparejar);
 	}
 	

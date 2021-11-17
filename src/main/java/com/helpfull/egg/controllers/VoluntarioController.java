@@ -31,10 +31,8 @@ import com.helpfull.egg.entities.Emparejar;
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.InteresVoluntario;
-import com.helpfull.egg.services.AmigoService;
 import com.helpfull.egg.services.EmparejarService;
 import com.helpfull.egg.services.VoluntarioService;
-import com.helpfull.egg.services.ZonaService;
 
 @Controller
 @RequestMapping("/voluntario")
@@ -44,13 +42,7 @@ public class VoluntarioController {
 	private VoluntarioService voluntarioService;
 	
 	@Autowired
-	private ZonaService zonaService;
-	
-	@Autowired
 	private EmparejarService emparejarService;
-	
-	@Autowired
-	private AmigoService amigoService;
 	
 	@GetMapping("/login")
 	public String login() {
@@ -80,7 +72,7 @@ public class VoluntarioController {
 	@GetMapping("/registrarse")
 	public String registrarse(Model model) {
 		model.addAttribute("intereses", InteresVoluntario.values());
-		model.addAttribute("zonas", zonaService.listar());
+		
 		return "registrarse";
 	}
 	
@@ -131,5 +123,4 @@ public class VoluntarioController {
 		return "redirect:/amigo/listaAmigos";
 	}
 	
-
 }
