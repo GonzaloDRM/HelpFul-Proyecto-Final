@@ -28,7 +28,7 @@ public class AmigoService {
 	@Transactional
 	public void save(String nombre, String apellido, String telefono,
 			  		 LocalDate nacimiento, MultipartFile foto, String direccion,
-			  		 String provincia, String departamento,
+			  		 String provincia, String localidad,
 			  		 Collection<Interes> intereses,
 					 Collection<Discapacidad> discapacidades,
 					 Collection<Necesidad> necesidades) throws Exception {
@@ -41,7 +41,7 @@ public class AmigoService {
 		amigo.setAlta(LocalDate.now());
 		amigo.setDireccion(direccion);
 		
-		Zona zona = zonaService.crearZona(provincia, departamento);
+		Zona zona = zonaService.crearZona(provincia, localidad);
 		
 		amigo.setZona(zona);
 		amigo.setIntereses(intereses);

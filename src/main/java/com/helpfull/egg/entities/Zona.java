@@ -22,127 +22,49 @@ public class Zona implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    //@Column(name = "Direccion")
-    //private String direccion;
-
-    //@Column(name = "Barrio")
-    //private String barrio;
-
-    //@Column(name = "Municipio")
-    //private String municipio;
-
-    @Column(name = "Departamento")
-    private String departamento;
+    @Column(name = "Localidad")
+    private String localidad;
 
     @Column(name = "Provincia")
     private String provincia;
 
-//    @ManyToMany
-//    private Amigo amigo;
-//
-//    @ManyToMany
-//    private Voluntario voluntario;
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-/*
-    public String getDireccion() {
-        return direccion;
-    }
+	public Zona() {
+		
+	}
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+	public Zona(String localidad, String provincia) {
+		this.localidad = localidad;
+		this.provincia = provincia;
+	}
 
-    public String getBarrio() {
-        return barrio;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setBarrio(String barrio) {
-        this.barrio = barrio;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getMunicipio() {
-        return municipio;
-    }
+	public String getLocalidad() {
+		return localidad;
+	}
 
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
-*/
-    public String getDepartamento() {
-        return departamento;
-    }
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
 
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
+	public String getProvincia() {
+		return provincia;
+	}
 
-    public String getProvincia() {
-        return provincia;
-    }
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
 
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-    public Zona() {
-    }
-
-    public Zona(String departamento, String provincia) {
-        //this.barrio = barrio;
-        //this.municipio = municipio;
-        this.departamento = departamento;
-        this.provincia = provincia;
-    }
-
-//      public Amigo getAmigo() {
-//        return amigo;
-//    }
-//
-//    public void setAmigo(Amigo amigo) {
-//        this.amigo = amigo;
-//    }
-//
-//    public Voluntario getVoluntario() {
-//        return voluntario;
-//    }
-//
-//    public void setVoluntario(Voluntario voluntario) {
-//        this.voluntario = voluntario;
-//    }
-//
-    @Override
-    public String toString() {
-        return "Zona {"
-                + "Id" + id
- //               + "Direccion" + direccion
- //               + "Barrio" + barrio
- //               + "Municipio" + municipio
-                + "Departamento" + departamento
-                + "Provincia" + provincia
-                + "}";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Zona zona = (Zona) o;
-        return id != null ? id.equals(zona.id) : zona.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
+	
 }

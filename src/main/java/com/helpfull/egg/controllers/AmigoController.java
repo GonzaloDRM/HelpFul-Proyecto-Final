@@ -49,10 +49,10 @@ public class AmigoController {
 	public String guardar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
 						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento, 
 						  @RequestParam MultipartFile foto, @RequestParam String direccion,@RequestParam String provincia,
-						  @RequestParam	String departamento, @RequestParam Collection<Interes> intereses,
+						  @RequestParam	String localidad, @RequestParam Collection<Interes> intereses,
 						  @RequestParam Collection<Discapacidad> discapacidades,
 						  @RequestParam Collection<Necesidad> necesidades) throws Exception {
-		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, provincia, departamento, intereses, discapacidades, necesidades);
+		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, provincia, localidad, intereses, discapacidades, necesidades);
 		return "redirect:/";
 	}
 	
