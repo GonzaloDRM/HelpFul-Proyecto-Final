@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.helpfull.egg.entities.Amigo;
-import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.services.EmparejarService;
 import com.helpfull.egg.services.VoluntarioService;
 

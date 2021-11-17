@@ -2,7 +2,9 @@ package com.helpfull.egg.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,9 +26,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.helpfull.egg.entities.Amigo;
+import com.helpfull.egg.entities.Emparejar;
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.InteresVoluntario;
+import com.helpfull.egg.services.AmigoService;
+import com.helpfull.egg.services.EmparejarService;
 import com.helpfull.egg.services.VoluntarioService;
 import com.helpfull.egg.services.ZonaService;
 
@@ -40,6 +46,12 @@ public class VoluntarioController {
 	@Autowired
 	private ZonaService zonaService;
 	
+	@Autowired
+	private EmparejarService emparejarService;
+	
+	@Autowired
+	private AmigoService amigoService;
+	
 	@GetMapping("/login")
 	public String login() {
 		return "login";
@@ -48,9 +60,21 @@ public class VoluntarioController {
 	@PreAuthorize("hasRole('ROLE_REGISTRADO')")
 	@GetMapping("/perfil")
 	public String perfil(Model model) {
-		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();
 		model.addAttribute("usuario", voluntarioService.buscarPorId(userDetails.getUsername()));
+		
+		List<Emparejar> emparejamientos = emparejarService.listar();
+		List<Amigo> amigos = new ArrayList<>();
+		for (Emparejar emparejar : emparejamientos) {
+			if(emparejar.getVoluntario().getUsername().equals(userDetails.getUsername())) {
+				amigos.add(emparejar.getAmigo());
+			}
+		}
+		
+		
+		model.addAttribute("amigos", amigos);
+		
 		return "perfil";
 	}
 	

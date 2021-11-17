@@ -1,12 +1,12 @@
 package com.helpfull.egg.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.Emparejar;
-import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.repositories.MatchRepository;
 
 @Service
@@ -31,4 +31,8 @@ public class EmparejarService {
 		emparejarRepository.save(emparejar);
 	}
 	
+	@Transactional
+	public List<Emparejar> listar() {
+		return emparejarRepository.findAll();
+	}
 }

@@ -127,7 +127,42 @@
           </div>
         </div>
       </div>
-    </section><!-- End Members Section -->
+    </section>
+    
+     
+    
+     <section id="event-list" class="event-list">
+     <h3>Matchs!</h3>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-stretch" th:each="amigo : ${amigos}">
+            <div class="card">
+              <div class="card-img">
+                <img th:src="@{/amigo/load/__${amigo.id}__}" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title" th:text="${amigo.nombre}+' '+${amigo.apellido}">Lara's 1th Birthday</h5>
+                <p class="fst-italic text-center" th:text="'Fecha de alta: '+${amigo.alta}"></p>
+                <p class="card-text" th:text="'Telefono: '+${amigo.telefono}"></p>
+                <p class="card-text" th:text="'Nacimiento: '+${amigo.nacimiento}"></p>
+                <p class="card-text" th:text="'Direccion: '+${amigo.direccion}"></p>
+                <p class="card-text" th:text="'Miembro desde: '+${amigo.alta}"></p>
+                <p class="card-text" th:text="'Intereses: '+${amigo.intereses}"></p>
+                <p class="card-text" th:text="'Discapacidades: '+${amigo.discapacidades}"></p>
+                <p class="card-text" th:text="'Necesidades: '+${amigo.necesidades}"></p>
+                <button sec:authorize="hasRole('ROLE_VOLUNTARIO')" class="btn-primary"><a th:href="@{/voluntario/seleccionar}+'?id='+${amigo.id}" class="btn-primary">Seleccionar</a></button>
+                <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn-primary"><a th:href="@{/amigo/eliminar}+'?id='+${amigo.id}" class="btn-primary">Eliminar</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+    
+    <!-- End Members Section -->
 
   </main><!-- End #main -->
 
