@@ -72,7 +72,6 @@ public class VoluntarioController {
 			}
 		}
 		
-		
 		model.addAttribute("amigos", amigos);
 		
 		return "perfil";

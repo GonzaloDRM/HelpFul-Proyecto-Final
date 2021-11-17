@@ -1,5 +1,7 @@
 package com.helpfull.egg.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.helpfull.egg.entities.Amigo;
+import com.helpfull.egg.entities.Emparejar;
 import com.helpfull.egg.services.EmparejarService;
 import com.helpfull.egg.services.VoluntarioService;
 
@@ -29,8 +33,12 @@ public class EmparejarController {
 	
 	@GetMapping("/emparejarAmigos")
 	public String emparejarAmigos(Model model, @RequestParam(required = false) String username) {
-		model.addAttribute("voluntario", voluntarioService.buscarPorId(username).getAmigos());
 		model.addAttribute("volun", voluntarioService.buscarPorId(username));
+		
+		List<Amigo> amigos = voluntarioService.buscarPorId(username).getAmigos();
+		
+		
+		model.addAttribute("voluntario", amigos);
 		return "emparejarAmigos";
 	}
 	
