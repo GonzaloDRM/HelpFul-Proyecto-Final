@@ -5,24 +5,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.helpfull.egg.entities.Amigo;
-import com.helpfull.egg.entities.Match;
+import com.helpfull.egg.entities.Emparejar;
 import com.helpfull.egg.entities.Voluntario;
 import com.helpfull.egg.repositories.MatchRepository;
 
 @Service
-public class MatchService {
+public class EmparejarService {
 
 	@Autowired
 	private MatchRepository matchRepository;
 	
 	@Transactional
 	public void save(Amigo amigo, Voluntario voluntario) {
-		Match match = new Match();
+		Emparejar emparejar = new Emparejar();
 		
-		match.setAmigo(amigo);
-		match.setVoluntario(voluntario);
+		emparejar.setAmigo(amigo);
+		emparejar.setVoluntario(voluntario);
 		
-		matchRepository.save(match);
+		matchRepository.save(emparejar);
 	}
 	
 }

@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Match {
+public class Emparejar {
 	
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -21,11 +21,11 @@ public class Match {
 	@OneToOne
 	private Amigo amigo;
 
-	public Match() {
+	public Emparejar() {
 		super();
 	}
 
-	public Match(String id, Voluntario voluntario, Amigo amigo) {
+	public Emparejar(String id, Voluntario voluntario, Amigo amigo) {
 		super();
 		this.id = id;
 		this.voluntario = voluntario;

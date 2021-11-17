@@ -47,7 +47,7 @@
           <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
           <li sec:authorize="hasRole('ROLE_VOLUNTARIO')"><a th:href="@{/voluntario/perfil}">Perfil</a></li>
           <li sec:authorize="isAuthenticated()"><a th:href="@{/amigo/listaAmigos}">listar Amigos</a></li>
-          <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/match/match}">Match</a></li>
+          <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/emparejar/empareja}">Match</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
