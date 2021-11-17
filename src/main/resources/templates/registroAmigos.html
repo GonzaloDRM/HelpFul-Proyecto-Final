@@ -77,6 +77,17 @@
             </div>
             <div class="input-contenedor">
                 <input class="from-control" type="text" placeholder="Direccion" name="direccion">
+            <div id="row g-3">
+            <div class="input-contenedor">
+            <p class="from-control">Provincia</p>
+            	<select id="provincias" class="from-control" name="provincia">
+            	</select>
+            </div>
+            <div id="row g-3">
+            <div class="input-contenedor">
+            <p class="from-control">Departamento</p>
+            	<select id="departamentos" class="from-control" name="departamento">
+            	</select>
             </div>
             <div class="input-contenedor">
             	<p class="from-control">Discapacidades</p>
@@ -137,6 +148,136 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  
+  <script th:inline="javascript">
+let $provincias = document.getElementById('provincias')  
+let $departamentos = document.getElementById('departamentos')
+
+/*<![CDATA[*/
+let zonas = /*[[${zona}]]*/ "asdas";
+/*]]>*/
+
+const provincias_sin_rep = [];
+
+for(var i = 0; i < zonas.length; i++) {
+ 
+  const elemento = zonas[i]['provincia'];
+ 
+  if (!provincias_sin_rep.includes(elemento)) {
+    provincias_sin_rep.push(elemento);
+  }
+}
+
+function array_de_dep_x_prov(provincia){
+	
+	let departamentos = [];
+
+	for(var i = 0; i < zonas.length; i++) {
+
+  		if (zonas[i]['provincia']==provincia) {
+    		departamentos.push(zonas[i]['departamento']);
+  		}
+	}
+	
+	return departamentos
+}
+
+
+function mostrar(array, lugar){
+	let elementosOptions = '<option selected disable>--Seleccione--</option>'
+	
+	for(var i = 0; i < array.length; i++){
+		elementosOptions += '<option value= "' + array[i] + '">' + array[i] + '</option>'
+	}
+
+	lugar.innerHTML = elementosOptions
+}
+
+mostrar(provincias_sin_rep, $provincias)
+
+console.log(zonas)
+
+$provincias.addEventListener('change',function(){
+	let valor = $provincias.value
+	
+	switch(valor){
+		case "San Juan":
+			mostrar(array_de_dep_x_prov("San Juan"), $departamentos)
+		break
+		case "La Pampa":
+			mostrar(array_de_dep_x_prov("La Pampa"), $departamentos)
+		break
+		case "Formosa":
+			mostrar(array_de_dep_x_prov("Formosa"), $departamentos)
+		break
+		case "Buenos Aires":
+			mostrar(array_de_dep_x_prov("Buenos Aires"), $departamentos)
+		break
+		case "Mendoza":
+			mostrar(array_de_dep_x_prov("Mendoza"), $departamentos)
+		break
+		case "Chaco":
+			mostrar(array_de_dep_x_prov("Chaco"), $departamentos)
+		break
+		case "Salta":
+			mostrar(array_de_dep_x_prov("Salta"), $departamentos)
+		break
+		case "Entre Ríos":
+			mostrar(array_de_dep_x_prov("Entre Ríos"), $departamentos)
+		break
+		case "Chubut":
+			mostrar(array_de_dep_x_prov("Chubut"), $departamentos)
+		break
+		case "Santiago Del Estero":
+			mostrar(array_de_dep_x_prov("Santiago Del Estero"), $departamentos)
+		break
+		case "Jujuy":
+			mostrar(array_de_dep_x_prov("Jujuy"), $departamentos)
+		break
+		case "Santa Fe":
+			mostrar(array_de_dep_x_prov("Santa Fe"), $departamentos)
+		break
+		case "Misiones":
+			mostrar(array_de_dep_x_prov("Misiones"), $departamentos)
+		break
+		case "Santa Cruz":
+			mostrar(array_de_dep_x_prov("Santa Cruz"), $departamentos)
+		break
+		case "La Rioja":
+			mostrar(array_de_dep_x_prov("La Rioja"), $departamentos)
+		break
+		case "Córdoba":
+			mostrar(array_de_dep_x_prov("Córdoba"), $departamentos)
+		break
+		case "Corrientes":
+			mostrar(array_de_dep_x_prov("Corrientes"), $departamentos)
+		break
+		case "Ciudad De Buenos Aires":
+			mostrar(array_de_dep_x_prov("Ciudad De Buenos Aires"), $departamentos)
+		break
+		case "Catamarca":
+			mostrar(array_de_dep_x_prov("Catamarca"), $departamentos)
+		break
+		case "Tucumán":
+			mostrar(array_de_dep_x_prov("Tucumán"), $departamentos)
+		break
+		case "Tierra Del Fuego, Antártida E Islas Del Atlántico Sur":
+			mostrar(array_de_dep_x_prov("Tierra Del Fuego, Antártida E Islas Del Atlántico Sur"), $departamentos)
+		break
+		case "Neuquén":
+			mostrar(array_de_dep_x_prov("Neuquén"), $departamentos)
+		break
+		case "San Luis":
+			mostrar(array_de_dep_x_prov("San Luis"), $departamentos)
+		break
+		case "Río Negro":
+			mostrar(array_de_dep_x_prov("Río Negro"), $departamentos)
+		break
+	}
+	
+})
+
+</script>
 
 </body>
 

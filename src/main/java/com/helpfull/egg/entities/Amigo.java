@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -35,6 +37,9 @@ public class Amigo {
 	private String telefono;
 	private String direccion;
 	private LocalDate alta;
+	
+	@ManyToOne(cascade= {CascadeType.PERSIST , CascadeType.REMOVE})
+	private Zona zona;
 	
 	@Lob @Basic(fetch = FetchType.LAZY) 
 	private byte[] foto;
@@ -58,8 +63,9 @@ public class Amigo {
 		super();
 	}
 
+
 	public Amigo(String id, String nombre, String apellido, LocalDate nacimiento, String telefono, String direccion,
-			LocalDate alta, byte[] foto, Collection<Interes> intereses,
+			LocalDate alta, Zona zona, byte[] foto, Collection<Interes> intereses,
 			Collection<Discapacidad> discapacidades, Collection<Necesidad> necesidades) {
 		super();
 		this.id = id;
@@ -69,11 +75,13 @@ public class Amigo {
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.alta = alta;
+		this.zona = zona;
 		this.foto = foto;
 		this.intereses = intereses;
 		this.discapacidades = discapacidades;
 		this.necesidades = necesidades;
 	}
+
 
 	public String getId() {
 		return id;
@@ -161,6 +169,14 @@ public class Amigo {
 
 	public void setNecesidades(Collection<Necesidad> necesidades) {
 		this.necesidades = necesidades;
+	}
+	
+	public Zona getZona() {
+		return zona;
+	}
+
+	public void setZona(Zona zona) {
+		this.zona = zona;
 	}
 
 	@Override
