@@ -1,5 +1,6 @@
 package com.helpfull.egg.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,18 @@ public class EmparejarController {
 	public String emparejarAmigos(Model model, @RequestParam(required = false) String username) {
 		model.addAttribute("volun", voluntarioService.buscarPorId(username));
 		
+		List<Emparejar> emparejamientos = emparejarService.listar();
 		List<Amigo> amigos = voluntarioService.buscarPorId(username).getAmigos();
+		List<Amigo> eliminar = new ArrayList<>();
 		
+		for (Emparejar empareja : emparejamientos) {
+			if(empareja.getVoluntario().equals(voluntarioService.buscarPorId(username))) {
+				eliminar.add(empareja.getAmigo());
+			}
+		}
+		for (Amigo elim : eliminar) {
+			amigos.remove(elim);
+		}
 		
 		model.addAttribute("voluntario", amigos);
 		return "emparejarAmigos";
