@@ -22,14 +22,14 @@ public class Zona implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Column(name = "Direccion")
-    private String direccion;
+    //@Column(name = "Direccion")
+    //private String direccion;
 
-    @Column(name = "Barrio")
-    private String barrio;
+    //@Column(name = "Barrio")
+    //private String barrio;
 
-    @Column(name = "Municipio")
-    private String municipio;
+    //@Column(name = "Municipio")
+    //private String municipio;
 
     @Column(name = "Departamento")
     private String departamento;
@@ -49,7 +49,7 @@ public class Zona implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
+/*
     public String getDireccion() {
         return direccion;
     }
@@ -73,7 +73,7 @@ public class Zona implements Serializable {
     public void setMunicipio(String municipio) {
         this.municipio = municipio;
     }
-
+*/
     public String getDepartamento() {
         return departamento;
     }
@@ -93,9 +93,9 @@ public class Zona implements Serializable {
     public Zona() {
     }
 
-    public Zona(String barrio, String municipio, String departamento, String provincia) {
-        this.barrio = barrio;
-        this.municipio = municipio;
+    public Zona(String departamento, String provincia) {
+        //this.barrio = barrio;
+        //this.municipio = municipio;
         this.departamento = departamento;
         this.provincia = provincia;
     }
@@ -120,9 +120,9 @@ public class Zona implements Serializable {
     public String toString() {
         return "Zona {"
                 + "Id" + id
-                + "Direccion" + direccion
-                + "Barrio" + barrio
-                + "Municipio" + municipio
+ //               + "Direccion" + direccion
+ //               + "Barrio" + barrio
+ //               + "Municipio" + municipio
                 + "Departamento" + departamento
                 + "Provincia" + provincia
                 + "}";

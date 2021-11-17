@@ -1,6 +1,5 @@
 package com.helpfull.egg.controllers;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -25,6 +24,7 @@ import com.helpfull.egg.enums.Discapacidad;
 import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.Necesidad;
 import com.helpfull.egg.services.AmigoService;
+import com.helpfull.egg.services.ZonaService;
 
 @Controller
 @RequestMapping("/amigo")
@@ -33,22 +33,26 @@ public class AmigoController {
 	@Autowired
 	private AmigoService amigoService;
 	
+	@Autowired
+	private ZonaService zonaService;
+	
 	@GetMapping("/registroAmigos")
 	public String registroAmigos(Model model) {
 		model.addAttribute("discapacidades", Discapacidad.values());
 		model.addAttribute("necesidades", Necesidad.values());
 		model.addAttribute("intereses", Interes.values());
+		model.addAttribute("zona", zonaService.listar());
 		return "registroAmigos";
 	}
 	
 	@PostMapping("/guardar")
 	public String guardar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
 						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento, 
-						  @RequestParam MultipartFile foto, @RequestParam String direccion,
-						  @RequestParam Collection<Interes> intereses,
+						  @RequestParam MultipartFile foto, @RequestParam String direccion,@RequestParam String provincia,
+						  @RequestParam	String departamento, @RequestParam Collection<Interes> intereses,
 						  @RequestParam Collection<Discapacidad> discapacidades,
-						  @RequestParam Collection<Necesidad> necesidades) throws IOException {
-		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, intereses, discapacidades, necesidades);
+						  @RequestParam Collection<Necesidad> necesidades) throws Exception {
+		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, provincia, departamento, intereses, discapacidades, necesidades);
 		return "redirect:/";
 	}
 	

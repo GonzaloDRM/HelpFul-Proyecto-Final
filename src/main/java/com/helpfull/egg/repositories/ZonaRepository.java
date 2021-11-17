@@ -11,7 +11,7 @@ import com.helpfull.egg.entities.Zona;
 
 @Repository
 public interface ZonaRepository extends JpaRepository<Zona, String> {
-
+/*
     @Query("SELECT c FROM Zona c WHERE c.barrio = :barrio  ORDER BY c.barrio ASC")
 	public List<Zona> buscarPorBarrio(@Param("barrio") String barrio);
         
@@ -29,4 +29,5 @@ public interface ZonaRepository extends JpaRepository<Zona, String> {
 
 	@Query("SELECT c FROM Zona c WHERE c.id = :id")
 	public Zona consultarZonaPorId(@Param("id") Integer id);
+*/	
 }

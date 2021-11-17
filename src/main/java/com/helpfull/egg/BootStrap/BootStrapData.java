@@ -33,7 +33,7 @@ public class BootStrapData implements CommandLineRunner {
 //https://mkyong.com/java/java-read-a-file-from-resources-folder/
 
     private void crearZonasDefault() {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("Listado de Localidades - 27-10-2021.csv");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("Book1.csv");
         try (InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(streamReader)) {
 
@@ -41,9 +41,7 @@ public class BootStrapData implements CommandLineRunner {
             while ((line = reader.readLine()) != null) {
                 Zona zona = new Zona(
                         capitalizarPalabra(line.split(";")[0]),
-                        capitalizarPalabra(line.split(";")[1]),
-                        capitalizarPalabra(line.split(";")[2]),
-                        capitalizarPalabra(line.split(";")[3]));
+                        capitalizarPalabra(line.split(";")[1]));
                 zonaRepository.save(zona);
             }
         } catch (IOException e) {

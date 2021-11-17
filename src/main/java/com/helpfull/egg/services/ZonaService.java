@@ -21,33 +21,34 @@ public class ZonaService {
     }
 
     @Transactional
-    public void crearZona(String direccion, String barrio, String municipio, String departamento, String provincia) throws Exception {
+    public Zona crearZona(String provincia, String departamento) throws Exception {
 
-        validar(direccion, barrio, municipio, departamento, provincia);
+        validar(departamento, provincia);
 
         Zona zona = new Zona();
-        zona.setDireccion(direccion);
-        zona.setBarrio(barrio);
-        zona.setMunicipio(municipio);
-        zona.setDepartamento(departamento);
+//        zona.setDireccion(direccion);
+//        zona.setBarrio(barrio);
+//        zona.setMunicipio(municipio);
         zona.setProvincia(provincia);
-
+        zona.setDepartamento(departamento);
+       
         zonaRepository.save(zona);
+        return zona;
     }
 
     @Transactional(readOnly = true)
-    public void modificarZona(String id, String direccion, String barrio, String municipio, String departamento, String provincia) {
+    public void modificarZona(String id, String provincia, String departamento) {
 
-        validar(direccion, barrio, municipio, departamento, provincia);
+        validar(departamento, provincia);
 
         Optional<Zona> respuesta = zonaRepository.findById(id);
         if (respuesta.isPresent()) {
             Zona zona = zonaRepository.findById(id).get();
-            zona.setDireccion(direccion);
-            zona.setBarrio(barrio);
-            zona.setMunicipio(municipio);
+//            zona.setDireccion(direccion);
+//            zona.setBarrio(barrio);
+//            zona.setMunicipio(municipio);
+            zona.setProvincia(provincia);
             zona.setDepartamento(departamento);
-            zona.setProvincia(provincia);;
 
             zonaRepository.save(zona);
         } else {
@@ -56,8 +57,8 @@ public class ZonaService {
     }
 
     @Transactional
-    private void validar(String direccion, String barrio, String municipio, String departamento, String provincia) throws Error {
-
+    private void validar(String departamento,String provincia) throws Error {
+/*
         if (direccion == null || direccion.isEmpty()) {
             throw new Error("el direccion del usuario no puede ser nulo");
         }
@@ -69,7 +70,7 @@ public class ZonaService {
         if (municipio == null || municipio.isEmpty()) {
             throw new Error("la municipio del usuario no puede ser nulo");
         }
-
+*/
         if (departamento == null || departamento.isEmpty()) {
             throw new Error("la departamento del usuario no puede ser nulo");
         }
