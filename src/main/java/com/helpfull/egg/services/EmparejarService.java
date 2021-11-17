@@ -13,16 +13,22 @@ import com.helpfull.egg.repositories.MatchRepository;
 public class EmparejarService {
 
 	@Autowired
-	private MatchRepository matchRepository;
+	private MatchRepository emparejarRepository;
+	
+	@Autowired
+	private AmigoService amigoService;
+	
+	@Autowired
+	private VoluntarioService voluntarioService;
 	
 	@Transactional
-	public void save(Amigo amigo, Voluntario voluntario) {
+	public void save(String amigo, String voluntario) {
 		Emparejar emparejar = new Emparejar();
 		
-		emparejar.setAmigo(amigo);
-		emparejar.setVoluntario(voluntario);
+		emparejar.setAmigo(amigoService.buscarPorId(amigo));
+		emparejar.setVoluntario(voluntarioService.buscarPorId(voluntario));
 		
-		matchRepository.save(emparejar);
+		emparejarRepository.save(emparejar);
 	}
 	
 }

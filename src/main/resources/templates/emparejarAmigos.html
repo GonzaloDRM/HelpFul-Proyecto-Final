@@ -85,7 +85,7 @@
                 <img th:src="@{/amigo/load/__${amigo.id}__}" alt="...">
               </div>
               <div class="card-body">
-                <h5 class="card-title" th:text="${amigo.nombre}+' '+${amigo.apellido}">Lara's 1th Birthday</h5>
+                <h5 class="card-title" th:text="${amigo.nombre}+' '+${amigo.apellido}"></h5>
                 <p class="fst-italic text-center" th:text="'Fecha de alta: '+${amigo.alta}"></p>
                 <p class="card-text" th:text="'Telefono: '+${amigo.telefono}"></p>
                 <p class="card-text" th:text="'Nacimiento: '+${amigo.nacimiento}"></p>
@@ -94,8 +94,9 @@
                 <p class="card-text" th:text="'Intereses: '+${amigo.intereses}"></p>
                 <p class="card-text" th:text="'Discapacidades: '+${amigo.discapacidades}"></p>
                 <p class="card-text" th:text="'Necesidades: '+${amigo.necesidades}"></p>
-                <form action="@{/emparejar/guardar}" method="POST">
-                	<input type="hidden" th:value="${amigo.id}">
+                <form th:action="@{/emparejar/guardar}" method="POST" >
+                	<input type="hidden" th:value="${volun.username}" name="voluntario">
+                	<input type="hidden" th:value="${amigo.id}" name="amigo">
                 	<input class="btn-primary" type="submit" value="Hacer Match">
                 </form>
               </div>

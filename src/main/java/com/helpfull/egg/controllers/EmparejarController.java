@@ -18,7 +18,7 @@ import com.helpfull.egg.services.VoluntarioService;
 public class EmparejarController {
 
 	@Autowired
-	private EmparejarService matchService;
+	private EmparejarService emparejarService;
 	
 	@Autowired
 	private VoluntarioService voluntarioService;
@@ -32,12 +32,13 @@ public class EmparejarController {
 	@GetMapping("/emparejarAmigos")
 	public String emparejarAmigos(Model model, @RequestParam(required = false) String username) {
 		model.addAttribute("voluntario", voluntarioService.buscarPorId(username).getAmigos());
+		model.addAttribute("volun", voluntarioService.buscarPorId(username));
 		return "emparejarAmigos";
 	}
 	
 	@PostMapping("/guardar")
-	public String guardar(@RequestParam Amigo amigo, @RequestParam Voluntario voluntario) {
-		matchService.save(amigo, voluntario);
+	public String guardar(@RequestParam String amigo, @RequestParam String voluntario) {
+		emparejarService.save(amigo, voluntario);
 		return "redirect:/emparejar/empareja";
 	}
 	
