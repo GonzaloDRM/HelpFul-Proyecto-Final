@@ -1,6 +1,5 @@
 package com.helpfull.egg.controllers;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,6 +32,7 @@ import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.services.EmparejarService;
 import com.helpfull.egg.services.VoluntarioService;
+import com.helpfull.egg.services.ZonaService;
 
 @Controller
 @RequestMapping("/voluntario")
@@ -43,6 +43,9 @@ public class VoluntarioController {
 	
 	@Autowired
 	private EmparejarService emparejarService;
+	
+	@Autowired
+	private ZonaService zonaService;
 	
 	@GetMapping("/login")
 	public String login() {
@@ -72,7 +75,7 @@ public class VoluntarioController {
 	@GetMapping("/registrarse")
 	public String registrarse(Model model) {
 		model.addAttribute("intereses", InteresVoluntario.values());
-		
+		model.addAttribute("zona", zonaService.listar());
 		return "registrarse";
 	}
 	
@@ -82,8 +85,9 @@ public class VoluntarioController {
 									 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 									 @RequestParam String email, @RequestParam MultipartFile foto,
 									 @RequestParam String descripcion, @RequestParam String direccion,
-									 @RequestParam Collection<InteresVoluntario> intereses) throws IOException {
-		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses);
+									 @RequestParam Collection<InteresVoluntario> intereses,
+									 @RequestParam String provincia, @RequestParam String localidad) throws Exception {
+		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses, provincia, localidad);
 		return "redirect:/";
 	}
 	

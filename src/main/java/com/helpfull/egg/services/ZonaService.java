@@ -21,57 +21,39 @@ public class ZonaService {
     }
 
     @Transactional
-    public Zona crearZona(String provincia, String departamento) throws Exception {
+    public Zona crearZona(String provincia, String localidad) throws Exception {
 
-        validar(departamento, provincia);
+        validar(localidad, provincia);
 
         Zona zona = new Zona();
-//        zona.setDireccion(direccion);
-//        zona.setBarrio(barrio);
-//        zona.setMunicipio(municipio);
         zona.setProvincia(provincia);
-        zona.setDepartamento(departamento);
+        zona.setLocalidad(localidad);
        
         zonaRepository.save(zona);
         return zona;
     }
 
     @Transactional(readOnly = true)
-    public void modificarZona(String id, String provincia, String departamento) {
+    public void modificarZona(String id, String provincia, String localidad) {
 
-        validar(departamento, provincia);
+        validar(localidad, provincia);
 
         Optional<Zona> respuesta = zonaRepository.findById(id);
         if (respuesta.isPresent()) {
             Zona zona = zonaRepository.findById(id).get();
-//            zona.setDireccion(direccion);
-//            zona.setBarrio(barrio);
-//            zona.setMunicipio(municipio);
             zona.setProvincia(provincia);
-            zona.setDepartamento(departamento);
+            zona.setLocalidad(localidad);;
 
             zonaRepository.save(zona);
         } else {
-            throw new Error("Nose encontro la zona solicitada");
+            throw new Error("No se encontro la zona localizada");
         }
     }
 
     @Transactional
-    private void validar(String departamento,String provincia) throws Error {
-/*
-        if (direccion == null || direccion.isEmpty()) {
-            throw new Error("el direccion del usuario no puede ser nulo");
-        }
+    private void validar(String localidad,String provincia) throws Error {
 
-        if (barrio == null || barrio.isEmpty()) {
-            throw new Error("la barrio del usuario no puede ser nulo");
-        }
-
-        if (municipio == null || municipio.isEmpty()) {
-            throw new Error("la municipio del usuario no puede ser nulo");
-        }
-*/
-        if (departamento == null || departamento.isEmpty()) {
+        if (localidad == null || localidad.isEmpty()) {
             throw new Error("la departamento del usuario no puede ser nulo");
         }
 

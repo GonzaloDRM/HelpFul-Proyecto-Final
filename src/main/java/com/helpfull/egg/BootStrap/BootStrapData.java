@@ -33,7 +33,7 @@ public class BootStrapData implements CommandLineRunner {
 //https://mkyong.com/java/java-read-a-file-from-resources-folder/
 
     private void crearZonasDefault() {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("Book1.csv");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("localidad-provincia.csv");
         try (InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(streamReader)) {
 

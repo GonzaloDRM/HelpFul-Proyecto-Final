@@ -97,32 +97,17 @@
             <div id="row g-3">
             <div class="input-contenedor">
             <p class="from-control">Provincia</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.provincia}"></option>
+            	<select id="provincias" class="from-control" name="provincia">
+            	</select>
+            </div>
+            <div id="row g-3">
+            <div class="input-contenedor">
+            <p class="from-control">Localidad</p>
+            	<select id="localidad" class="from-control" name="localidad">
             	</select>
             </div>
             
-            <div class="input-contenedor">
-            <p class="from-control">Departamento</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.departamento}"></option>
-            	</select>
-            </div>
             
-            <div class="input-contenedor">
-            <p class="from-control">Municipio</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.municipio}"></option>
-            	</select>
-            </div>
-            
-            <div class="input-contenedor">
-            <p class="from-control">Barrio</p>
-            	<select class="from-control" name="zona-ciudad">
-            		<option th:each="zona : ${zonas}" th:value="${zona.id}" th:text="${zona.barrio}"></option>
-            	</select>
-            </div>             
-            </div>
             <div class="input-contenedor">
             	<p class="from-control">Intereses</p>
                 <ul>
@@ -149,6 +134,139 @@
   </div>
   </main>
 </section>
+
+  <script th:inline="javascript">
+let $provincias = document.getElementById('provincias')  
+let $localidad = document.getElementById('localidad')
+
+/*<![CDATA[*/
+let zonas = /*[[${zona}]]*/ "asdas";
+/*]]>*/
+
+const provincias_sin_rep = [];
+
+for(var i = 0; i < zonas.length; i++) {
+ 
+  const elemento = zonas[i]['provincia'];
+ 
+  if (!provincias_sin_rep.includes(elemento)) {
+    provincias_sin_rep.push(elemento);
+  }
+}
+
+function array_de_localidad_x_prov(provincia){
+	
+	let localidad = [];
+
+	for(var i = 0; i < zonas.length; i++) {
+
+  		if (zonas[i]['provincia']==provincia) {
+    		localidad.push(zonas[i]['localidad']);
+  		}
+	}
+	
+	return localidad
+}
+
+
+function mostrar(array, lugar){
+	let elementosOptions = '<option selected disable>--Seleccione--</option>'
+	
+	for(var i = 0; i < array.length; i++){
+		elementosOptions += '<option value= "' + array[i] + '">' + array[i] + '</option>'
+	}
+
+	lugar.innerHTML = elementosOptions
+}
+
+mostrar(provincias_sin_rep, $provincias)
+
+
+$provincias.addEventListener('change',function(){
+	let valor = $provincias.value
+	
+	switch(valor){
+		case "San Juan":
+			mostrar(array_de_localidad_x_prov("San Juan"), $localidad)
+		break
+		case "La Pampa":
+			mostrar(array_de_localidad_x_prov("La Pampa"), $localidad)
+		break
+		case "Formosa":
+			mostrar(array_de_localidad_x_prov("Formosa"), $localidad)
+		break
+		case "Buenos Aires":
+			mostrar(array_de_localidad_x_prov("Buenos Aires"), $localidad)
+		break
+		case "Mendoza":
+			mostrar(array_de_localidad_x_prov("Mendoza"), $localidad)
+		break
+		case "Chaco":
+			mostrar(array_de_localidad_x_prov("Chaco"), $localidad)
+		break
+		case "Salta":
+			mostrar(array_de_localidad_x_prov("Salta"), $localidad)
+		break
+		case "Entre Ríos":
+			mostrar(array_de_localidad_x_prov("Entre Ríos"), $localidad)
+		break
+		case "Chubut":
+			mostrar(array_de_localidad_x_prov("Chubut"), $localidad)
+		break
+		case "Santiago Del Estero":
+			mostrar(array_de_localidad_x_prov("Santiago Del Estero"), $localidad)
+		break
+		case "Jujuy":
+			mostrar(array_de_localidad_x_prov("Jujuy"), $localidad)
+		break
+		case "Santa Fe":
+			mostrar(array_de_localidad_x_prov("Santa Fe"), $localidad)
+		break
+		case "Misiones":
+			mostrar(array_de_localidad_x_prov("Misiones"), $localidad)
+		break
+		case "Santa Cruz":
+			mostrar(array_de_localidad_x_prov("Santa Cruz"), $localidad)
+		break
+		case "La Rioja":
+			mostrar(array_de_localidad_x_prov("La Rioja"), $localidad)
+		break
+		case "Córdoba":
+			mostrar(array_de_localidad_x_prov("Córdoba"), $localidad)
+		break
+		case "Corrientes":
+			mostrar(array_de_localidad_x_prov("Corrientes"), $localidad)
+		break
+		case "Ciudad De Buenos Aires":
+			mostrar(array_de_localidad_x_prov("Ciudad De Buenos Aires"), $localidad)
+		break
+		case "Catamarca":
+			mostrar(array_de_localidad_x_prov("Catamarca"), $localidad)
+		break
+		case "Tucumán":
+			mostrar(array_de_localidad_x_prov("Tucumán"), $localidad)
+		break
+		case "Tierra Del Fuego, Antártida E Islas Del Atlántico Sur":
+			mostrar(array_de_localidad_x_prov("Tierra Del Fuego, Antártida E Islas Del Atlántico Sur"), $localidad)
+		break
+		case "Neuquén":
+			mostrar(array_de_localidad_x_prov("Neuquén"), $localidad)
+		break
+		case "San Luis":
+			mostrar(array_de_localidad_x_prov("San Luis"), $localidad)
+		break
+		case "Río Negro":
+			mostrar(array_de_localidad_x_prov("Río Negro"), $localidad)
+		break
+	}
+	
+})
+
+</script>
+
+
+
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">

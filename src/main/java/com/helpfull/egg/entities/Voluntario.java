@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.enums.Rol;
@@ -50,6 +52,9 @@ public class Voluntario {
 	
 	@ManyToMany
 	private List<Amigo> amigos;
+	
+	@ManyToOne(cascade= {CascadeType.PERSIST , CascadeType.REMOVE})
+	private Zona zona;
 
 	public Voluntario() {
 		super();
@@ -57,7 +62,7 @@ public class Voluntario {
 
 	public Voluntario(String username, String password, String nombre, String apellido, String direccion, Integer dni,
 			String email, Integer telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
-			LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses, List<Amigo> amigos) {
+			LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses, List<Amigo> amigos, Zona zona) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -75,6 +80,7 @@ public class Voluntario {
 		this.baja = baja;
 		this.intereses = intereses;
 		this.amigos = amigos;
+		this.zona = zona;
 	}
 
 	public String getUsername() {
@@ -204,7 +210,13 @@ public class Voluntario {
 	public void setAmigos(List<Amigo> amigos) {
 		this.amigos = amigos;
 	}
-	
-	
+
+	public Zona getZona() {
+		return zona;
+	}
+
+	public void setZona(Zona zona) {
+		this.zona = zona;
+	}
 	
 }

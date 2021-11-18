@@ -1,6 +1,5 @@
 package com.helpfull.egg.services;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.Voluntario;
+import com.helpfull.egg.entities.Zona;
 import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.enums.Rol;
 import com.helpfull.egg.repositories.AmigoRepository;
@@ -42,6 +42,9 @@ public class VoluntarioService implements UserDetailsService{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private ZonaService zonaService;
+	
 	@Transactional
 	public void save(Voluntario voluntario) {
 		voluntarioRepository.save(voluntario);
@@ -49,7 +52,8 @@ public class VoluntarioService implements UserDetailsService{
 	
 	public void save(String username, String password, String nombre, String apellido, String dni,
 					 String telefono, LocalDate nacimiento, String email, MultipartFile foto,
-					 String descripcion, String direccion, Collection<InteresVoluntario> intereses) throws IOException {
+					 String descripcion, String direccion, Collection<InteresVoluntario> intereses,
+					 String provincia, String localidad) throws Exception {
 		Voluntario voluntario = new Voluntario();
 		
 		voluntario.setUsername(username);
@@ -63,6 +67,9 @@ public class VoluntarioService implements UserDetailsService{
 		voluntario.setNacimiento(nacimiento);
 		voluntario.setFoto(foto.getBytes());
 
+		Zona zona = zonaService.crearZona(provincia, localidad);
+		voluntario.setZona(zona);
+		
 		voluntario.setAlta(LocalDate.now());
 		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
 		voluntario.setBaja(null);

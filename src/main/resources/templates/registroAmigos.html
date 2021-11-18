@@ -85,8 +85,8 @@
             </div>
             <div id="row g-3">
             <div class="input-contenedor">
-            <p class="from-control">Departamento</p>
-            	<select id="departamentos" class="from-control" name="departamento">
+            <p class="from-control">Localidad</p>
+            	<select id="localidad" class="from-control" name="localidad">
             	</select>
             </div>
             <div class="input-contenedor">
@@ -120,7 +120,150 @@
         </div>
     </form>
 
-  <!-- ======= Footer ======= -->
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  
+  <script th:inline="javascript">
+let $provincias = document.getElementById('provincias')  
+let $localidad = document.getElementById('localidad')
+
+/*<![CDATA[*/
+let zonas = /*[[${zona}]]*/ "asdas";
+/*]]>*/
+
+const provincias_sin_rep = [];
+
+for(var i = 0; i < zonas.length; i++) {
+ 
+  const elemento = zonas[i]['provincia'];
+ 
+  if (!provincias_sin_rep.includes(elemento)) {
+    provincias_sin_rep.push(elemento);
+  }
+}
+
+function array_de_localidad_x_prov(provincia){
+	
+	let localidad = [];
+
+	for(var i = 0; i < zonas.length; i++) {
+
+  		if (zonas[i]['provincia']==provincia) {
+    		localidad.push(zonas[i]['localidad']);
+  		}
+	}
+	
+	return localidad
+}
+
+
+function mostrar(array, lugar){
+	let elementosOptions = '<option selected disable>--Seleccione--</option>'
+	
+	for(var i = 0; i < array.length; i++){
+		elementosOptions += '<option value= "' + array[i] + '">' + array[i] + '</option>'
+	}
+
+	lugar.innerHTML = elementosOptions
+}
+
+mostrar(provincias_sin_rep, $provincias)
+
+
+$provincias.addEventListener('change',function(){
+	let valor = $provincias.value
+	
+	switch(valor){
+		case "San Juan":
+			mostrar(array_de_localidad_x_prov("San Juan"), $localidad)
+		break
+		case "La Pampa":
+			mostrar(array_de_localidad_x_prov("La Pampa"), $localidad)
+		break
+		case "Formosa":
+			mostrar(array_de_localidad_x_prov("Formosa"), $localidad)
+		break
+		case "Buenos Aires":
+			mostrar(array_de_localidad_x_prov("Buenos Aires"), $localidad)
+		break
+		case "Mendoza":
+			mostrar(array_de_localidad_x_prov("Mendoza"), $localidad)
+		break
+		case "Chaco":
+			mostrar(array_de_localidad_x_prov("Chaco"), $localidad)
+		break
+		case "Salta":
+			mostrar(array_de_localidad_x_prov("Salta"), $localidad)
+		break
+		case "Entre Ríos":
+			mostrar(array_de_localidad_x_prov("Entre Ríos"), $localidad)
+		break
+		case "Chubut":
+			mostrar(array_de_localidad_x_prov("Chubut"), $localidad)
+		break
+		case "Santiago Del Estero":
+			mostrar(array_de_localidad_x_prov("Santiago Del Estero"), $localidad)
+		break
+		case "Jujuy":
+			mostrar(array_de_localidad_x_prov("Jujuy"), $localidad)
+		break
+		case "Santa Fe":
+			mostrar(array_de_localidad_x_prov("Santa Fe"), $localidad)
+		break
+		case "Misiones":
+			mostrar(array_de_localidad_x_prov("Misiones"), $localidad)
+		break
+		case "Santa Cruz":
+			mostrar(array_de_localidad_x_prov("Santa Cruz"), $localidad)
+		break
+		case "La Rioja":
+			mostrar(array_de_localidad_x_prov("La Rioja"), $localidad)
+		break
+		case "Córdoba":
+			mostrar(array_de_localidad_x_prov("Córdoba"), $localidad)
+		break
+		case "Corrientes":
+			mostrar(array_de_localidad_x_prov("Corrientes"), $localidad)
+		break
+		case "Ciudad De Buenos Aires":
+			mostrar(array_de_localidad_x_prov("Ciudad De Buenos Aires"), $localidad)
+		break
+		case "Catamarca":
+			mostrar(array_de_localidad_x_prov("Catamarca"), $localidad)
+		break
+		case "Tucumán":
+			mostrar(array_de_localidad_x_prov("Tucumán"), $localidad)
+		break
+		case "Tierra Del Fuego, Antártida E Islas Del Atlántico Sur":
+			mostrar(array_de_localidad_x_prov("Tierra Del Fuego, Antártida E Islas Del Atlántico Sur"), $localidad)
+		break
+		case "Neuquén":
+			mostrar(array_de_localidad_x_prov("Neuquén"), $localidad)
+		break
+		case "San Luis":
+			mostrar(array_de_localidad_x_prov("San Luis"), $localidad)
+		break
+		case "Río Negro":
+			mostrar(array_de_localidad_x_prov("Río Negro"), $localidad)
+		break
+	}
+	
+})
+
+</script>
+
+   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <h3>HelpFul</h3>
@@ -148,136 +291,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  
-  <script th:inline="javascript">
-let $provincias = document.getElementById('provincias')  
-let $departamentos = document.getElementById('departamentos')
-
-/*<![CDATA[*/
-let zonas = /*[[${zona}]]*/ "asdas";
-/*]]>*/
-
-const provincias_sin_rep = [];
-
-for(var i = 0; i < zonas.length; i++) {
- 
-  const elemento = zonas[i]['provincia'];
- 
-  if (!provincias_sin_rep.includes(elemento)) {
-    provincias_sin_rep.push(elemento);
-  }
-}
-
-function array_de_dep_x_prov(provincia){
-	
-	let departamentos = [];
-
-	for(var i = 0; i < zonas.length; i++) {
-
-  		if (zonas[i]['provincia']==provincia) {
-    		departamentos.push(zonas[i]['departamento']);
-  		}
-	}
-	
-	return departamentos
-}
-
-
-function mostrar(array, lugar){
-	let elementosOptions = '<option selected disable>--Seleccione--</option>'
-	
-	for(var i = 0; i < array.length; i++){
-		elementosOptions += '<option value= "' + array[i] + '">' + array[i] + '</option>'
-	}
-
-	lugar.innerHTML = elementosOptions
-}
-
-mostrar(provincias_sin_rep, $provincias)
-
-console.log(zonas)
-
-$provincias.addEventListener('change',function(){
-	let valor = $provincias.value
-	
-	switch(valor){
-		case "San Juan":
-			mostrar(array_de_dep_x_prov("San Juan"), $departamentos)
-		break
-		case "La Pampa":
-			mostrar(array_de_dep_x_prov("La Pampa"), $departamentos)
-		break
-		case "Formosa":
-			mostrar(array_de_dep_x_prov("Formosa"), $departamentos)
-		break
-		case "Buenos Aires":
-			mostrar(array_de_dep_x_prov("Buenos Aires"), $departamentos)
-		break
-		case "Mendoza":
-			mostrar(array_de_dep_x_prov("Mendoza"), $departamentos)
-		break
-		case "Chaco":
-			mostrar(array_de_dep_x_prov("Chaco"), $departamentos)
-		break
-		case "Salta":
-			mostrar(array_de_dep_x_prov("Salta"), $departamentos)
-		break
-		case "Entre Ríos":
-			mostrar(array_de_dep_x_prov("Entre Ríos"), $departamentos)
-		break
-		case "Chubut":
-			mostrar(array_de_dep_x_prov("Chubut"), $departamentos)
-		break
-		case "Santiago Del Estero":
-			mostrar(array_de_dep_x_prov("Santiago Del Estero"), $departamentos)
-		break
-		case "Jujuy":
-			mostrar(array_de_dep_x_prov("Jujuy"), $departamentos)
-		break
-		case "Santa Fe":
-			mostrar(array_de_dep_x_prov("Santa Fe"), $departamentos)
-		break
-		case "Misiones":
-			mostrar(array_de_dep_x_prov("Misiones"), $departamentos)
-		break
-		case "Santa Cruz":
-			mostrar(array_de_dep_x_prov("Santa Cruz"), $departamentos)
-		break
-		case "La Rioja":
-			mostrar(array_de_dep_x_prov("La Rioja"), $departamentos)
-		break
-		case "Córdoba":
-			mostrar(array_de_dep_x_prov("Córdoba"), $departamentos)
-		break
-		case "Corrientes":
-			mostrar(array_de_dep_x_prov("Corrientes"), $departamentos)
-		break
-		case "Ciudad De Buenos Aires":
-			mostrar(array_de_dep_x_prov("Ciudad De Buenos Aires"), $departamentos)
-		break
-		case "Catamarca":
-			mostrar(array_de_dep_x_prov("Catamarca"), $departamentos)
-		break
-		case "Tucumán":
-			mostrar(array_de_dep_x_prov("Tucumán"), $departamentos)
-		break
-		case "Tierra Del Fuego, Antártida E Islas Del Atlántico Sur":
-			mostrar(array_de_dep_x_prov("Tierra Del Fuego, Antártida E Islas Del Atlántico Sur"), $departamentos)
-		break
-		case "Neuquén":
-			mostrar(array_de_dep_x_prov("Neuquén"), $departamentos)
-		break
-		case "San Luis":
-			mostrar(array_de_dep_x_prov("San Luis"), $departamentos)
-		break
-		case "Río Negro":
-			mostrar(array_de_dep_x_prov("Río Negro"), $departamentos)
-		break
-	}
-	
-})
-
-</script>
 
 </body>
 
