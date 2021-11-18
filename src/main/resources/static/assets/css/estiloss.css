@@ -19,8 +19,7 @@
     font-size: 20px;
     padding: 10px;
     border: none;
-    
- 
+     
  }
  .input-contenedor{
     margin-bottom: 15px;
@@ -44,6 +43,7 @@
  h1{
     background-color: #ffffff;
     text-align: center;
+    margin: auto auto 50px auto;
  }
  .button{
     cursor: pointer;
@@ -54,18 +54,34 @@
     padding: 15px 20px;
     border-radius: 5px;
  }
+  .button1{
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    font-size: 20px;
+    background: #3668B1;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin: auto auto 200px auto;
+ }
  .button:hover{
     background: rgb(0, 162, 255);
     text-decoration: none;
  }
+ .button1:hover{
+	background: rgb(0, 162, 255);
+    text-decoration: none;
+}
  p{
     text-align: center;
  }
  .text-registro a{
     color: #000;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 600;  
  }
+
+ 
  .fecha{
     color: rgb(107, 107, 107);
     display:flex;
@@ -79,11 +95,16 @@
  {
     .formulario{
        font-family: Arial, Helvetica, sans-serif;
-       margin: auto;
+       margin: 100px auto auto auto;
        width: 600px;
-       margin-top: 100px;
        border-radius: 2%;
     }   
+    .formulario1{
+	 font-family: Arial, Helvetica, sans-serif;
+       margin: 200px auto auto auto;
+       width: 600px;
+       border-radius: 2%;
+	}
  }
 
 .enums-inline {
