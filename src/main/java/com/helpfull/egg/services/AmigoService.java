@@ -31,24 +31,34 @@ public class AmigoService {
 			  		 String provincia, String localidad,
 			  		 Collection<Interes> intereses,
 					 Collection<Discapacidad> discapacidades,
-					 Collection<Necesidad> necesidades) throws Exception {
-		Amigo amigo = new Amigo();
-		amigo.setNombre(nombre);
-		amigo.setApellido(apellido);
-		amigo.setTelefono(telefono);
-		amigo.setNacimiento(nacimiento);;
-		amigo.setFoto(foto.getBytes());
-		amigo.setAlta(LocalDate.now());
-		amigo.setDireccion(direccion);
-		
-		Zona zona = zonaService.crearZona(provincia, localidad);
-		
-		amigo.setZona(zona);
-		amigo.setIntereses(intereses);
-		amigo.setDiscapacidades(discapacidades);
-		amigo.setNecesidades(necesidades);
-		
-		amigoRepository.save(amigo);
+					 Collection<Necesidad> necesidades) throws Error {
+		try {
+			
+			validar(nombre,apellido,telefono,nacimiento,foto,direccion,provincia,localidad,intereses,discapacidades,necesidades);
+			
+			Amigo amigo = new Amigo();
+			amigo.setNombre(nombre);
+			amigo.setApellido(apellido);
+			amigo.setTelefono(telefono);
+			amigo.setNacimiento(nacimiento);;
+			amigo.setFoto(foto.getBytes());
+			amigo.setAlta(LocalDate.now());
+			amigo.setDireccion(direccion);
+			
+			Zona zona = zonaService.buscarZona(provincia, localidad);
+			
+			amigo.setZona(zona);
+			amigo.setIntereses(intereses);
+			amigo.setDiscapacidades(discapacidades);
+			amigo.setNecesidades(necesidades);
+			
+			amigoRepository.save(amigo);
+		}catch(Error e) {
+			throw e;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Error("Error de sistema");
+		}
 	}
 	
 	@Transactional
@@ -64,6 +74,46 @@ public class AmigoService {
 	@Transactional
 	public void eliminarAmigo(String id) {
 		amigoRepository.deleteById(id);
+	}
+	
+	public void validar(String nombre, String apellido, String telefono,
+			  		 LocalDate nacimiento, MultipartFile foto, String direccion,
+			  		 String provincia, String localidad,
+			  		 Collection<Interes> intereses,
+					 Collection<Discapacidad> discapacidades,
+					 Collection<Necesidad> necesidades) throws Error{
+		
+		if(nombre == null || nombre.isEmpty()){
+			throw new Error("Ingresó un nombre vacio o nulo");
+		}
+		
+		if(apellido == null || apellido.isEmpty()){
+			throw new Error("Ingresó el apellido vacio o nulo");
+		}
+		
+		if(telefono == null || telefono.isEmpty()){
+			throw new Error("Ingresó el telefono vacio o nulo");
+		}
+		
+		if(telefono.length() < 10 || Long.parseLong(telefono) < 0) {
+			throw new Error("El telefono no puede tener menos de 8 digitos.");
+		}
+		
+		if(provincia == null || provincia.isEmpty()) {
+			throw new Error("No ingresó una provincia o es nula.");
+		}
+		
+		if(localidad == null || localidad.isEmpty()) {
+			throw new Error("No ingresó una localidad o es nula.");
+		}
+		
+		if(nacimiento==null) {
+			throw new Error("No ingresó una fecha de nacimiento.");
+		}
+		
+		if(intereses == null || discapacidades == null || necesidades == null) {
+			throw new Error("Debe marcar alguna opción.");
+		}
 	}
 	
 }

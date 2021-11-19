@@ -21,45 +21,40 @@ public class ZonaService {
     }
 
     @Transactional
-    public Zona crearZona(String provincia, String localidad) throws Exception {
-
-        validar(localidad, provincia);
-
-        Zona zona = new Zona();
-        zona.setProvincia(provincia);
-        zona.setLocalidad(localidad);
-       
-        zonaRepository.save(zona);
+    public Zona buscarZona(String provincia, String localidad) throws Exception {
+        Zona zona = zonaRepository.buscarPorLocalidadProvincia(provincia, localidad);
         return zona;
     }
 
     @Transactional(readOnly = true)
     public void modificarZona(String id, String provincia, String localidad) {
 
-        validar(localidad, provincia);
+        validar(provincia,localidad);
 
         Optional<Zona> respuesta = zonaRepository.findById(id);
         if (respuesta.isPresent()) {
             Zona zona = zonaRepository.findById(id).get();
+            
             zona.setProvincia(provincia);
-            zona.setLocalidad(localidad);;
+            zona.setLocalidad(localidad);
 
             zonaRepository.save(zona);
         } else {
-            throw new Error("No se encontro la zona localizada");
+            throw new Error("Nose encontro la zona solicitada");
         }
     }
 
     @Transactional
-    private void validar(String localidad,String provincia) throws Error {
-
+    private void validar(String provincia, String localidad) throws Error {
+    	
+        if (provincia == null || provincia.isEmpty()) {
+            throw new Error("la provincia del usuario no puede ser nulo");
+        }
+        
         if (localidad == null || localidad.isEmpty()) {
             throw new Error("la departamento del usuario no puede ser nulo");
         }
 
-        if (provincia == null || provincia.isEmpty()) {
-            throw new Error("la provincia del usuario no puede ser nulo");
-        }
     }
     
     public void eliminar (String id){
