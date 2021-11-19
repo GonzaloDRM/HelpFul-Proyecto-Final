@@ -110,3 +110,7 @@
 .enums-inline {
 	display: inline;
 }
+
+.contenedor-error {
+	position: absolute;
+}

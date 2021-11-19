@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.Voluntario;
@@ -45,6 +47,7 @@ public class AmigoController {
 	@Autowired
 	private ZonaService zonaService;
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/registroAmigos")
 	public String registroAmigos(Model model) {
 		
@@ -59,14 +62,19 @@ public class AmigoController {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
+	public String guardar(RedirectAttributes redirectAt, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
 						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento, 
 						  @RequestParam MultipartFile foto, @RequestParam String direccion,@RequestParam String provincia,
 						  @RequestParam	String localidad, @RequestParam Collection<Interes> intereses,
 						  @RequestParam Collection<Discapacidad> discapacidades,
-						  @RequestParam Collection<Necesidad> necesidades) throws Exception {
-		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, provincia, localidad, intereses, discapacidades, necesidades);
-		return "redirect:/";
+						  @RequestParam Collection<Necesidad> necesidades){
+		try{
+			amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, provincia, localidad, intereses, discapacidades, necesidades);
+			return "redirect:/";
+		}catch(Error e) {
+			redirectAt.addFlashAttribute("error", e.getMessage());
+			return "redirect:/amigo/registroAmigos";
+		}
 	}
 	
 	@GetMapping("/listaAmigos")

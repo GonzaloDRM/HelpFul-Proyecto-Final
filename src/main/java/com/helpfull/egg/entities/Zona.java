@@ -12,6 +12,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Zona implements Serializable {
 
+    /**
+     *
+     */
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -25,8 +28,9 @@ public class Zona implements Serializable {
     @Column(name = "Provincia")
     private String provincia;
 
+
 	public Zona() {
-		super();
+		
 	}
 
 	public Zona(String localidad, String provincia) {
@@ -62,4 +66,5 @@ public class Zona implements Serializable {
 		return serialVersionUID;
 	}
 
+	
 }

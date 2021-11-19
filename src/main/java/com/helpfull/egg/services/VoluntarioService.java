@@ -67,7 +67,7 @@ public class VoluntarioService implements UserDetailsService{
 		voluntario.setNacimiento(nacimiento);
 		voluntario.setFoto(foto.getBytes());
 
-		Zona zona = zonaService.crearZona(provincia, localidad);
+		Zona zona = zonaService.buscarZona(provincia, localidad);
 		voluntario.setZona(zona);
 		
 		voluntario.setAlta(LocalDate.now());
