@@ -21,16 +21,8 @@ public class ZonaService {
     }
 
     @Transactional
-    public Zona crearZona(String provincia, String localidad) throws Exception {
-
-        validar(provincia,localidad);
-
-        Zona zona = new Zona();
-
-        zona.setProvincia(provincia);
-        zona.setLocalidad(localidad);
-       
-        zonaRepository.save(zona);
+    public Zona buscarZona(String provincia, String localidad) throws Exception {
+        Zona zona = zonaRepository.buscarPorLocalidadProvincia(provincia, localidad);
         return zona;
     }
 
