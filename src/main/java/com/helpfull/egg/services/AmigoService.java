@@ -32,7 +32,11 @@ public class AmigoService {
 			  		 Collection<Interes> intereses,
 					 Collection<Discapacidad> discapacidades,
 					 Collection<Necesidad> necesidades) throws Exception {
+		validar(nombre,apellido,telefono,nacimiento,foto,direccion,provincia,localidad,intereses,discapacidades,necesidades);
+		
 		Amigo amigo = new Amigo();
+		
+		
 		amigo.setNombre(nombre);
 		amigo.setApellido(apellido);
 		amigo.setTelefono(telefono);
@@ -66,4 +70,54 @@ public class AmigoService {
 		amigoRepository.deleteById(id);
 	}
 	
+	@Transactional
+    private void validar(String nombre, String apellido, String telefono,
+	  		 LocalDate nacimiento, MultipartFile foto, String direccion,
+	  		 String provincia, String localidad,
+	  		 Collection<Interes> intereses,
+			 Collection<Discapacidad> discapacidades,
+			 Collection<Necesidad> necesidades) throws Exception {
+
+        if (nombre == null || nombre.isEmpty()) {
+            throw new Exception ("El nombre no puede ser nulo");
+        }
+
+        if (apellido == null || apellido.isEmpty()) {
+            throw new Exception ("El apellido no puede ser nulo");
+        }
+        if (telefono == null || telefono.isEmpty()) {
+            throw new Exception("El telefono del usuario no puede ser nulo");
+        }
+        if (nacimiento == null ) {
+            throw new Exception("La fecha de nacimiento del usuario no puede ser nulo");
+        }
+        if (foto == null || foto.isEmpty()) {
+            throw new Exception("La foto del usuario no puede ser nulo");
+        }
+        if (direccion == null || direccion.isEmpty()) {
+            throw new Exception("La foto del usuario no puede ser nulo");
+        }
+        if (provincia == null || provincia.isEmpty()) {
+            throw new Exception("La provincia del usuario no puede ser nulo");
+            
+        }
+        if (localidad == null || localidad.isEmpty()) {
+            throw new Exception("La provincia del usuario no puede ser nulo");
+            
+        }
+        if (intereses == null || intereses.isEmpty()) {
+            throw new Exception("Los intereses del usuario no pueden ser nulos");
+            
+        }
+        
+        if (discapacidades == null || discapacidades.isEmpty()) {
+            throw new Exception("La discapacidad no pueden estar vacío");
+            
+        }
+        if (necesidades == null || necesidades.isEmpty()) {
+            throw new Exception("Las necesidades del usuario no pueden ser nulos");
+                    
+    }
+	}
 }
+

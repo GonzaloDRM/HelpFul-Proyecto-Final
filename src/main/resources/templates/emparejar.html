@@ -92,6 +92,7 @@
                 <p class="card-text" th:text="'Miembro desde: '+${voluntario.alta}"></p>
                 <p class="card-text" th:text="'Intereses: '+${voluntario.intereses}"></p>
                 <p class="card-text" th:text="'Descripcion: '+${voluntario.descripcion}"></p>
+               
 				<button><a th:href="@{/emparejar/emparejarAmigos}+'?username='+${voluntario.username}">traer</a></button>
               </div>
             </div>

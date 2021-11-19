@@ -95,6 +95,7 @@
                 <p class="card-text" th:text="'Discapacidades: '+${amigo.discapacidades}"></p>
                 <p class="card-text" th:text="'Necesidades: '+${amigo.necesidades}"></p>
                 <form th:action="@{/emparejar/guardar}" method="POST" >
+                 <p th:if"${error!=null}" th:text="${error}">></p>
                 	<input type="hidden" th:value="${volun.username}" name="voluntario">
                 	<input type="hidden" th:value="${amigo.id}" name="amigo">
                 	<input class="btn-primary" type="submit" value="Hacer Match">

@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,13 +56,18 @@ public class AmigoController {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
+	public String guardar(ModelMap modelo,@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
 						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento, 
 						  @RequestParam MultipartFile foto, @RequestParam String direccion,@RequestParam String provincia,
 						  @RequestParam	String localidad, @RequestParam Collection<Interes> intereses,
 						  @RequestParam Collection<Discapacidad> discapacidades,
 						  @RequestParam Collection<Necesidad> necesidades) throws Exception {
+		try {
 		amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, provincia, localidad, intereses, discapacidades, necesidades);
+		}catch(Error e) {
+			modelo.put("error", e.getMessage());
+						
+		}
 		return "redirect:/";
 	}
 	
@@ -95,3 +101,4 @@ public class AmigoController {
 	}
 	
 }
+

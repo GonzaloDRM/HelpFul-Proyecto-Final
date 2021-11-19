@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class EmparejarController {
 	
 	@GetMapping("/emparejarAmigos")
 	public String emparejarAmigos(Model model, @RequestParam(required = false) String username) {
+		
 		model.addAttribute("volun", voluntarioService.buscarPorId(username));
 		List<Emparejar> emparejamientos = emparejarService.listar();
 		List<Amigo> amigos = voluntarioService.buscarPorId(username).getAmigos();
@@ -51,8 +53,13 @@ public class EmparejarController {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardar(@RequestParam String amigo, @RequestParam String voluntario) {
+	public String guardar(ModelMap modelo,@RequestParam String amigo, @RequestParam String voluntario) {
+		try {
 		emparejarService.save(amigo, voluntario);
+		}catch(Error e) {
+			modelo.put("error", e.getMessage());
+						
+		}
 		return "redirect:/emparejar/empareja";
 	}
 	
