@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.Emparejar;
@@ -48,35 +49,66 @@ public class VoluntarioController {
 	private ZonaService zonaService;
 	
 	@GetMapping("/login")
-	public String login() {
-		return "login";
+	public String login(Model model){
+		
+		try {
+		
+			return "login";
+		}catch(Exception e) {
+			model.addAttribute("error", "usuario invalido");
+			return "login";
+		}catch(Error e) {
+			model.addAttribute("error", "usuario invalido");
+			return "login";
+		}
 	}
 	
 	@PreAuthorize("hasRole('ROLE_REGISTRADO')")
 	@GetMapping("/perfil")
 	public String perfil(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetails = (UserDetails) auth.getPrincipal();
-		model.addAttribute("usuario", voluntarioService.buscarPorId(userDetails.getUsername()));
 		
-		List<Emparejar> emparejamientos = emparejarService.listar();
-		List<Amigo> amigos = new ArrayList<>();
-		for (Emparejar emparejar : emparejamientos) {
-			if(emparejar.getVoluntario().getUsername().equals(userDetails.getUsername())) {
-				amigos.add(emparejar.getAmigo());
+		try {
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetails = (UserDetails) auth.getPrincipal();
+			model.addAttribute("usuario", voluntarioService.buscarPorId(userDetails.getUsername()));
+			
+			List<Emparejar> emparejamientos = emparejarService.listar();
+			List<Amigo> amigos = new ArrayList<>();
+			for (Emparejar emparejar : emparejamientos) {
+				if(emparejar.getVoluntario().getUsername().equals(userDetails.getUsername())) {
+					amigos.add(emparejar.getAmigo());
+				}
 			}
+			
+			model.addAttribute("amigos", amigos);
+			
+			return "perfil";
+			
+		}catch(Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "perfil";
+		}catch(Error e) {
+			model.addAttribute("error", e.getMessage());
+			return "perfil";
 		}
-		
-		model.addAttribute("amigos", amigos);
-		
-		return "perfil";
 	}
 	
 	@GetMapping("/registrarse")
 	public String registrarse(Model model) {
-		model.addAttribute("intereses", InteresVoluntario.values());
-		model.addAttribute("zona", zonaService.listar());
-		return "registrarse";
+		
+		try {
+			model.addAttribute("intereses", InteresVoluntario.values());
+			model.addAttribute("zona", zonaService.listar());
+			return "registrarse";
+		}catch(Exception e){
+			model.addAttribute("error", e.getMessage());
+			return "registrarse";
+		}catch(Error e){
+			model.addAttribute("error", e.getMessage());
+			return "registrarse";
+		}
+			
 	}
 	
 	@PostMapping("/registroVoluntario")
@@ -92,39 +124,75 @@ public class VoluntarioController {
 	}
 	
 	@GetMapping("/load/{id}")
-	public ResponseEntity<byte[]> cargarFoto(@PathVariable String id) {
-		Voluntario voluntario = voluntarioService.buscarPorId(id);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
-		return new ResponseEntity<>(voluntario.getFoto(), headers, HttpStatus.OK);
+	public ResponseEntity<byte[]> cargarFoto(@PathVariable String id,RedirectAttributes redirectAt) {
+		
+		try {
+			Voluntario voluntario = voluntarioService.buscarPorId(id);
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_PNG);
+			return new ResponseEntity<>(voluntario.getFoto(), headers, HttpStatus.OK);
+			
+		}catch(Exception e){
+			redirectAt.addFlashAttribute("error", e.getMessage());
+			return new ResponseEntity<>(null, null, HttpStatus.OK);
+			
+		}catch(Error e){
+			redirectAt.addFlashAttribute("error", e.getMessage());
+			return new ResponseEntity<>(null, null, HttpStatus.OK);
+			
+		}
 	}
 	
 	@PreAuthorize("hasRole('ROLE_REGISTRADO')")
 	@GetMapping("/modificarVoluntario")
 	public String modificarVoluntario(Model model) {
-		model.addAttribute("intereses", Interes.values());
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetails = (UserDetails) auth.getPrincipal();
-		model.addAttribute("usuario", voluntarioService.buscarPorId(userDetails.getUsername()));
-		return "modificarVoluntario";
+		try {
+			model.addAttribute("intereses", Interes.values());
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetails = (UserDetails) auth.getPrincipal();
+			model.addAttribute("usuario", voluntarioService.buscarPorId(userDetails.getUsername()));
+			return "modificarVoluntario";
+		}catch(Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "modificarVoluntario";
+		}catch(Error e) {
+			model.addAttribute("error", e.getMessage());
+			return "modificarVoluntario";
+		}
 	}
 	
 	@PostMapping("/modificoVoluntario")
-	public String modificoVoluntario(@RequestParam String username, @RequestParam String nombre,
+	public String modificoVoluntario(Model model,@RequestParam String username, @RequestParam String nombre,
 						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
 						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 						@RequestParam String direccion, @RequestParam Integer dni) {
 		
-		voluntarioService.modificar(username, password, nombre, apellido, direccion, dni, email, telefono, nacimiento);
-		return "redirect:/";
+		try {		
+			voluntarioService.modificar(username, password, nombre, apellido, direccion, dni, email, telefono, nacimiento);
+			return "redirect:/";
+		}catch(Exception e){
+			model.addAttribute("error", e.getMessage());
+			return "redirect:/";
+		}catch(Error e){
+			model.addAttribute("error", e.getMessage());
+			return "redirect:/";
+		}
 	}
 	
 	@GetMapping("/seleccionar")
-	public String seleccionar(@RequestParam String id) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetails = (UserDetails) auth.getPrincipal();
-		voluntarioService.agregarAmigo(userDetails.getUsername(), id);
-		return "redirect:/amigo/listaAmigos";
+	public String seleccionar(Model model,@RequestParam String id) {
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetails = (UserDetails) auth.getPrincipal();
+			voluntarioService.agregarAmigo(userDetails.getUsername(), id);
+			return "redirect:/amigo/listaAmigos";
+		}catch(Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "redirect:/amigo/listaAmigos";
+		}catch(Error e) {
+			model.addAttribute("error", e.getMessage());
+			return "redirect:/amigo/listaAmigos";
+		}
 	}
 	
 }

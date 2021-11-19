@@ -47,11 +47,15 @@ public class AmigoController {
 
 	@GetMapping("/registroAmigos")
 	public String registroAmigos(Model model) {
+		
 		model.addAttribute("discapacidades", Discapacidad.values());
 		model.addAttribute("necesidades", Necesidad.values());
 		model.addAttribute("intereses", Interes.values());
 		model.addAttribute("zona", zonaService.listar());
 		return "registroAmigos";
+		
+			
+		
 	}
 	
 	@PostMapping("/guardar")
