@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.Emparejar;
@@ -80,15 +81,21 @@ public class VoluntarioController {
 	}
 	
 	@PostMapping("/registroVoluntario")
-	public String registroVoluntario(@RequestParam String username, @RequestParam String password,
+	public String registroVoluntario(RedirectAttributes redirectAt, @RequestParam String username, @RequestParam String password,
 									 @RequestParam String nombre, @RequestParam String apellido, @RequestParam String dni,
 									 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 									 @RequestParam String email, @RequestParam MultipartFile foto,
 									 @RequestParam String descripcion, @RequestParam String direccion,
 									 @RequestParam Collection<InteresVoluntario> intereses,
 									 @RequestParam String provincia, @RequestParam String localidad) throws Exception {
-		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses, provincia, localidad);
-		return "redirect:/";
+		try {
+			voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses, provincia, localidad);
+			return "redirect:/";
+		} catch (Error e) {
+			redirectAt.addFlashAttribute("error", e.getMessage());
+			return "redirect:/voluntario/registrarse";
+		}
+		
 	}
 	
 	@GetMapping("/load/{id}")
@@ -110,13 +117,17 @@ public class VoluntarioController {
 	}
 	
 	@PostMapping("/modificoVoluntario")
-	public String modificoVoluntario(@RequestParam String username, @RequestParam String nombre,
-						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
+	public String modificoVoluntario(RedirectAttributes redirectAt, @RequestParam String username, @RequestParam String nombre,
+						@RequestParam String apellido, @RequestParam String password, @RequestParam String telefono,
 						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 						@RequestParam String direccion, @RequestParam Integer dni) {
-		
-		voluntarioService.modificar(username, password, nombre, apellido, direccion, dni, email, telefono, nacimiento);
-		return "redirect:/";
+		try {
+			voluntarioService.modificar(username, password, nombre, apellido, direccion, dni, email, telefono, nacimiento);
+			return "redirect:/";
+		} catch (Error e) {
+			redirectAt.addFlashAttribute("error", e.getMessage());
+			return "redirect:/voluntario/modificarVoluntario";
+		}	
 	}
 	
 	@GetMapping("/seleccionar")

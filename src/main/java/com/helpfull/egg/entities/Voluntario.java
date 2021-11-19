@@ -31,7 +31,7 @@ public class Voluntario {
 	private String direccion;
 	private Integer dni;
 	private String email;
-	private Integer telefono;
+	private Long telefono;
 	private LocalDate nacimiento;
 	private String descripcion;
 
@@ -61,7 +61,7 @@ public class Voluntario {
 	}
 
 	public Voluntario(String username, String password, String nombre, String apellido, String direccion, Integer dni,
-			String email, Integer telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
+			String email, Long telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
 			LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses, List<Amigo> amigos, Zona zona) {
 		super();
 		this.username = username;
@@ -139,11 +139,11 @@ public class Voluntario {
 		this.email = email;
 	}
 
-	public Integer getTelefono() {
+	public Long getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(Long telefono) {
 		this.telefono = telefono;
 	}
 

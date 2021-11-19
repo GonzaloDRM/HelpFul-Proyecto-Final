@@ -56,42 +56,42 @@
 
     </div>
   </header><!-- End Header -->
-	<div class="contenedor-error" th:if="${error != null}">
-		<label class="mensaje-error" th:text="${error}">Holy guacamole!</p>
-	</div>
     <form class="formulario" th:action= "@{/amigo/guardar}" method="POST" enctype="multipart/form-data">
         <h1>Registrar Amigo</h1>
+        <div class="contenedor-error" th:if="${error != null}">
+			<label class="mensaje-error" th:text="${error}"></p>
+		</div>
         <div class="contenedor">
             <div class="input-contenedor">
-                <input class="from-control" type="text" placeholder="Nombre" name="nombre" >
+                <input class="from-control" type="text" placeholder="Nombre" name="nombre" required>
             </div>
             <div class="input-contenedor">
-                <input class="from-control" type="text" placeholder="Apellido" name="apellido">
+                <input class="from-control" type="text" placeholder="Apellido" name="apellido" required>
             </div>
             <div class="input-contenedor">
-                <input class="from-control" type="text" placeholder="Telefono" name="telefono">
+                <input class="from-control" type="text" placeholder="Telefono" name="telefono" required minlength="6" maxlength="15">
             </div>
             <div class="input-contenedor">
                 <p class="from-control">Fecha de nacimiento</p>
-                <input class="from-control" type="date" name="nacimiento">
+                <input class="from-control" type="date" name="nacimiento" required>
             </div>
             <div class="input-contenedor">
-                <input class="from-control" type="file" name="foto" >
+                <input class="from-control" type="file" name="foto" required>
             </div>
             <div class="input-contenedor">
-                <input class="from-control" type="text" placeholder="Direccion" name="direccion">
+                <input class="from-control" type="text" placeholder="Direccion" name="direccion" required>
             </div>
             <div id="row g-3">
             <div class="input-contenedor">
             <p class="from-control">Provincia</p>
-            	<select id="provincias" class="from-control" name="provincia">
+            	<select id="provincias" class="from-control" name="provincia" required>
             	</select>
             </div>
             </div>
             <div id="row g-3">
             <div class="input-contenedor">
             <p class="from-control">Localidad</p>
-            	<select id="localidad" class="from-control" name="localidad">
+            	<select id="localidad" class="from-control" name="localidad" required>
             	</select>
             </div>
             </div>
@@ -121,6 +121,24 @@
                    		<label class="enums-inline" for="intereses" th:text = "${n}"></label>
                    	</li>
                 </ul>
+			</div>
+			<div>
+				<h2>Familiar a cargo</h2>
+				<div class="input-contenedor">
+                	<input class="from-control" type="text" placeholder="Nombre" name="nombrefamiliar" required>
+            	</div>	
+            	<div class="input-contenedor">
+                	<input class="from-control" type="text" placeholder="Apellido" name="apellidofamiliar" required>
+            	</div>
+            	<div class="input-contenedor">
+                	<input class="from-control" type="text" placeholder="Edad" name="edadfamiliar" required minlength="1" maxlength="3">
+            	</div>
+            	<div class="input-contenedor">
+                	<input class="from-control" type="text" placeholder="Telefono" name="telefonofamiliar" required minlength="6" maxlength="15">
+            	</div>
+				<div class="input-contenedor">
+                	<input class="from-control" type="text" placeholder="Direccion" name="direccionfamiliar" required>
+            	</div>		
 			</div>
                 <input type="submit" value="Registro" class="button">
         </div>
@@ -262,11 +280,9 @@ $provincias.addEventListener('change',function(){
 			mostrar(array_de_localidad_x_prov("Río Negro"), $localidad)
 		break
 	}
-	
 })
 
 </script>
-
 
    <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -297,11 +313,9 @@ $provincias.addEventListener('change',function(){
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
 	
-
 </body>
 
 </html>

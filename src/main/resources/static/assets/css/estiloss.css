@@ -111,6 +111,6 @@
 	display: inline;
 }
 
-.contenedor-error {
-	position: absolute;
+.mensaje-error {
+	color: red;
 }

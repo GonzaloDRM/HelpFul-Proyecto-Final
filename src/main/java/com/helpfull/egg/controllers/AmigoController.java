@@ -63,9 +63,14 @@ public class AmigoController {
 						  @RequestParam MultipartFile foto, @RequestParam String direccion,@RequestParam String provincia,
 						  @RequestParam	String localidad, @RequestParam Collection<Interes> intereses,
 						  @RequestParam Collection<Discapacidad> discapacidades,
-						  @RequestParam Collection<Necesidad> necesidades){
+						  @RequestParam Collection<Necesidad> necesidades,
+						  @RequestParam String nombrefamiliar, @RequestParam String apellidofamiliar,
+						  @RequestParam Integer edadfamiliar, @RequestParam String telefonofamiliar,
+						  @RequestParam String direccionfamiliar){
 		try{
-			amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, provincia, localidad, intereses, discapacidades, necesidades);
+			amigoService.save(nombre, apellido, telefono, nacimiento, foto, direccion, 
+							  provincia, localidad, intereses, discapacidades, necesidades,
+							  nombrefamiliar, apellidofamiliar, edadfamiliar, telefonofamiliar, direccionfamiliar);
 			return "redirect:/";
 		}catch(Error e) {
 			redirectAt.addFlashAttribute("error", e.getMessage());

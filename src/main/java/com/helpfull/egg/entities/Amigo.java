@@ -1,7 +1,6 @@
 package com.helpfull.egg.entities;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Basic;
@@ -58,15 +57,17 @@ public class Amigo {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="necesidades")
 	private Collection<Necesidad> necesidades;
+	
+	@ManyToOne(cascade= {CascadeType.PERSIST , CascadeType.REMOVE})
+	private FamiliarAcargo familiarAcargo;
 
 	public Amigo() {
 		super();
 	}
 
-
 	public Amigo(String id, String nombre, String apellido, LocalDate nacimiento, String telefono, String direccion,
 			LocalDate alta, Zona zona, byte[] foto, Collection<Interes> intereses,
-			Collection<Discapacidad> discapacidades, Collection<Necesidad> necesidades) {
+			Collection<Discapacidad> discapacidades, Collection<Necesidad> necesidades, FamiliarAcargo familiarAcargo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -80,8 +81,8 @@ public class Amigo {
 		this.intereses = intereses;
 		this.discapacidades = discapacidades;
 		this.necesidades = necesidades;
+		this.familiarAcargo = familiarAcargo;
 	}
-
 
 	public String getId() {
 		return id;
@@ -179,12 +180,12 @@ public class Amigo {
 		this.zona = zona;
 	}
 
-	@Override
-	public String toString() {
-		return "Amigo [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", nacimiento=" + nacimiento
-				+ ", telefono=" + telefono + ", direccion=" + direccion + ", alta=" + alta
-				+ ", foto=" + Arrays.toString(foto) + ", intereses=" + intereses + ", discapacidades=" + discapacidades
-				+ ", necesidades=" + necesidades + "]";
+	public FamiliarAcargo getFamiliarAcargo() {
+		return familiarAcargo;
+	}
+
+	public void setFamiliarAcargo(FamiliarAcargo familiarAcargo) {
+		this.familiarAcargo = familiarAcargo;
 	}
 
 }

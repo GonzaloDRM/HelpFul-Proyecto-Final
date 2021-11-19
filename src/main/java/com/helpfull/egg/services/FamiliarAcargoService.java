@@ -23,7 +23,6 @@ public class FamiliarAcargoService {
 		return familiarAcargo;
 	}
 
-	
 	public void validarFamiliarAcargo(String nombre, String apellido, String edad, String telefono,
 			String direccion) throws Error {
 		

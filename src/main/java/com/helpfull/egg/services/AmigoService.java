@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.helpfull.egg.entities.Amigo;
+import com.helpfull.egg.entities.FamiliarAcargo;
 import com.helpfull.egg.entities.Zona;
 import com.helpfull.egg.enums.Discapacidad;
 import com.helpfull.egg.enums.Interes;
@@ -25,16 +26,24 @@ public class AmigoService {
 	@Autowired
 	private ZonaService zonaService;
 	
+	@Autowired
+	private FamiliarAcargoService familiarAcargoService;
+	
 	@Transactional
 	public void save(String nombre, String apellido, String telefono,
 			  		 LocalDate nacimiento, MultipartFile foto, String direccion,
 			  		 String provincia, String localidad,
 			  		 Collection<Interes> intereses,
 					 Collection<Discapacidad> discapacidades,
-					 Collection<Necesidad> necesidades) throws Error {
+					 Collection<Necesidad> necesidades,
+					 String nombrefamiliar, String apellidofamiliar, Integer edadfamiliar, 
+					 String telefonofamiliar, String direccionfamiliar) throws Error {
 		try {
 			
 			validar(nombre,apellido,telefono,nacimiento,foto,direccion,provincia,localidad,intereses,discapacidades,necesidades);
+			
+			FamiliarAcargo familiarAcargo = familiarAcargoService.crearFamiliarAcargo(nombrefamiliar, apellidofamiliar, 
+											edadfamiliar, telefonofamiliar, direccionfamiliar);
 			
 			Amigo amigo = new Amigo();
 			amigo.setNombre(nombre);
@@ -51,6 +60,8 @@ public class AmigoService {
 			amigo.setIntereses(intereses);
 			amigo.setDiscapacidades(discapacidades);
 			amigo.setNecesidades(necesidades);
+			
+			amigo.setFamiliarAcargo(familiarAcargo);
 			
 			amigoRepository.save(amigo);
 		}catch(Error e) {
@@ -95,8 +106,12 @@ public class AmigoService {
 			throw new Error("Ingresó el telefono vacio o nulo");
 		}
 		
-		if(telefono.length() < 10 || Long.parseLong(telefono) < 0) {
-			throw new Error("El telefono no puede tener menos de 8 digitos.");
+		if(foto == null || foto.isEmpty()){
+			throw new Error("Debe ingresar al menos una foto");
+		}
+		
+		if(telefono.length() < 6) {
+			throw new Error("El telefono no puede tener menos de 6 digitos.");
 		}
 		
 		if(provincia == null || provincia.isEmpty()) {
