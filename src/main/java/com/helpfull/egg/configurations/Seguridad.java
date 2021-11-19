@@ -15,32 +15,32 @@ import com.helpfull.egg.services.VoluntarioService;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class Seguridad extends WebSecurityConfigurerAdapter{
+public class Seguridad extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	@Qualifier("voluntarioService")
-	public VoluntarioService voluntarioService;
+    @Autowired
+    @Qualifier("voluntarioService")
+    public VoluntarioService voluntarioService;
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(voluntarioService).passwordEncoder(new BCryptPasswordEncoder());
-	}
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(voluntarioService).passwordEncoder(new BCryptPasswordEncoder());
+    }
 
-	protected void configure(HttpSecurity http) throws Exception {
-		http.headers().frameOptions().sameOrigin()
-			.and()
-				.authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
-			.and()
-				.authorizeRequests().antMatchers("/list").hasRole("ADMIN")
-			.and()
-				.formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
-				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/").failureUrl("/voluntario/login")
-				.permitAll()
-			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
-			.and()
-				.csrf().disable();
-	}
-	
+    protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().sameOrigin()
+                .and()
+                .authorizeRequests().antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/list").hasRole("ADMIN")
+                .and()
+                .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
+                .usernameParameter("username").passwordParameter("password")
+                .defaultSuccessUrl("/").failureUrl("/voluntario/login")
+                .permitAll()
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
+                .and()
+                .csrf().disable();
+    }
+
 }

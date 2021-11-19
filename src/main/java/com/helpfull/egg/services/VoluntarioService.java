@@ -29,134 +29,149 @@ import com.helpfull.egg.enums.InteresVoluntario;
 import com.helpfull.egg.enums.Rol;
 import com.helpfull.egg.repositories.AmigoRepository;
 import com.helpfull.egg.repositories.VoluntarioRepository;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.hibernate.Session;
+
+import org.hibernate.Filter;
 
 @Service
-public class VoluntarioService implements UserDetailsService{
+public class VoluntarioService implements UserDetailsService {
 
-	@Autowired
-	private VoluntarioRepository voluntarioRepository;
-	
-	@Autowired
-	private AmigoRepository amigoRepository;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Transactional
-	public void save(Voluntario voluntario) {
-		voluntarioRepository.save(voluntario);
-	}
-	
-	public void save(String username, String password, String nombre, String apellido, String dni,
-					 String telefono, LocalDate nacimiento, String email, MultipartFile foto,
-					 String descripcion, String direccion, Collection<InteresVoluntario> intereses) throws IOException {
-		Voluntario voluntario = new Voluntario();
-		
-		voluntario.setUsername(username);
-		voluntario.setPassword(passwordEncoder.encode(password));
-		voluntario.setNombre(nombre);
-		voluntario.setApellido(apellido);
-		voluntario.setDireccion(direccion);
-		voluntario.setDni(Integer.parseInt(dni));
-		voluntario.setTelefono(Integer.parseInt(telefono));
-		voluntario.setEmail(email);
-		voluntario.setNacimiento(nacimiento);
-		voluntario.setFoto(foto.getBytes());
+    @Autowired
+    private VoluntarioRepository voluntarioRepository;
 
-		voluntario.setAlta(LocalDate.now());
-		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
-		voluntario.setBaja(null);
-		voluntario.setDescripcion(descripcion);
-		voluntario.setIntereses(intereses);
-		
-		voluntarioRepository.save(voluntario);
-	}
-	
-	@Transactional
-	public List<Voluntario> listartodos(){
-		return voluntarioRepository.findAll();
-	}
-	
-	@Transactional
-	public Voluntario buscarPorId(String id) {
-		return voluntarioRepository.getById(id);
-	}
-	
-	public void modificar(String username, String password, String nombre, String apellido, 
-						  String direccion, Integer dni, String email, Integer telefono, LocalDate nacimiento) {
-	Voluntario voluntario = buscarPorId(username);
-	
-	voluntario.setUsername(username);
-	voluntario.setPassword(voluntario.getPassword());
-	voluntario.setNombre(nombre);
-	voluntario.setApellido(apellido);
-	voluntario.setDireccion(direccion);
-	voluntario.setDni(dni);
-	voluntario.setTelefono(telefono);
-	voluntario.setEmail(email);
-	voluntario.setNacimiento(nacimiento);
-	voluntario.setFoto(voluntario.getFoto());
+    @Autowired
+    private AmigoRepository amigoRepository;
 
-	voluntario.setAlta(voluntario.getAlta());
-	voluntario.setRol(Rol.ROLE_VOLUNTARIO);
-	voluntario.setBaja(null);
-	voluntario.setDescripcion(voluntario.getDescripcion());
-	
-	voluntarioRepository.save(voluntario);
-}
-	
-	@Transactional
-	public void agregarAmigo(String username, String id) {
-		Voluntario voluntario = buscarPorId(username);
-		
-		List<Amigo> amigos = voluntario.getAmigos();
-		amigos.add(amigoRepository.getById(id));
-		
-		voluntario.setUsername(username);
-		voluntario.setPassword(voluntario.getPassword());
-		voluntario.setNombre(voluntario.getNombre());
-		voluntario.setApellido(voluntario.getApellido());
-		voluntario.setDireccion(voluntario.getDireccion());
-		voluntario.setDni(voluntario.getDni());
-		voluntario.setTelefono(voluntario.getTelefono());
-		voluntario.setEmail(voluntario.getEmail());
-		voluntario.setNacimiento(voluntario.getNacimiento());
-		voluntario.setFoto(voluntario.getFoto());
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-		voluntario.setAlta(voluntario.getAlta());
-		voluntario.setRol(voluntario.getRol());
-		voluntario.setBaja(null);
-		voluntario.setDescripcion(voluntario.getDescripcion());
-		
-		voluntario.setAmigos(amigos);
-		
-		voluntarioRepository.save(voluntario);		
-	}
-	
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Voluntario> voluntario = voluntarioRepository.findByUsername(username);
-		
-		List<GrantedAuthority> permisos = new ArrayList<>();
-		
-		if (voluntario.get().getRol() != null) {			
-			permisos.add(new SimpleGrantedAuthority(Rol.ROLE_REGISTRADO.toString()));
-			permisos.add(new SimpleGrantedAuthority(voluntario.get().getRol().toString()));
-		}else if(voluntario.get().getRol().equals("ROLE_ADMIN")){
-			permisos.add(new SimpleGrantedAuthority(Rol.ROLE_REGISTRADO.toString()));
-			permisos.add(new SimpleGrantedAuthority(voluntario.get().getRol().toString()));
-		}else {
-			permisos.add(new SimpleGrantedAuthority("ROLE_GUEST"));
-		}
-		
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		HttpSession session = attr.getRequest().getSession(true);
-		session.setAttribute("voluntariosession", voluntario);
-		
-		User user = new User(voluntario.get().getUsername(), voluntario.get().getPassword(), permisos);
-		
-		return user;
-	}
+    @Transactional
+    public void save(Voluntario voluntario) {
+        voluntarioRepository.save(voluntario);
+    }
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public void save(String username, String password, String nombre, String apellido, String dni,
+            String telefono, LocalDate nacimiento, String email, MultipartFile foto,
+            String descripcion, String direccion, Collection<InteresVoluntario> intereses) throws IOException {
+        Voluntario voluntario = new Voluntario();
+
+        voluntario.setUsername(username);
+        voluntario.setPassword(passwordEncoder.encode(password));
+        voluntario.setNombre(nombre);
+        voluntario.setApellido(apellido);
+        voluntario.setDireccion(direccion);
+        voluntario.setDni(Integer.parseInt(dni));
+        voluntario.setTelefono(Long.parseLong(telefono));
+        voluntario.setEmail(email);
+        voluntario.setNacimiento(nacimiento);
+        voluntario.setFoto(foto.getBytes());
+
+        voluntario.setAlta(LocalDate.now());
+        voluntario.setRol(Rol.ROLE_VOLUNTARIO);
+        voluntario.setBaja(null);
+        voluntario.setDescripcion(descripcion);
+        voluntario.setIntereses(intereses);
+
+        voluntarioRepository.save(voluntario);
+    }
+
+    @Transactional
+    public List<Voluntario> listartodos() {
+        return voluntarioRepository.findAll();
+    }
+
+    @Transactional
+    public Voluntario buscarPorId(String id) {
+        return voluntarioRepository.getById(id);
+    }
+
+    public void modificar(String username, String password, String nombre, String apellido,
+            String direccion, Integer dni, String email, Long telefono, LocalDate nacimiento) {
+        Voluntario voluntario = buscarPorId(username);
+
+        voluntario.setUsername(username);
+        voluntario.setPassword(voluntario.getPassword());
+        voluntario.setNombre(nombre);
+        voluntario.setApellido(apellido);
+        voluntario.setDireccion(direccion);
+        voluntario.setDni(dni);
+        voluntario.setTelefono(telefono);
+        voluntario.setEmail(email);
+        voluntario.setNacimiento(nacimiento);
+        voluntario.setFoto(voluntario.getFoto());
+
+        voluntario.setAlta(voluntario.getAlta());
+        voluntario.setRol(Rol.ROLE_VOLUNTARIO);
+        voluntario.setBaja(null);
+        voluntario.setDescripcion(voluntario.getDescripcion());
+
+        voluntarioRepository.save(voluntario);
+    }
+
+    @Transactional
+    public void agregarAmigo(String username, String id) {
+        Voluntario voluntario = buscarPorId(username);
+
+        List<Amigo> amigos = voluntario.getAmigos();
+        amigos.add(amigoRepository.getById(id));
+
+        voluntario.setUsername(username);
+        voluntario.setPassword(voluntario.getPassword());
+        voluntario.setNombre(voluntario.getNombre());
+        voluntario.setApellido(voluntario.getApellido());
+        voluntario.setDireccion(voluntario.getDireccion());
+        voluntario.setDni(voluntario.getDni());
+        voluntario.setTelefono(voluntario.getTelefono());
+        voluntario.setEmail(voluntario.getEmail());
+        voluntario.setNacimiento(voluntario.getNacimiento());
+        voluntario.setFoto(voluntario.getFoto());
+
+        voluntario.setAlta(voluntario.getAlta());
+        voluntario.setRol(voluntario.getRol());
+        voluntario.setBaja(null);
+        voluntario.setDescripcion(voluntario.getDescripcion());
+
+        voluntario.setAmigos(amigos);
+
+        voluntarioRepository.save(voluntario);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Voluntario> voluntario = voluntarioRepository.findByUsername(username);
+
+        List<GrantedAuthority> permisos = new ArrayList<>();
+
+        if (voluntario.get().getRol() != null) {
+            permisos.add(new SimpleGrantedAuthority(Rol.ROLE_REGISTRADO.toString()));
+            permisos.add(new SimpleGrantedAuthority(voluntario.get().getRol().toString()));
+        } else if (voluntario.get().getRol().equals("ROLE_ADMIN")) {
+            permisos.add(new SimpleGrantedAuthority(Rol.ROLE_REGISTRADO.toString()));
+            permisos.add(new SimpleGrantedAuthority(voluntario.get().getRol().toString()));
+        } else {
+            permisos.add(new SimpleGrantedAuthority("ROLE_GUEST"));
+        }
+
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession(true);
+        session.setAttribute("voluntariosession", voluntario);
+
+        User user = new User(voluntario.get().getUsername(), voluntario.get().getPassword(), permisos);
+
+        return user;
+    }
+
+    public Iterable<Voluntario> findAll(boolean isDeleted) {
+        Session session = entityManager.unwrap(Session.class);
+        Filter filter = session.enableFilter("deletedVoluntarioFilter");
+        filter.setParameter("isDeleted", isDeleted);
+        Iterable<Voluntario> Voluntarios = voluntarioRepository.findAll();
+        session.disableFilter("deletedVoluntarioFilter");
+        return Voluntarios;
+    }
 }

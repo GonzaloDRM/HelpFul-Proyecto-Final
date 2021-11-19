@@ -20,156 +20,168 @@ import org.hibernate.annotations.GenericGenerator;
 import com.helpfull.egg.enums.Discapacidad;
 import com.helpfull.egg.enums.Interes;
 import com.helpfull.egg.enums.Necesidad;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Amigo {
 
-	@Id
-	@GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid",strategy ="uuid2")
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-	
-	private String nombre;
-	private String apellido;
-	private LocalDate nacimiento;
-	private String telefono;
-	private String direccion;
-	private LocalDate alta;
-	
-	@Lob @Basic(fetch = FetchType.LAZY) 
-	private byte[] foto;
-	
-	@ElementCollection(targetClass=Interes.class)
+
+    private String nombre;
+    private String apellido;
+    private LocalDate nacimiento;
+    private String telefono;
+    private String direccion;
+    private LocalDate alta;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] foto;
+
+    @ElementCollection(targetClass = Interes.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="intereses")
-	private Collection<Interes> intereses;
-	
-	@ElementCollection(targetClass=Discapacidad.class)
+    @CollectionTable(name = "intereses")
+    private Collection<Interes> intereses;
+
+    @ElementCollection(targetClass = Discapacidad.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="discapacidades")
-	private Collection<Discapacidad> discapacidades;
-	
-	@ElementCollection(targetClass=Necesidad.class)
+    @CollectionTable(name = "discapacidades")
+    private Collection<Discapacidad> discapacidades;
+
+    @ElementCollection(targetClass = Necesidad.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="necesidades")
-	private Collection<Necesidad> necesidades;
+    @CollectionTable(name = "necesidades")
+    private Collection<Necesidad> necesidades;
 
-	public Amigo() {
-		super();
-	}
+    @ManyToOne
+    private Zona zona;
 
-	public Amigo(String id, String nombre, String apellido, LocalDate nacimiento, String telefono, String direccion,
-			LocalDate alta, byte[] foto, Collection<Interes> intereses,
-			Collection<Discapacidad> discapacidades, Collection<Necesidad> necesidades) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.nacimiento = nacimiento;
-		this.telefono = telefono;
-		this.direccion = direccion;
-		this.alta = alta;
-		this.foto = foto;
-		this.intereses = intereses;
-		this.discapacidades = discapacidades;
-		this.necesidades = necesidades;
-	}
+    public Amigo() {
+        super();
+    }
 
-	public String getId() {
-		return id;
-	}
+    public Amigo(String nombre, String apellido, LocalDate nacimiento, String telefono,
+            String direccion, LocalDate alta, byte[] foto, Collection<Interes> intereses,
+            Collection<Discapacidad> discapacidades, Collection<Necesidad> necesidades, Zona zona) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nacimiento = nacimiento;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.alta = alta;
+        this.foto = foto;
+        this.intereses = intereses;
+        this.discapacidades = discapacidades;
+        this.necesidades = necesidades;
+        this.zona = zona;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public LocalDate getNacimiento() {
-		return nacimiento;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public void setNacimiento(LocalDate edad) {
-		this.nacimiento = edad;
-	}
+    public LocalDate getNacimiento() {
+        return nacimiento;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public void setNacimiento(LocalDate nacimiento) {
+        this.nacimiento = nacimiento;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public LocalDate getAlta() {
-		return alta;
-	}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-	public void setAlta(LocalDate alta) {
-		this.alta = alta;
-	}
+    public LocalDate getAlta() {
+        return alta;
+    }
 
-	public byte[] getFoto() {
-		return foto;
-	}
+    public void setAlta(LocalDate alta) {
+        this.alta = alta;
+    }
 
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-	
-	public Collection<Interes> getIntereses() {
-		return intereses;
-	}
+    public byte[] getFoto() {
+        return foto;
+    }
 
-	public void setIntereses(Collection<Interes> intereses) {
-		this.intereses = intereses;
-	}
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 
-	public Collection<Discapacidad> getDiscapacidades() {
-		return discapacidades;
-	}
+    public Collection<Interes> getIntereses() {
+        return intereses;
+    }
 
-	public void setDiscapacidades(Collection<Discapacidad> discapacidades) {
-		this.discapacidades = discapacidades;
-	}
+    public void setIntereses(Collection<Interes> intereses) {
+        this.intereses = intereses;
+    }
 
-	public Collection<Necesidad> getNecesidades() {
-		return necesidades;
-	}
+    public Collection<Discapacidad> getDiscapacidades() {
+        return discapacidades;
+    }
 
-	public void setNecesidades(Collection<Necesidad> necesidades) {
-		this.necesidades = necesidades;
-	}
+    public void setDiscapacidades(Collection<Discapacidad> discapacidades) {
+        this.discapacidades = discapacidades;
+    }
 
-	@Override
-	public String toString() {
-		return "Amigo [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", nacimiento=" + nacimiento
-				+ ", telefono=" + telefono + ", direccion=" + direccion + ", alta=" + alta
-				+ ", foto=" + Arrays.toString(foto) + ", intereses=" + intereses + ", discapacidades=" + discapacidades
-				+ ", necesidades=" + necesidades + "]";
-	}
+    public Collection<Necesidad> getNecesidades() {
+        return necesidades;
+    }
 
+    public void setNecesidades(Collection<Necesidad> necesidades) {
+        this.necesidades = necesidades;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    @Override
+    public String toString() {
+        return "Amigo [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", nacimiento=" + nacimiento
+                + ", telefono=" + telefono + ", direccion=" + direccion + ", alta=" + alta
+                + ", foto=" + Arrays.toString(foto) + ", intereses=" + intereses + ", discapacidades=" + discapacidades
+                + ", necesidades=" + necesidades + "]";
+    }
 }
-	
