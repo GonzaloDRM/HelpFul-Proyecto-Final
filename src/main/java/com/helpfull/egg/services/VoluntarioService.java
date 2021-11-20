@@ -219,7 +219,7 @@ public class VoluntarioService implements UserDetailsService {
 		}
 
 		if (intereses == null || intereses.isEmpty()) {
-			throw new Error("Debe marcar alguna opción.");
+			throw new Error("Debe seleccionar al menos un interes.");
 		}
 	}
 	

@@ -126,8 +126,15 @@ public class AmigoService {
 			throw new Error("No ingresó una fecha de nacimiento.");
 		}
 		
-		if(intereses == null || discapacidades == null || necesidades == null) {
-			throw new Error("Debe marcar alguna opción.");
+		if(intereses == null) {
+			throw new Error("Debe seleccionar al menos un interes.");
+		}
+		if(discapacidades == null) {
+			throw new Error("Debe seleccionar al menos una discapacidad.");
+		}
+		
+		if(necesidades == null) {
+			throw new Error("Debe seleccionar al menos un interes.");
 		}
 	}
 	

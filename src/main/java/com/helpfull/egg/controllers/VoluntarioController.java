@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpHeaders;
@@ -86,7 +87,7 @@ public class VoluntarioController {
 									 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 									 @RequestParam String email, @RequestParam MultipartFile foto,
 									 @RequestParam String descripcion, @RequestParam String direccion,
-									 @RequestParam Collection<InteresVoluntario> intereses,
+									 @RequestParam(required = false) Collection<InteresVoluntario> intereses,
 									 @RequestParam String provincia, @RequestParam String localidad) throws Exception {
 		try {
 			voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses, provincia, localidad);

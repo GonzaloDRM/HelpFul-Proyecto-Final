@@ -61,9 +61,9 @@ public class AmigoController {
 	public String guardar(RedirectAttributes redirectAt, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
 						  @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento, 
 						  @RequestParam MultipartFile foto, @RequestParam String direccion,@RequestParam String provincia,
-						  @RequestParam	String localidad, @RequestParam Collection<Interes> intereses,
-						  @RequestParam Collection<Discapacidad> discapacidades,
-						  @RequestParam Collection<Necesidad> necesidades,
+						  @RequestParam	String localidad, @RequestParam(required = false) Collection<Interes> intereses,
+						  @RequestParam(required = false) Collection<Discapacidad> discapacidades,
+						  @RequestParam(required = false) Collection<Necesidad> necesidades,
 						  @RequestParam String nombrefamiliar, @RequestParam String apellidofamiliar,
 						  @RequestParam Integer edadfamiliar, @RequestParam String telefonofamiliar,
 						  @RequestParam String direccionfamiliar){
