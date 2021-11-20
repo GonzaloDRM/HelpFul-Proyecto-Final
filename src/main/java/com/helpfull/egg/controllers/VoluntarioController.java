@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpHeaders;
@@ -124,7 +123,7 @@ public class VoluntarioController {
 						@RequestParam String direccion, @RequestParam Integer dni) {
 		try {
 			voluntarioService.modificar(username, password, nombre, apellido, direccion, dni, email, telefono, nacimiento);
-			return "redirect:/";
+			return "redirect:/voluntario/perfil";
 		} catch (Error e) {
 			redirectAt.addFlashAttribute("error", e.getMessage());
 			return "redirect:/voluntario/modificarVoluntario";

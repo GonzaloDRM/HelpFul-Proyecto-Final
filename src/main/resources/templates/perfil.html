@@ -131,14 +131,20 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title" th:text="${amigo.nombre}+' '+${amigo.apellido}">Lara's 1th Birthday</h5>
-                <p class="fst-italic text-center" th:text="'Fecha de alta: '+${amigo.alta}"></p>
                 <p class="card-text" th:text="'Telefono: '+${amigo.telefono}"></p>
                 <p class="card-text" th:text="'Nacimiento: '+${amigo.nacimiento}"></p>
+                <p class="card-text" th:text="'Provincia: '+${amigo.zona.provincia}"></p>
+                <p class="card-text" th:text="'Localidad: '+${amigo.zona.localidad}"></p>
                 <p class="card-text" th:text="'Direccion: '+${amigo.direccion}"></p>
                 <p class="card-text" th:text="'Miembro desde: '+${amigo.alta}"></p>
                 <p class="card-text" th:text="'Intereses: '+${amigo.intereses}"></p>
                 <p class="card-text" th:text="'Discapacidades: '+${amigo.discapacidades}"></p>
                 <p class="card-text" th:text="'Necesidades: '+${amigo.necesidades}"></p>
+                <p class="familiaracargo">Familiar a cargo</p>
+                <p class="card-text" th:text="'Nombre: '+${amigo.familiarAcargo.nombre}+' '+${amigo.familiarAcargo.apellido}"></p>
+                <p class="card-text" th:text="'Edad: '+${amigo.familiarAcargo.edad}"></p>
+                <p class="card-text" th:text="'Telefono: '+${amigo.familiarAcargo.telefono}"></p>
+                <p class="card-text" th:text="'Direccion: '+${amigo.familiarAcargo.direccion}"></p>
               </div>
             </div>
           </div>
