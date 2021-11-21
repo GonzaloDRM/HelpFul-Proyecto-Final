@@ -173,7 +173,11 @@ public class VoluntarioService implements UserDetailsService {
 	public void validar(String username, String password, String nombre, String apellido, String dni, String telefono,
 			LocalDate nacimiento, String email, MultipartFile foto, String descripcion, String direccion,
 			Collection<InteresVoluntario> intereses, String provincia, String localidad) throws Error {
-
+	
+		if(voluntarioRepository.findById(username).isPresent()) {
+			throw new Error("Ese nombre de usuario ya existe");
+		}
+		
 		if(username == null || username.isEmpty()) {
 			throw new Error("Ingresó un nombre de usuario vacio o nulo");
 		}
