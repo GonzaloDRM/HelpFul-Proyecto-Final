@@ -51,16 +51,8 @@ public class VoluntarioController {
 	@GetMapping("/login")
 	public String login(Model model){
 		
-		try {
+			return "login";
 		
-			return "login";
-		}catch(Exception e) {
-			model.addAttribute("error", "usuario invalido");
-			return "login";
-		}catch(Error e) {
-			model.addAttribute("error", "usuario invalido");
-			return "login";
-		}
 	}
 	
 	@PreAuthorize("hasRole('ROLE_REGISTRADO')")
@@ -98,6 +90,7 @@ public class VoluntarioController {
 	public String registrarse(Model model) {
 		
 		try {
+			
 			model.addAttribute("intereses", InteresVoluntario.values());
 			model.addAttribute("zona", zonaService.listar());
 			return "registrarse";
@@ -112,16 +105,29 @@ public class VoluntarioController {
 	}
 	
 	@PostMapping("/registroVoluntario")
-	public String registroVoluntario(@RequestParam String username, @RequestParam String password,
+	public String registroVoluntario(Model model,@RequestParam String username, @RequestParam String password,
 									 @RequestParam String nombre, @RequestParam String apellido, @RequestParam String dni,
 									 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
 									 @RequestParam String email, @RequestParam MultipartFile foto,
 									 @RequestParam String descripcion, @RequestParam String direccion,
 									 @RequestParam Collection<InteresVoluntario> intereses,
 									 @RequestParam String provincia, @RequestParam String localidad) throws Exception {
-		voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses, provincia, localidad);
-		return "redirect:/";
+		try {
+				voluntarioService.save(username, password, nombre, apellido, dni, telefono, nacimiento, email, foto, descripcion, direccion, intereses, provincia, localidad);
+				return "redirect:/";
+		} catch(Exception e) {
+			model.addAttribute("error", e.getMessage());
+			model.addAttribute("error", e.getMessage());
+			return "modificarVoluntario";
+			
+		}catch(Error e) {
+			model.addAttribute("error", e.getMessage());
+			model.addAttribute("error", e.getMessage());
+			return "modificarVoluntario";
+			
+		}
 	}
+	
 	
 	@GetMapping("/load/{id}")
 	public ResponseEntity<byte[]> cargarFoto(@PathVariable String id,RedirectAttributes redirectAt) {
@@ -162,13 +168,16 @@ public class VoluntarioController {
 	}
 	
 	@PostMapping("/modificoVoluntario")
-	public String modificoVoluntario(Model model,@RequestParam String username, @RequestParam String nombre,
-						@RequestParam String apellido, @RequestParam String password, @RequestParam Integer telefono,
-						@RequestParam String email, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
-						@RequestParam String direccion, @RequestParam Integer dni) {
+	public String modificoVoluntario(Model model,@RequestParam String username, @RequestParam String password,
+			 @RequestParam String nombre, @RequestParam String apellido, @RequestParam String dni,
+			 @RequestParam String telefono, @RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate nacimiento,
+			 @RequestParam String email, @RequestParam MultipartFile foto,
+			 @RequestParam String descripcion, @RequestParam String direccion,
+			 @RequestParam Collection<InteresVoluntario> intereses,
+			 @RequestParam String provincia, @RequestParam String localidad) {
 		
 		try {		
-			voluntarioService.modificar(username, password, nombre, apellido, direccion, dni, email, telefono, nacimiento);
+			voluntarioService.modificar(username, password, nombre, apellido, dni, telefono, nacimiento, email, descripcion, direccion, intereses, provincia, localidad);
 			return "redirect:/";
 		}catch(Exception e){
 			model.addAttribute("error", e.getMessage());

@@ -30,6 +30,7 @@ import com.helpfull.egg.enums.Rol;
 import com.helpfull.egg.repositories.AmigoRepository;
 import com.helpfull.egg.repositories.VoluntarioRepository;
 
+
 @Service
 public class VoluntarioService implements UserDetailsService{
 
@@ -54,29 +55,37 @@ public class VoluntarioService implements UserDetailsService{
 					 String telefono, LocalDate nacimiento, String email, MultipartFile foto,
 					 String descripcion, String direccion, Collection<InteresVoluntario> intereses,
 					 String provincia, String localidad) throws Exception {
-		Voluntario voluntario = new Voluntario();
 		
-		voluntario.setUsername(username);
-		voluntario.setPassword(passwordEncoder.encode(password));
-		voluntario.setNombre(nombre);
-		voluntario.setApellido(apellido);
-		voluntario.setDireccion(direccion);
-		voluntario.setDni(Integer.parseInt(dni));
-		voluntario.setTelefono(Integer.parseInt(telefono));
-		voluntario.setEmail(email);
-		voluntario.setNacimiento(nacimiento);
-		voluntario.setFoto(foto.getBytes());
-
-		Zona zona = zonaService.buscarZona(provincia, localidad);
-		voluntario.setZona(zona);
-		
-		voluntario.setAlta(LocalDate.now());
-		voluntario.setRol(Rol.ROLE_VOLUNTARIO);
-		voluntario.setBaja(null);
-		voluntario.setDescripcion(descripcion);
-		voluntario.setIntereses(intereses);
-		
-		voluntarioRepository.save(voluntario);
+		try {
+			validar(username, password, nombre, apellido, dni, telefono, nacimiento, email, descripcion, direccion, intereses, provincia, localidad);
+			Voluntario voluntario = new Voluntario();
+			
+			voluntario.setUsername(username);
+			voluntario.setPassword(passwordEncoder.encode(password));
+			voluntario.setNombre(nombre);
+			voluntario.setApellido(apellido);
+			voluntario.setDireccion(direccion);
+			voluntario.setDni(Integer.parseInt(dni));
+			voluntario.setTelefono(Integer.parseInt(telefono));
+			voluntario.setEmail(email);
+			voluntario.setNacimiento(nacimiento);
+			voluntario.setFoto(foto.getBytes());
+	
+			Zona zona = zonaService.buscarZona(provincia, localidad);
+			voluntario.setZona(zona);
+			
+			voluntario.setAlta(LocalDate.now());
+			voluntario.setRol(Rol.ROLE_VOLUNTARIO);
+			voluntario.setBaja(null);
+			voluntario.setDescripcion(descripcion);
+			voluntario.setIntereses(intereses);
+			
+			voluntarioRepository.save(voluntario);
+		}catch(Error e) {
+			throw e;
+		}catch(Exception e) {
+			throw new Error("ingreso de datos erroneos");
+		} 
 	}
 	
 	@Transactional
@@ -89,17 +98,19 @@ public class VoluntarioService implements UserDetailsService{
 		return voluntarioRepository.getById(id);
 	}
 	
-	public void modificar(String username, String password, String nombre, String apellido, 
-						  String direccion, Integer dni, String email, Integer telefono, LocalDate nacimiento) {
+	public void modificar(String username,String password, String nombre, String apellido, String dni,
+			 String telefono, LocalDate nacimiento, String email,
+			 String descripcion, String direccion, Collection<InteresVoluntario> intereses,
+			 String provincia, String localidad) throws Exception {
 	Voluntario voluntario = buscarPorId(username);
-	
+	validar(username, password, nombre, apellido,direccion, password, nacimiento, email, apellido, direccion, intereses, direccion, email);
 	voluntario.setUsername(username);
 	voluntario.setPassword(voluntario.getPassword());
 	voluntario.setNombre(nombre);
 	voluntario.setApellido(apellido);
 	voluntario.setDireccion(direccion);
-	voluntario.setDni(dni);
-	voluntario.setTelefono(telefono);
+	voluntario.setDni(Integer.parseInt(dni));
+	voluntario.setTelefono(Integer.parseInt(telefono));
 	voluntario.setEmail(email);
 	voluntario.setNacimiento(nacimiento);
 	voluntario.setFoto(voluntario.getFoto());
@@ -165,5 +176,59 @@ public class VoluntarioService implements UserDetailsService{
 		
 		return user;
 	}
+	
+	public void validar(String username,String password, String nombre, String apellido, String dni,
+			 String telefono, LocalDate nacimiento, String email,
+			 String descripcion, String direccion, Collection<InteresVoluntario> intereses,
+			 String provincia, String localidad) throws Exception{
+		try {
+			if(username == null || username.isEmpty()) {
+				throw new Error("El usuario es es inválido.");
+			}
+			if(password == null || password.isEmpty()) {
+				throw new Error("El usuario es es inválido.");
+			}
+			if(nombre == null || nombre.isEmpty()) {
+				throw new Error("El nombre ingresado es inválido.");
+			}
+			if(apellido == null || apellido.isEmpty()) {
+				throw new Error("El apellido ingresado es inválido.");
+			}
+			if(dni == null || dni.length()<7) {
+				throw new Error("El DNI ingresado es inválido.");
+			}
+			
+			if(telefono == null || telefono.isEmpty()) {
+				throw new Error("El telefono ingresado es inválido.");
+			}
+			
+			LocalDate today = LocalDate.now();
+			if(nacimiento == null || nacimiento.isAfter(today.minusYears(18))) {
+				throw new Error("Tiene que ser mayor de edad.");
+			}
+			if(email == null || email.isEmpty()||!email.contains("@")) {
+				throw new Error("email invalido.");
+			}
+			
+			if(intereses.isEmpty()) {
+				throw new Error("Por favor ingrese sus intereses.");
+			}
+			if(provincia.isEmpty() || provincia == null) {
+				throw new Error("Por favor ingrese su provincia.");
+			}
+			if(localidad.isEmpty() || localidad == null) {
+				throw new Error("Por favor ingrese su provincia.");
+			}
+			
+		}catch(Exception e) {
+			throw e;
+		}catch(Error e) {
+			e.printStackTrace();
+			throw new Error("Error de sistema.");
+		
+		
+	}
 
+	}
+	
 }
