@@ -2,6 +2,7 @@ package com.helpfull.egg.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.helpfull.egg.entities.Amigo;
 import com.helpfull.egg.entities.Emparejar;
+import com.helpfull.egg.entities.Voluntario;
+import com.helpfull.egg.enums.Rol;
 import com.helpfull.egg.services.EmparejarService;
 import com.helpfull.egg.services.VoluntarioService;
 
@@ -28,7 +31,12 @@ public class EmparejarController {
 	
 	@GetMapping("/empareja")
 	public String match(Model model) {
-		model.addAttribute("voluntarios", voluntarioService.listartodos());
+		
+		List<Voluntario> filtradaMap = voluntarioService.listartodos().stream()
+				.filter(a -> a.getRol().equals(Rol.ROLE_VOLUNTARIO))
+				.collect(Collectors.toList());
+		
+		model.addAttribute("voluntarios", filtradaMap);
 		return "emparejar";
 	}
 	
