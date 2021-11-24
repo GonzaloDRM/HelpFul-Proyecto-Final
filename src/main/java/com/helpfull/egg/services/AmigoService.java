@@ -126,6 +126,10 @@ public class AmigoService {
 			throw new Error("No ingresó una fecha de nacimiento.");
 		}
 		
+		if(nacimiento.getYear()<1920 || nacimiento.getYear()>2013) {
+			throw new Error("Debe ingresar una fecha real");
+		}
+		
 		if(intereses == null) {
 			throw new Error("Debe seleccionar al menos un interes.");
 		}
