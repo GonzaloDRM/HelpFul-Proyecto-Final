@@ -23,200 +23,200 @@ import com.helpfull.egg.enums.Rol;
 @Entity
 public class Voluntario {
 
-	@Id
-	private String username;
-	private String password;
-	private String nombre;
-	private String apellido;
-	private String direccion;
-	private Integer dni;
-	private String email;
-	private Long telefono;
-	private LocalDate nacimiento;
-	private String descripcion;
+    @Id
+    private String username;
+    private String password;
+    private String nombre;
+    private String apellido;
+    private String direccion;
+    private Integer dni;
+    private String email;
+    private Long telefono;
+    private LocalDate nacimiento;
+    private String descripcion;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	private byte[] foto;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] foto;
 
-	@Enumerated(EnumType.STRING)
-	private Rol rol;
-
-	private LocalDate alta;
-	private LocalDate baja;
-	
-	@ElementCollection(targetClass=InteresVoluntario.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="interesesVoluntarios")
-	private Collection<InteresVoluntario> intereses;
-	
-	@ManyToMany
-	private List<Amigo> amigos;
-	
-	@ManyToOne(cascade= {CascadeType.PERSIST , CascadeType.REMOVE})
-	private Zona zona;
+    private Rol rol;
 
-	public Voluntario() {
-		super();
-	}
+    private LocalDate alta;
+    private LocalDate baja;
 
-	public Voluntario(String username, String password, String nombre, String apellido, String direccion, Integer dni,
-			String email, Long telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
-			LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses, List<Amigo> amigos, Zona zona) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.direccion = direccion;
-		this.dni = dni;
-		this.email = email;
-		this.telefono = telefono;
-		this.nacimiento = nacimiento;
-		this.descripcion = descripcion;
-		this.foto = foto;
-		this.rol = rol;
-		this.alta = alta;
-		this.baja = baja;
-		this.intereses = intereses;
-		this.amigos = amigos;
-		this.zona = zona;
-	}
+    @ElementCollection(targetClass = InteresVoluntario.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "interesesVoluntarios")
+    private Collection<InteresVoluntario> intereses;
 
-	public String getUsername() {
-		return username;
-	}
+    @ManyToMany
+    private List<Amigo> amigos;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    private Zona zona;
 
-	public String getPassword() {
-		return password;
-	}
+    public Voluntario() {
+        super();
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public Voluntario(String username, String password, String nombre, String apellido, String direccion, Integer dni,
+            String email, Long telefono, LocalDate nacimiento, String descripcion, byte[] foto, Rol rol,
+            LocalDate alta, LocalDate baja, Collection<InteresVoluntario> intereses, List<Amigo> amigos, Zona zona) {
+        super();
+        this.username = username;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.dni = dni;
+        this.email = email;
+        this.telefono = telefono;
+        this.nacimiento = nacimiento;
+        this.descripcion = descripcion;
+        this.foto = foto;
+        this.rol = rol;
+        this.alta = alta;
+        this.baja = baja;
+        this.intereses = intereses;
+        this.amigos = amigos;
+        this.zona = zona;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public Integer getDni() {
-		return dni;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public void setDni(Integer dni) {
-		this.dni = dni;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-	public Long getTelefono() {
-		return telefono;
-	}
+    public Integer getDni() {
+        return dni;
+    }
 
-	public void setTelefono(Long telefono) {
-		this.telefono = telefono;
-	}
+    public void setDni(Integer dni) {
+        this.dni = dni;
+    }
 
-	public LocalDate getNacimiento() {
-		return nacimiento;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setNacimiento(LocalDate nacimiento) {
-		this.nacimiento = nacimiento;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public Long getTelefono() {
+        return telefono;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public void setTelefono(Long telefono) {
+        this.telefono = telefono;
+    }
 
-	public byte[] getFoto() {
-		return foto;
-	}
+    public LocalDate getNacimiento() {
+        return nacimiento;
+    }
 
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
+    public void setNacimiento(LocalDate nacimiento) {
+        this.nacimiento = nacimiento;
+    }
 
-	public Rol getRol() {
-		return rol;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setRol(Rol rol) {
-		this.rol = rol;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public LocalDate getAlta() {
-		return alta;
-	}
+    public byte[] getFoto() {
+        return foto;
+    }
 
-	public void setAlta(LocalDate alta) {
-		this.alta = alta;
-	}
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 
-	public LocalDate getBaja() {
-		return baja;
-	}
+    public Rol getRol() {
+        return rol;
+    }
 
-	public void setBaja(LocalDate baja) {
-		this.baja = baja;
-	}
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 
-	public Collection<InteresVoluntario> getIntereses() {
-		return intereses;
-	}
+    public LocalDate getAlta() {
+        return alta;
+    }
 
-	public void setIntereses(Collection<InteresVoluntario> intereses) {
-		this.intereses = intereses;
-	}
+    public void setAlta(LocalDate alta) {
+        this.alta = alta;
+    }
 
-	public List<Amigo> getAmigos() {
-		return amigos;
-	}
+    public LocalDate getBaja() {
+        return baja;
+    }
 
-	public void setAmigos(List<Amigo> amigos) {
-		this.amigos = amigos;
-	}
+    public void setBaja(LocalDate baja) {
+        this.baja = baja;
+    }
 
-	public Zona getZona() {
-		return zona;
-	}
+    public Collection<InteresVoluntario> getIntereses() {
+        return intereses;
+    }
 
-	public void setZona(Zona zona) {
-		this.zona = zona;
-	}
-	
+    public void setIntereses(Collection<InteresVoluntario> intereses) {
+        this.intereses = intereses;
+    }
+
+    public List<Amigo> getAmigos() {
+        return amigos;
+    }
+
+    public void setAmigos(List<Amigo> amigos) {
+        this.amigos = amigos;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
 }

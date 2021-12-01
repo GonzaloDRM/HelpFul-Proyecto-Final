@@ -28,43 +28,41 @@ public class Zona implements Serializable {
     @Column(name = "Provincia")
     private String provincia;
 
+    public Zona() {
 
-	public Zona() {
-		
-	}
+    }
 
-	public Zona(String localidad, String provincia) {
-		this.localidad = localidad;
-		this.provincia = provincia;
-	}
+    public Zona(String localidad, String provincia) {
+        this.localidad = localidad;
+        this.provincia = provincia;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getLocalidad() {
-		return localidad;
-	}
+    public String getLocalidad() {
+        return localidad;
+    }
 
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
 
-	public String getProvincia() {
-		return provincia;
-	}
+    public String getProvincia() {
+        return provincia;
+    }
 
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
-	
 }
